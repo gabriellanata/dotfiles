@@ -1,0 +1,88 @@
+[user]
+  name = Gabriel Lanata
+  email = gabriel@lanata.me
+[github]
+  user = gabriellanata
+[diff]
+  tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+  prompt = false
+[merge]
+  tool = Kaleidoscope
+  renamelimit = 5000
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
+[mergetool]
+  prompt = false
+[core]
+  editor = nano
+  excludesfile = /Users/marcosg/.gitignore
+[color]
+  pager = true
+  ui = true
+  status = auto
+  diff = auto
+  branch = auto
+  showBranch = auto
+  interactive = auto
+  grep = auto
+[pull]
+  rebase = true
+[advice]
+  skippedCherryPicks = false
+[branch "main"]
+  pushRemote = NOPE
+[branch "master"]
+    pushRemote = NOPE
+[rebase]
+  autosquash = true
+  autostash = true
+  updateRefs = true
+  stat = true
+[rerere]
+  enabled = true
+  autoupdate = true
+[fetch]
+  prune = true
+  pruneTags = true
+  fsckobjects = true
+[receive]
+  fsckobjects = true
+[push]
+  default = upstream
+[alias]
+  undo = "reset --soft HEAD^"
+[pile]
+  cleanupRemoteOnSubmitFailure = true
+[log]
+  date = default
+  follow = true
+[column]
+  ui = auto
+[branch]
+  sort = -committerdate
+  autosetupmerge = true
+[stash]
+  showPatch = true
+  showIncludeUntracked = true
+[commit]
+  gpgsign = true
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[gpg]
+  format = ssh
+  program = /opt/homebrew/bin/gpg
+[oh-my-zsh]
+  hide-status = 1
+  hide-dirty = 1
+[maintenance]
+  repo = /Users/glanata/Developer/lyft/Lyft-iOS
+  strategy = incremental
+  interval = hourly
+[init]
+  defaultBranch = main
+[help]
+  autocorrect = 1

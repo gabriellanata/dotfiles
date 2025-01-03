@@ -1,0 +1,59 @@
+!.gitignore
+*.un~
+*~
+._*
+.DS_Store
+.Spotlight-V100
+.Trashes
+*.log
+Icon
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+pip-log.txt
+pip-delete-this-directory.txt
+**/*.pyc
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Xcode
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+
+# JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode
+.idea/
+.idea_modules/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
