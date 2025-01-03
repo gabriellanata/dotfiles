@@ -14,8 +14,7 @@ NC='\033[0m' # No Color
 # Format: "source_path:target_path"
 FILES_TO_LINK=(
     "zshrc:.zshrc"
-    "config/gitconfig:.gitconfig"
-    "config/com.apple.dock.plist:Library/Preferences/com.apple.dock.plist"
+    "gitconfig:.gitconfig"
 )
 
 DIRS_TO_LINK=(
@@ -143,24 +142,40 @@ setup_permissions() {
     fi
 }
 
-setup_settings() {
-    log "Setting up settings..."
+setup_preferences() {
+    log "Setting up preferences..."
     
-    # Run script
-    source "$DOTFILES_DIR/config/macos-settings.sh"
+    # Run scripts
+    preferences="$DOTFILES/preferences/*.sh"
+    for file in ${preferences}; do
+        # shellcheck source=/dev/null
+        source "$file"
+    done
 
-    success "All settings configured"
+    success "All preferences configured"
+}
+
+restart_processes() {    
+    log "Restarting processes.. "
+
+    for app in "Address Book" "Calendar" "Contacts" "Dashboard" "Dock" "Finder" \
+        "Mail" "Safari" "SystemUIServer" "Terminal" "iCal" "iTunes" "Activity Monitor"; do
+        killall "$app" > /dev/null 2>&1 || true
+    done
+
+    success "Done. Note that some of these changes require a logout/restart to take effect."
 }
 
 main() {
     log "Starting dotfiles installation..."
     
-    setup_settings
-    # install_homebrew
-    # install_packages
+    install_homebrew
+    install_packages
     install_oh_my_zsh
     create_symlinks
-    setup_permissions
+    # setup_permissions
+    setup_preferences
+    restart_processes
     
     if [ -f "$HOME/.zshrc" ]; then
         source "$HOME/.zshrc"

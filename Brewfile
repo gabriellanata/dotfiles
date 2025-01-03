@@ -50,6 +50,7 @@ brew "cmake" # Cross-platform make
 brew "aria2" # Download manager
 brew "unxip" # Extract .xip files
 brew "libxml2" # XML parser
+brew "dockutil" # Manage dock items
 
 # Lyft
 tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
