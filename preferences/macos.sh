@@ -8,14 +8,6 @@ set -euo pipefail
 #  sudo opensnoop | grep plist
 # Useful reference: http://www.hcs.harvard.edu/~jrus/Site/Cocoa%20Text%20System.html
 
-# Ask for the administrator password upfront
-sudo -v
-
-# Keep-alive: update existing 'sudo' time stamp until '.osx' has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
-# Close open System Preferences panes, to prevent them from overriding settings.
-osascript -e 'tell application "System Preferences" to quit'
 
 #
 # General Settings
@@ -101,17 +93,20 @@ defaults write com.apple.dock mru-spaces -bool false
 # Terminal
 #
 
+# Only use UTF-8 in Terminal.app
+sudo defaults write com.apple.terminal StringEncodings -array 4
+
 # Disable leading [ on prompt lines (which is totally broken in anything curses)
 # https://twitter.com/UINT_MIN/status/652142001932996609
-defaults write com.apple.Terminal AutoMarkPromptLines -bool false
-defaults write com.apple.Terminal ShowLineMarks -bool false
+sudo defaults write com.apple.Terminal AutoMarkPromptLines -bool false
+sudo defaults write com.apple.Terminal ShowLineMarks -bool false
 
 # Hide scrollbars in terminal
-defaults write com.apple.Terminal AppleShowScrollBars -string "Automatic"
+sudo defaults write com.apple.Terminal AppleShowScrollBars -string "Automatic"
 
 # Setup the correct theme
-# defaults write com.apple.Terminal "Default Window Settings" -string "parsec"
-# defaults write com.apple.Terminal "Startup Window Settings" -string "parsec"
+# sudo defaults write com.apple.Terminal "Default Window Settings" -string "parsec"
+# sudo defaults write com.apple.Terminal "Startup Window Settings" -string "parsec"
 
 
 #
@@ -182,37 +177,37 @@ defaults write NSGlobalDomain AppleICUTimeFormatStrings -dict \
 # Safari/WebKit
 #
 
-defaults write -app Safari AlwaysRestoreSessionAtLaunch -bool true
-defaults write -app Safari AlwaysShowTabBar -bool true
-defaults write -app Safari AutoFillPasswords -bool false
+# defaults write -app Safari AlwaysRestoreSessionAtLaunch -bool true
+# defaults write -app Safari AlwaysShowTabBar -bool true
+# defaults write -app Safari AutoFillPasswords -bool false
 
 # Prevent Safari from opening 'safe' files automatically after downloading,
 # mostly because it trashes the original
-defaults write -app Safari AutoOpenSafeDownloads -bool false
+# defaults write -app Safari AutoOpenSafeDownloads -bool false
 
 # Change the Safari search to find strings contained in other words
-defaults write -app Safari FindOnPageMatchesWordStartsOnly -bool false
+# defaults write -app Safari FindOnPageMatchesWordStartsOnly -bool false
 
 # Auto clear downloads
-defaults write -app Safari DownloadsClearingPolicy -int 2
+# defaults write -app Safari DownloadsClearingPolicy -int 2
 
 # Show developer tools
-defaults write -app Safari IncludeDevelopMenu -bool true
+# defaults write -app Safari IncludeDevelopMenu -bool true
 
 # Show full URL in Safari
-defaults write -app Safari ShowFullURLInSmartSearchField -bool true
+# defaults write -app Safari ShowFullURLInSmartSearchField -bool true
 
 # Show status bar
-defaults write -app Safari ShowOverlayStatusBar -bool true
+# defaults write -app Safari ShowOverlayStatusBar -bool true
 
 # Never remove history, this is the constant the UI uses
-defaults write -app Safari HistoryAgeInDaysLimit -int 365000
+# defaults write -app Safari HistoryAgeInDaysLimit -int 365000
 
 
 ### Stock Apps
 
 # Mail: Only take address@example.com when copying email addresses in main
-defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+sudo defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
 # Messages: Seems that Messages.app doesn't respect the system setting on Big Sur+ FB8920792
 defaults write com.apple.messages.text SmartQuotes -bool false
@@ -224,6 +219,9 @@ defaults write com.apple.iCal "first minute of work hours" $((9 * 60))
 defaults write com.apple.iCal "last minute of work hours" $((18 * 60))
 defaults write com.apple.iCal lastViewsTimeZone "America/Los_Angeles"
 defaults write com.apple.iCal "TimeZone support enabled" -bool true
+
+# AddressBook: Sort users in Contacts by first name
+sudo defaults write -app Contacts ABNameSortingFormat -string "sortingFirstName sortingLastName"
 
 
 #
@@ -318,6 +316,3 @@ defaults write com.apple.TextEdit NSFixedPitchFontSize -int 16
 
 # https://mjtsai.com/blog/2021/03/29/how-to-stop-mac-app-store-notifications
 defaults write com.apple.appstored LastUpdateNotification -date "2029-12-12 12:00:00 +0000"
-
-# Sort users in Contacts by first name
-defaults write -app Contacts ABNameSortingFormat -string "sortingFirstName sortingLastName"

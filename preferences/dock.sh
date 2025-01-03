@@ -2,6 +2,28 @@
 
 set -euo pipefail
 
+# Define dock apps
+dockApps=( \
+    "Google Chrome" \
+    "Messages" \
+    "Slack" \
+    "SetApp/Spark Mail" \
+    "Spark" \
+    "Calendar" \
+    "" \
+    "Xcode" \
+    "Xcode.app/Contents/Developer/Applications/Simulator"
+    "Visual Studio Code" \
+    "Fork" \
+    "Ghostty" \
+    "" \
+)
+
+# Define dock apps
+dockFolders=( \
+    "$HOME/Downloads" \
+)
+
 # Set the icon size of Dock items
 defaults write com.apple.dock tilesize -int 46
 defaults write com.apple.dock largesize -int 100
@@ -35,9 +57,28 @@ defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 
 # Clear items
-dockutil --remove all
+dockutil --remove all --no-restart
 
 # Add apps
-dockutil --add "/Applications/Google Chrome.app" --no-restart
-dockutil --add "/Applications/Slack.app" --no-restart
-dockutil --add "/Applications/Spark.app" --no-restart
+for app in "${dockApps[@]}"; do
+    if [ -d "/System/Applications/$app.app" ]; then
+        dockutil --add "/System/Applications/$app.app" --no-restart
+    elif [ -d "/Applications/$app.app" ]; then
+        dockutil --add "/Applications/$app.app" --no-restart
+    elif [[ "$app" == /* ]]; then
+        dockutil --add "$app" --no-restart
+    elif [ -z "$app" ]; then
+        dockutil --add "" --type spacer --section apps --no-restart
+    else
+        echo "Unable to find the specified app: $app"
+    fi
+done
+
+# Add folders
+for folder in "${dockFolders[@]}"; do
+    if [ -d "$folder" ]; then
+        dockutil --add "$folder" --view fan --display folder --sort dateadded --no-restart
+    else
+        echo "Unable to find the specified folder: $folder"
+    fi
+done

@@ -86,7 +86,7 @@ install_homebrew() {
 
 install_packages() {
     log "Installing packages from Brewfile..."
-    brew bundle --file="$DOTFILES_DIR/Brewfile"
+    brew bundle --force cleanup --file="$DOTFILES_DIR/Brewfile"
     success "Packages installed"
 }
 
@@ -144,6 +144,9 @@ setup_permissions() {
 
 setup_preferences() {
     log "Setting up preferences..."
+
+    # Close open System Preferences panes, to prevent them from overriding settings.
+    osascript -e 'tell application "System Preferences" to quit'
     
     # Run scripts
     preferences="$DOTFILES/preferences/*.sh"
@@ -168,11 +171,17 @@ restart_processes() {
 
 main() {
     log "Starting dotfiles installation..."
+
+    # Ask for the administrator password upfront
+    sudo -v
+
+    # Keep-alive: update existing 'sudo' time stamp until '.osx' has finished
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     
-    install_homebrew
-    install_packages
-    install_oh_my_zsh
-    create_symlinks
+    # install_homebrew
+    # install_packages
+    # install_oh_my_zsh
+    # create_symlinks
     # setup_permissions
     setup_preferences
     restart_processes

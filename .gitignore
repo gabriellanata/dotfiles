@@ -57,3 +57,7 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
+
+# Lyft specific
+xcode/snippets/lyft_*
+Brewfile.backup
