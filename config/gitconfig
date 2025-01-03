@@ -1,6 +1,7 @@
 [user]
   name = Gabriel Lanata
   email = gabriel@lanata.me
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICwRfhS94H4MT8I60QXoA8EjSraatWkbn9GHgpdO4va3
 [github]
   user = gabriellanata
 [diff]
@@ -71,7 +72,7 @@
 [commit]
   gpgsign = true
 [gpg "ssh"]
-  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [gpg]
   format = ssh
   program = /opt/homebrew/bin/gpg

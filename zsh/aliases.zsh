@@ -4,6 +4,11 @@ alias zshrc="$EDITOR ~/dotfiles/zshrc"
 alias funcs="$EDITOR ~/dotfiles/functions.zsh"
 alias aliases="$EDITOR ~/dotfiles/aliases.zsh"
 
+# 1password auth
+export OP_PLUGIN_ALIASES_SOURCED=1
+alias gh="op plugin run -- gh"
+alias sentry-cli="op plugin run -- sentry-cli"
+
 # system
 alias o="open"
 alias oo="open ."
