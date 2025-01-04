@@ -21,6 +21,8 @@
 [core]
   editor = nano
   excludesfile = /Users/glanata/Developer/Dotfiles/.gitignore
+	trustctime = false # Ref: http://www.git-tower.com/blog/make-git-rebase-safe-on-osx
+	untrackedCache = true
 [color]
   pager = true
   ui = true
@@ -76,6 +78,8 @@
 [gpg]
   format = ssh
   program = /opt/homebrew/bin/gpg
+[tag]
+	gpgSign = true
 [oh-my-zsh]
   hide-status = 1
   hide-dirty = 1

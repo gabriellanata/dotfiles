@@ -1,13 +1,9 @@
 # Taps
-tap "homebrew/core"
 tap "homebrew/bundle"
-tap "homebrew/cask"
 tap "homebrew/cask-versions"
-tap "homebrew/cask-fonts"
 tap "buo/cask-upgrade" # Upgrade casks with "brew cu"
 tap "robotsandpencils/made"
 tap "twostraws/brew"
-brew "cask"
 brew "mas"
 
 # Terminal
@@ -49,7 +45,6 @@ brew "dduan/formulae/drstring"
 brew "python-setuptools"
 brew "python@3.11", link: false
 brew "python@3.10", link: false
-brew "python@3.8", link: false
 brew "python@3.9"
 brew "pylint"
 brew "node"
@@ -91,6 +86,7 @@ vscode "sswg.swift-lang"
 vscode "svanimpe.stencil"
 vscode "timonwong.shellcheck"
 vscode "vadimcn.vscode-lldb"
+vscode "dnicolson.binary-plist"
 
 # Lyft
 tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
@@ -137,6 +133,10 @@ cask "reveal"
 cask "home-assistant"
 cask "slack"
 cask "charles"
+cask "figma"
+cask "sf-symbols"
+cask "gpg-suite"
+cask "imageoptim"
 
 # App Store
 mas "1Password for Safari", id: 1569813296
@@ -160,7 +160,6 @@ mas "QuickShade", id: 931571202
 mas "Reeder", id: 1529448980
 mas "RocketSim", id: 1504940162
 mas "Shapr3D", id: 1091675654
-mas "Snippet", id: 1613020051
 mas "Soulver 3", id: 1508732804
 mas "Speedtest", id: 1153157709
 mas "SQLiteExplorer", id: 1616792360

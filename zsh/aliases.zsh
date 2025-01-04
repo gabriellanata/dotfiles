@@ -27,14 +27,13 @@ alias xsp="xcode-select -p"
 alias x="xed ."
 
 # git
+type hub &>/dev/null && eval "$(hub alias -s)" # Alias `git` as `hub`
 alias gc-="git clean -f"
 alias gri="git recent"
 # alias rbmaster="gco master && ggpull && git checkout - && git rebase master"
 # alias rbmain="gco main && ggpull && git checkout - && git rebase main"
 
-# gh
-alias cpr="BROWSER=open gh pr create --web"
-alias orp="BROWSER=open gh repo view --web"
+# github
 alias prs="BROWSER=open open 'https://github.com/pulls'"
 
 # other

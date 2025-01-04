@@ -1,0 +1,120 @@
+[
+  {
+    "version" : 1
+  },
+  {
+    "action" : {
+      "args" : "cleanup --force",
+      "path" : "\/Users\/glanata\/Documents\/Scripts\/god",
+      "showOutput" : false,
+      "type" : "process",
+      "waitForExit" : true
+    },
+    "name" : "Local: Cleanup branches",
+    "target" : "repository"
+  },
+  {
+    "name" : "Local: Generate",
+    "target" : "repository",
+    "ui" : {
+      "buttons" : [
+        {
+          "action" : {
+            "args" : "m $1{text}",
+            "path" : "\/Users\/glanata\/Documents\/Scripts\/god",
+            "showOutput" : false,
+            "type" : "process",
+            "waitForExit" : true
+          },
+          "title" : "OK"
+        },
+        {
+          "action" : {
+            "type" : "cancel"
+          },
+          "title" : "Cancel"
+        }
+      ],
+      "controls" : [
+        {
+          "placeholder" : "",
+          "text" : "",
+          "textBoxType" : "generic",
+          "title" : "Modules",
+          "type" : "textBox"
+        }
+      ],
+      "description" : "",
+      "title" : "Modules"
+    }
+  },
+  {
+    "action" : {
+      "args" : "undo",
+      "path" : "\/Users\/glanata\/Documents\/Scripts\/god",
+      "showOutput" : false,
+      "type" : "process",
+      "waitForExit" : true
+    },
+    "name" : "Local: Undo commit",
+    "target" : "repository"
+  },
+  {
+    "action" : {
+      "script" : "export GIT_PILE_PREFIX=gabriel\/\ngit submitpr\ng undo\ng reset",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "PR-Quick: Submit from last commit",
+    "target" : "repository"
+  },
+  {
+    "action" : {
+      "script" : "export GIT_PILE_PREFIX=gabriel\/\ngit submitpr",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "PR: Submit from last commit",
+    "target" : "repository"
+  },
+  {
+    "action" : {
+      "script" : "export GIT_PILE_PREFIX=gabriel\/\ngit submitpr --base ${ref}",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "PR: Submit from last commit with this base branch",
+    "referenceTargets" : [
+      "localBranch",
+      "remoteBranch"
+    ],
+    "target" : "reference"
+  },
+  {
+    "action" : {
+      "script" : "export GIT_PILE_PREFIX=gabriel\/\ngit headpr -m \"Changes\"",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "PR: Update from last commit",
+    "target" : "repository"
+  },
+  {
+    "action" : {
+      "script" : "export GIT_PILE_PREFIX=gabriel\/\ngit updatepr ${sha}",
+      "showOutput" : false,
+      "type" : "sh",
+      "waitForExit" : true
+    },
+    "name" : "PR: Update from last commit with this branch",
+    "referenceTargets" : [
+      "localBranch",
+      "remoteBranch"
+    ],
+    "target" : "reference"
+  }
+]

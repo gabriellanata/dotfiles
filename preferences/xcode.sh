@@ -3,9 +3,9 @@
 set -euo pipefail
 
 log "Linking xcode configuration..."
-link_file "$DOTFILES_DIR/xcode/keybindings" "$HOME/Library/Developer/Xcode/UserData/KeyBindings"
-link_file "$DOTFILES_DIR/xcode/themes" "$HOME/Library/Developer/Xcode/UserData/FontAndColorThemes"
-link_file "$DOTFILES_DIR/xcode/snippets" "$HOME/Library/Developer/Xcode/UserData/CodeSnippets"
+link_file "$DOTFILES_DIR/configs/xcode/keybindings" "$HOME/Library/Developer/Xcode/UserData/KeyBindings"
+link_file "$DOTFILES_DIR/configs/xcode/themes" "$HOME/Library/Developer/Xcode/UserData/FontAndColorThemes"
+link_file "$DOTFILES_DIR/configs/xcode/snippets" "$HOME/Library/Developer/Xcode/UserData/CodeSnippets"
 
 # Trim trailing whitespace
 defaults write com.apple.dt.Xcode DVTTextEditorTrimTrailingWhitespace -bool true

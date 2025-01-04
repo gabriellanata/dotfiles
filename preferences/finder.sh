@@ -77,6 +77,9 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 # Don't use tabs in Finder
 defaults write com.apple.finder AppleWindowTabbingMode -string "manual"
 
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool "true"
+
 # Enable snap-to-grid for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 

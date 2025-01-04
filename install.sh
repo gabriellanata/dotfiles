@@ -20,7 +20,8 @@ setup_homebrew() {
     fi
     
     log "Installing packages from Brewfile..."
-    brew bundle --force cleanup --file="$DOTFILES_DIR/Brewfile"
+    brew bundle --force --file="$DOTFILES_DIR/Brewfile" || true
+    brew bundle --force cleanup --file="$DOTFILES_DIR/Brewfile" || true
     success "Packages installed"
 }
 
