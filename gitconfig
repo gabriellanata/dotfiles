@@ -20,7 +20,7 @@
   prompt = false
 [core]
   editor = nano
-  excludesfile = /Users/marcosg/.gitignore
+  excludesfile = /Users/glanata/Developer/Dotfiles/.gitignore
 [color]
   pager = true
   ui = true
@@ -37,7 +37,7 @@
 [branch "main"]
   pushRemote = NOPE
 [branch "master"]
-    pushRemote = NOPE
+  pushRemote = NOPE
 [rebase]
   autosquash = true
   autostash = true

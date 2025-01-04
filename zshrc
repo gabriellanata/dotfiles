@@ -1,4 +1,4 @@
-export DOTFILES="$(dirname "$(readlink "$HOME/.zshrc")")"
+export DOTFILES_DIR="$(dirname "$(readlink "$HOME/.zshrc")")"
 if [[ $(arch) == arm64* ]]; then
   export BREW_PREFIX=/opt/homebrew
 else
@@ -8,8 +8,8 @@ fi
 # system
 export PATH=$HOME/bin:$PATH
 export LC_ALL=en_US.UTF-8
-export EDITOR="$(which nano)"
-export BROWSER="Chrome"
+export EDITOR="$(which code)"
+export BROWSER="Google Chrome"
 
 # shell
 export ZSH="$HOME/.oh-my-zsh"
@@ -33,14 +33,7 @@ plugins=(
 )
 
 # Source all zsh files
-configs=($DOTFILES/zsh/*.zsh)
+configs=($DOTFILES_DIR/zsh/*.zsh)
 for file in ${configs}; do
   source "$file"
 done
-
-### lyft_localdevtools_shell_rc start
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
-    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
-fi
-### lyft_localdevtools_shell_rc end

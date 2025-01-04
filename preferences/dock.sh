@@ -5,10 +5,10 @@ set -euo pipefail
 # Define dock apps
 dockApps=( \
     "Google Chrome" \
-    "Messages" \
-    "Slack" \
     "SetApp/Spark Mail" \
     "Spark" \
+    "Messages" \
+    "Slack" \
     "Calendar" \
     "" \
     "Xcode" \

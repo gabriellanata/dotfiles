@@ -119,17 +119,13 @@ sudo defaults write com.apple.Terminal AppleShowScrollBars -string "Automatic"
 # 2 = on for essential services
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 
-# Disable auto-adjust brightness
-sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor.plist "Automatic Display Enabled" -bool false
-
 
 #
 # Power Settings
 #
 
-# To stop the display from half dimming before full display 'sleep'
-# http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html
-# sudo pmset -a halfdim 0
+# Half dimming before full display 'sleep'
+sudo pmset -a halfdim 4
 
 # Sleep options
 sudo pmset -a displaysleep 5
@@ -148,6 +144,9 @@ sudo pmset -a acwake 0
 
 # Don't dim brightness on any different source
 sudo pmset -a lessbright 0
+
+# Disable auto-adjust brightness
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor.plist "Automatic Display Enabled" -bool false
 
 #
 # Sound

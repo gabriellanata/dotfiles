@@ -17,6 +17,7 @@ brew "ripgrep"
 brew "has"
 brew "gpg"
 brew "gnupg"
+brew "fzf"
 
 # Git
 tap "keith/formulae"
@@ -54,18 +55,21 @@ brew "pylint"
 brew "node"
 brew "ruby"
 brew "rbenv"
+brew "yarn"
 
 # Other
+brew "coreutils" # Those that come with macOS are outdated
 brew "pkg-config" # Package compiler and linker metadata toolkit
-brew "imagemagick" # Image processing
 brew "cmake" # Cross-platform make
-brew "aria2" # Download manager
 brew "unxip" # Extract .xip files
 brew "libxml2" # XML parser
 brew "dockutil" # Manage dock items
+brew "imagemagick" # Image processing
 brew "webp" # Image format
 brew "jpeg-xl" # Image format
+brew "libpng" # Image format
 brew "curl" # Download files
+brew "aria2" # Download manager
 
 # VSCode
 vscode "davidanson.vscode-markdownlint"
