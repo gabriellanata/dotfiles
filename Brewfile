@@ -47,6 +47,7 @@ brew "python@3.11", link: false
 brew "python@3.10", link: false
 brew "python@3.9"
 brew "pylint"
+brew "php"
 brew "node"
 brew "ruby"
 brew "rbenv"
