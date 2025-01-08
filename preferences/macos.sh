@@ -82,26 +82,6 @@ defaults write com.apple.dock mru-spaces -bool false
 
 
 #
-# Terminal
-#
-
-# Only use UTF-8 in Terminal.app
-if_sudo_active defaults write com.apple.terminal StringEncodings -array 4
-
-# Disable leading [ on prompt lines (which is totally broken in anything curses)
-# https://twitter.com/UINT_MIN/status/652142001932996609
-if_sudo_active defaults write com.apple.Terminal AutoMarkPromptLines -bool false
-if_sudo_active defaults write com.apple.Terminal ShowLineMarks -bool false
-
-# Hide scrollbars in terminal
-if_sudo_active defaults write com.apple.Terminal AppleShowScrollBars -string "Automatic"
-
-# Setup the correct theme
-# if_sudo_active defaults write com.apple.Terminal "Default Window Settings" -string "parsec"
-# if_sudo_active defaults write com.apple.Terminal "Startup Window Settings" -string "parsec"
-
-
-#
 # Firewall
 #
 
@@ -162,37 +142,6 @@ defaults write NSGlobalDomain AppleICUTimeFormatStrings -dict \
   2 -string "H:mm:ss" \
   3 -string "H:mm:ss z" \
   4 -string "H:mm:ss zzzz"
-
-
-#
-# Safari/WebKit
-#
-
-# defaults write -app Safari AlwaysRestoreSessionAtLaunch -bool true
-# defaults write -app Safari AlwaysShowTabBar -bool true
-# defaults write -app Safari AutoFillPasswords -bool false
-
-# Prevent Safari from opening 'safe' files automatically after downloading,
-# mostly because it trashes the original
-# defaults write -app Safari AutoOpenSafeDownloads -bool false
-
-# Change the Safari search to find strings contained in other words
-# defaults write -app Safari FindOnPageMatchesWordStartsOnly -bool false
-
-# Auto clear downloads
-# defaults write -app Safari DownloadsClearingPolicy -int 2
-
-# Show developer tools
-# defaults write -app Safari IncludeDevelopMenu -bool true
-
-# Show full URL in Safari
-# defaults write -app Safari ShowFullURLInSmartSearchField -bool true
-
-# Show status bar
-# defaults write -app Safari ShowOverlayStatusBar -bool true
-
-# Never remove history, this is the constant the UI uses
-# defaults write -app Safari HistoryAgeInDaysLimit -int 365000
 
 
 ### Stock Apps
