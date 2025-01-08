@@ -29,8 +29,6 @@ defaults write NSGlobalDomain AppleLanguage -array "en-US"
 # This works, although the checkbox will still appear to be checked.
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
-# Disable reopen on restart
-defaults write NSGlobalDomain ApplePersistence -bool false
 
 # Always show scrollbars
 # defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
