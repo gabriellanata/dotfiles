@@ -20,6 +20,7 @@ alias ....="cd ../../.."
 alias o="open"
 alias oo="open ."
 alias ls="ls -F"
+alias s="rg"
 
 # xcode
 alias xcode-select-default="sudo xcode-select -s /Applications/Xcode.app/Contents/Developer"
@@ -28,10 +29,7 @@ alias x="xed ."
 
 # git
 type hub &>/dev/null && eval "$(hub alias -s)" # Alias `git` as `hub`
-alias gc-="git clean -f"
-alias gri="git recent"
-# alias rbmaster="gco master && ggpull && git checkout - && git rebase master"
-# alias rbmain="gco main && ggpull && git checkout - && git rebase main"
+alias lg="lazygit"
 
 # github
 alias prs="BROWSER=open open 'https://github.com/pulls'"
@@ -40,6 +38,7 @@ alias prs="BROWSER=open open 'https://github.com/pulls'"
 alias pre="pre-commit run --all-files"
 alias pb="pbcopy"
 alias desk="cd ~/Desktop"
+alias ql="qlmanage -p "$@" >& /dev/null" # Quick look
 
 # Commands starting with % for pasting from web
 alias %=" "
@@ -50,3 +49,9 @@ export OP_PLUGIN_ALIASES_SOURCED=1
 alias gh="op plugin run -- gh"
 alias openai="op plugin run -- openai"
 alias sentry-cli="op plugin run -- sentry-cli"
+
+# locations
+alias lyft="cd /Users/glanata/Developer/Lyft-iOS"
+alias lyft2="cd /Users/glanata/Developer/Lyft-iOS-2"
+alias lpl="cd /Users/glanata/Developer/LyftProductLanguage"
+alias hammer="cd /Users/glanata/Developer/Hammer"

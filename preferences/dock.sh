@@ -56,6 +56,10 @@ defaults write com.apple.dock show-recents -bool false
 # Disable the Launchpad gesture (pinch with thumb and three fingers)
 defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 
+### Update Dock
+
+log "Updating Dock..."
+
 # Clear items
 dockutil --remove all --no-restart
 

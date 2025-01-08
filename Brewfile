@@ -13,7 +13,10 @@ brew "ripgrep"
 brew "has"
 brew "gpg"
 brew "gnupg"
-brew "fzf"
+brew "fzf" # Fuxxy file search
+brew "fd"
+brew "bat"
+brew "eza" # Modern, maintained replacement for ls/exa
 
 # Git
 tap "keith/formulae"
@@ -101,7 +104,7 @@ brew "lyft/localdevtools/protoc-gen-pynamodb"
 brew "lyft/localdevtools/idltools"
 brew "lyft/localdevtools/kubernetes-cli@1.22"
 brew "lyft/localdevtools/lyft-gitwrapper"
-brew "lyft/localdevtools/lyftdev"
+# brew "lyft/localdevtools/lyftdev"
 brew "lyft/localdevtools/lyftdevtools"
 brew "lyft/localdevtools/python-310-bundle-arm64"
 brew "lyft/localdevtools/python-311-bundle-arm64"

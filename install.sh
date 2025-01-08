@@ -29,13 +29,14 @@ setup_preferences() {
     log "Setting up preferences..."
 
     # Close open System Preferences panes, to prevent them from overriding settings.
-    osascript -e 'tell application "System Preferences" to quit'
+    osascript -e 'tell application "System Preferences" to quit' || true
     
     # Run scripts
     preferences="$DOTFILES_DIR/preferences/*.sh"
     for file in ${preferences}; do
+        log "Linking $(basename "$file" .sh) configuration..."
         # shellcheck source=/dev/null
-        source "$file"
+        source "$file" || true
     done
 
     success "All preferences configured"
@@ -58,11 +59,15 @@ restart_processes() {
 
 log "Starting dotfiles installation..."
 
-sudo -v # Ask for the administrator password upfront and Keep-alive
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+if ask "Do you want to perform sudo actions?"; then
+    sudo_start
+else
+    log "Skipping sudo actions"
+fi
 
 setup_homebrew
 setup_preferences
 restart_processes
+sudo_stop
 
 success "Installation complete! Please restart your terminal."

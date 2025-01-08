@@ -15,7 +15,6 @@ else
     success "Oh My Zsh already installed"
 fi
 
-log "Linking zsh configuration..."
 link_file "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
 link_file "$DOTFILES_DIR/zsh" "$HOME/.oh-my-zsh/custom/zsh"
 

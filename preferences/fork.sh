@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-log "Linking fork configuration..."
 link_file "$DOTFILES_DIR/configs/fork/custom-commands.json" "$HOME/Library/Application Support/com.DanPristupov.Fork/custom-commands.json"
 
 defaults write com.DanPristupov.Fork "defaultSourceFolder" -string "/Users/glanata/Developer"

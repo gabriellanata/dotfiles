@@ -2,22 +2,16 @@
 
 set -euo pipefail
 
-# ~/.osx — http://mths.be/osx
-# Watch for changes in files with either of
-#  sudo fs_usage | grep plist
-#  sudo opensnoop | grep plist
-# Useful reference: http://www.hcs.harvard.edu/~jrus/Site/Cocoa%20Text%20System.html
-
 
 #
 # General Settings
 #
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "GaboMac"
-sudo scutil --set HostName "GaboMac"
-sudo scutil --set LocalHostName "GaboMac"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "GaboMac"
+if_sudo_active scutil --set ComputerName "GaboMac"
+if_sudo_active scutil --set HostName "GaboMac"
+if_sudo_active scutil --set LocalHostName "GaboMac"
+if_sudo_active defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "GaboMac"
 
 # Default sidebar icon size to small
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
@@ -77,10 +71,10 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 5
 
 # Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+if_sudo_active defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 # Show shut down etc. buttons in Login Screen
-sudo defaults write /Library/Preferences/com.apple.loginwindow PowerOffDisabled -bool false
+if_sudo_active defaults write /Library/Preferences/com.apple.loginwindow PowerOffDisabled -bool false
 
 # Show battery percentage
 defaults write com.apple.menuextra.battery ShowPercent -string "YES"
@@ -94,19 +88,19 @@ defaults write com.apple.dock mru-spaces -bool false
 #
 
 # Only use UTF-8 in Terminal.app
-sudo defaults write com.apple.terminal StringEncodings -array 4
+if_sudo_active defaults write com.apple.terminal StringEncodings -array 4
 
 # Disable leading [ on prompt lines (which is totally broken in anything curses)
 # https://twitter.com/UINT_MIN/status/652142001932996609
-sudo defaults write com.apple.Terminal AutoMarkPromptLines -bool false
-sudo defaults write com.apple.Terminal ShowLineMarks -bool false
+if_sudo_active defaults write com.apple.Terminal AutoMarkPromptLines -bool false
+if_sudo_active defaults write com.apple.Terminal ShowLineMarks -bool false
 
 # Hide scrollbars in terminal
-sudo defaults write com.apple.Terminal AppleShowScrollBars -string "Automatic"
+if_sudo_active defaults write com.apple.Terminal AppleShowScrollBars -string "Automatic"
 
 # Setup the correct theme
-# sudo defaults write com.apple.Terminal "Default Window Settings" -string "parsec"
-# sudo defaults write com.apple.Terminal "Startup Window Settings" -string "parsec"
+# if_sudo_active defaults write com.apple.Terminal "Default Window Settings" -string "parsec"
+# if_sudo_active defaults write com.apple.Terminal "Startup Window Settings" -string "parsec"
 
 
 #
@@ -117,7 +111,7 @@ sudo defaults write com.apple.Terminal AppleShowScrollBars -string "Automatic"
 # 0 = off
 # 1 = on for specific services
 # 2 = on for essential services
-sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+if_sudo_active defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 
 
 #
@@ -125,28 +119,28 @@ sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 #
 
 # Half dimming before full display 'sleep'
-sudo pmset -a halfdim 4
+if_sudo_active pmset -a halfdim 4
 
 # Sleep options
-sudo pmset -a displaysleep 5
+if_sudo_active pmset -a displaysleep 5
 
 # Wake for network access
-sudo pmset -a womp 1
+if_sudo_active pmset -a womp 1
 
 # Don't restart after power failure
-sudo pmset -a autorestart 0
+if_sudo_active pmset -a autorestart 0
 
 # Wake computer when laptop is opened
-sudo pmset -a lidwake 1
+if_sudo_active pmset -a lidwake 1
 
 # Don't wake computer when power source changes
-sudo pmset -a acwake 0
+if_sudo_active pmset -a acwake 0
 
 # Don't dim brightness on any different source
-sudo pmset -a lessbright 0
+if_sudo_active pmset -a lessbright 0
 
 # Disable auto-adjust brightness
-sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor.plist "Automatic Display Enabled" -bool false
+if_sudo_active defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor.plist "Automatic Display Enabled" -bool false
 
 #
 # Sound
@@ -206,7 +200,7 @@ defaults write NSGlobalDomain AppleICUTimeFormatStrings -dict \
 ### Stock Apps
 
 # Mail: Only take address@example.com when copying email addresses in main
-sudo defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+if_sudo_active defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
 # Messages: Seems that Messages.app doesn't respect the system setting on Big Sur+ FB8920792
 defaults write com.apple.messages.text SmartQuotes -bool false
@@ -220,7 +214,7 @@ defaults write com.apple.iCal lastViewsTimeZone "America/Los_Angeles"
 defaults write com.apple.iCal "TimeZone support enabled" -bool true
 
 # AddressBook: Sort users in Contacts by first name
-sudo defaults write -app Contacts ABNameSortingFormat -string "sortingFirstName sortingLastName"
+if_sudo_active defaults write -app Contacts ABNameSortingFormat -string "sortingFirstName sortingLastName"
 
 
 #
@@ -282,8 +276,8 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Enable automatic update & download
-sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
-sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true
+if_sudo_active defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+if_sudo_active defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true
 
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true

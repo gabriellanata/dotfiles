@@ -21,8 +21,38 @@ error() {
     echo -e "${RED}==>${NC} $1"
 }
 
+ask() {
+    read -rn 1 -rp "$1 (y/n)? " choice
+    case "$choice" in 
+        y|Y ) return 1;;
+        n|N ) return 2;;
+        * ) echo "invalid";;
+    esac
+}
+
 command_exists() {
     command -v "$1" >/dev/null 2>&1
+}
+
+if_sudo_active() {
+    if sudo -nv 2>/dev/null; then
+        eval "$1"
+    fi
+}
+
+sudo_start() {
+    sudo -v
+    ( while true; do sudo -v; sleep 50; done; ) &
+    SUDO_PID=$!
+    trap 'kill $SUDO_PID' EXIT
+}
+
+sudo_stop() {
+    if [ -n "${SUDO_PID:-}" ]; then
+        kill "$SUDO_PID"
+        trap - SIGINT SIGTERM
+        sudo -k
+    fi
 }
 
 link_file() {
@@ -43,5 +73,5 @@ link_file() {
     fi
     
     ln -sfn "$src" "$dest"
-    success "Linked $src to $dest"
+    success "Linked $(echo "$src to $dest" | sed "s|$DOTFILES_DIR|.|; s|$HOME|~|")"
 }

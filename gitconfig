@@ -6,6 +6,7 @@
   user = gabriellanata
 [diff]
   tool = Kaleidoscope
+	renames = copies # Detect copies as well as renames
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
@@ -73,6 +74,8 @@
   showIncludeUntracked = true
 [commit]
   gpgsign = true
+[apply]
+	whitespace = fix # Detect whitespace errors when applying a patch
 [gpg "ssh"]
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [gpg]
@@ -91,3 +94,7 @@
   defaultBranch = main
 [help]
   autocorrect = 1
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
