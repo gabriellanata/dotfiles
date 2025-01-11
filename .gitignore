@@ -58,6 +58,9 @@ htmlcov/
 nosetests.xml
 coverage.xml
 
+# Tmux
+configs/tmux/ressurect/tmux_resurrect_*.txt
+
 # Lyft specific
 configs/xcode/snippets/lyft_*
 Brewfile.backup

@@ -1,0 +1,15 @@
+# Tmux cmd + num tabbing 
+keybind = super+1=text:\x021
+keybind = super+2=text:\x022
+keybind = super+3=text:\x023
+keybind = super+4=text:\x024
+keybind = super+5=text:\x025
+keybind = super+6=text:\x026
+keybind = super+7=text:\x027
+keybind = super+8=text:\x028
+keybind = super+9=text:\x029
+keybind = super+0=text:\x02\x12
+keybind = super+`=toggle_quick_terminal
+
+# Escape with backtick
+keybind = `=text:\x03

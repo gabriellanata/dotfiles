@@ -1,0 +1,36 @@
+#!/bin/zsh
+
+file=$1
+# If no file is specified, just open the current directory in Xcode.
+if [ -z "$file" ]; then
+    xed "."
+    return 0
+fi
+
+# Check if the selected file is within an open project
+open_projects_raw=$(osascript -e 'tell application "Xcode" to get path of every document')
+open_projects=(${(@s/, /)open_projects_raw})
+has_open_project=false
+for project in "${open_projects[@]}"; do
+    project_dir=$(echo "$project" | sed 's|/[^/]*\.[^/]*$||')
+    if [[ "$file" == "$project_dir"* ]]; then
+        has_open_project=true
+        break
+    fi
+done
+
+# If file is not found in an open project, open the project and wait
+if [[ $has_open_project == false ]]; then
+    # Determine sleep duration based on whether open_projects array is empty
+    if [ ${#open_projects[@]} -eq 0 ]; then
+        sleep_duration=2
+    else
+        sleep_duration=1
+    fi
+    
+    xed "."
+    echo "Waiting for Xcode project to open..."
+    sleep $sleep_duration
+fi
+
+xed "$file"

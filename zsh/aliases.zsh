@@ -25,14 +25,13 @@ alias s="rg"
 # xcode
 alias xcode-select-default="sudo xcode-select -s /Applications/Xcode.app/Contents/Developer"
 alias xsp="xcode-select -p"
-alias x="xed ."
 
 # git
 type hub &>/dev/null && eval "$(hub alias -s)" # Alias `git` as `hub`
 alias lg="lazygit"
 
 # github
-alias prs="BROWSER=open open 'https://github.com/pulls'"
+alias oprs="BROWSER=open open 'https://github.com/pulls'"
 
 # other
 alias pre="pre-commit run --all-files"
@@ -50,8 +49,18 @@ alias gh="op plugin run -- gh"
 alias openai="op plugin run -- openai"
 alias sentry-cli="op plugin run -- sentry-cli"
 
+# Copilot
+alias copilot="/opt/homebrew/bin/gh copilot"
+alias '??'='copilot suggest -t shell'
+alias 'gh?'='copilot suggest -t gh'
+alias 'git?'='copilot suggest -t git'
+alias 'explain'='gh copilot explain'
+
 # locations
 alias lyft="cd /Users/glanata/Developer/Lyft-iOS"
+alias lyft1="cd /Users/glanata/Developer/Lyft-iOS"
 alias lyft2="cd /Users/glanata/Developer/Lyft-iOS-2"
+alias l1="cd /Users/glanata/Developer/Lyft-iOS"
+alias l2="cd /Users/glanata/Developer/Lyft-iOS-2"
 alias lpl="cd /Users/glanata/Developer/LyftProductLanguage"
 alias hammer="cd /Users/glanata/Developer/Hammer"

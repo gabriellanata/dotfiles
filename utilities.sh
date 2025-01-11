@@ -22,12 +22,15 @@ error() {
 }
 
 ask() {
-    read -rn 1 -rp "$1 (y/n)? " choice
-    case "$choice" in 
-        y|Y ) return 1;;
-        n|N ) return 2;;
-        * ) echo "invalid";;
-    esac
+    while true; do
+        read -rn 1 -rp "$1 (y/n)? " choice
+        echo
+        case "$choice" in 
+            y|Y ) return 1;;
+            n|N ) return 2;;
+            * ) echo "Invalid input. Please enter y or n.";;
+        esac
+    done
 }
 
 command_exists() {

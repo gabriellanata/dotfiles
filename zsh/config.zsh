@@ -33,6 +33,17 @@ setopt HIST_REDUCE_BLANKS
 # After !! previous command don't execute, allow editing
 setopt HIST_VERIFY
 
+# Auto-cd when issuing a command that is a directory name
+setopt auto_cd
+
+# Case-insensitive globbing. This allows case-insensitive expansions
+# e.g. % ls ~/d*<tab> expands to % ls /Users/dte/Desktop /Users/dte/Documents
+setopt no_case_glob
+
+# Enable autocorrection on commands
+setopt correct
+setopt correct_all
+
 # pushd for cd commands
 setopt AUTO_PUSHD
 setopt CDABLE_VARS
@@ -69,6 +80,9 @@ unsetopt correct_all
 # Jump to start/end of line (needs override)
 bindkey "^E" end-of-line
 bindkey "^B" beginning-of-line
+
+# Auto-completion
+autoload -Uz compinit && compinit
 
 # Load fzf
 source <(fzf --zsh)

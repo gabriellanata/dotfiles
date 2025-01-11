@@ -4,6 +4,13 @@
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICwRfhS94H4MT8I60QXoA8EjSraatWkbn9GHgpdO4va3
 [github]
   user = gabriellanata
+[alias]
+  c = "!f() { if [ -z \"$1\" ]; then git commit -v -m 'Changes'; else git commit -v -m \"$1\"; fi }; f"
+	co = "!f() { if [ -z \"$1\" ]; then git checkout $(git branch --sort=committerdate | fzf); else git checkout \"$1\"; fi }; f"
+	s = status
+  p = pull
+	b = checkout -b
+	cp = cherry-pick
 [diff]
   tool = Kaleidoscope
 	renames = copies # Detect copies as well as renames
@@ -24,9 +31,10 @@
   excludesfile = /Users/glanata/Developer/Dotfiles/.gitignore
 	trustctime = false # Ref: http://www.git-tower.com/blog/make-git-rebase-safe-on-osx
 	untrackedCache = true
+	pager = diff-so-fancy | less --tabs=4 -RF
 [color]
   pager = true
-  ui = true
+	ui = true
   status = auto
   diff = auto
   branch = auto
@@ -98,3 +106,18 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

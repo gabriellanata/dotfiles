@@ -65,7 +65,12 @@ else
     log "Skipping sudo actions"
 fi
 
-setup_homebrew
+if ask "Do you want to update applications?"; then
+    setup_homebrew
+else
+    log "Skipping update applications"
+fi
+
 setup_preferences
 restart_processes
 sudo_stop

@@ -1,0 +1,57 @@
+#!/bin/zsh
+
+# If there are any arguments, assume they are the command and search term
+if [[ $# -gt 0 ]]; then
+
+    command="$1"
+    search_term="$2"
+    if [[ -z "$search_term" ]]; then
+        echo "No search term was provided after '-a'"
+        exit 1
+    fi
+
+    # Read each line from gh pr list, extracting only the PR number
+    prs_found=false
+    gh pr list --search "$search_term" | xargs -L1 echo | cut -d " " -f1 | while IFS= read -r pr_number; do
+        [[ -z "$pr_number" ]] && continue # If pr_number is empty, skip
+        if [[ "$command" == "approve" || "$command" == "-a" ]]; then
+            gh pr review --approve "$pr_number"
+        elif [[ "$command" == "merge" || "$command" == "automerge" || "$command" == "-m" ]]; then
+            gh pr merge --squash --auto "$pr_number"
+        else
+            echo "Unknown command '$command'"
+            exit 1
+        fi
+        prs_found=true
+    done
+
+    if [[ ! $prs_found ]]; then
+        echo "No PRs found for '$search_term'"
+        exit 1
+    fi
+
+# Open gh-dash
+else
+
+    # Get the local project root
+    GIT_ROOT=$(git -C $PWD rev-parse --show-toplevel 2>/dev/null)
+
+    # Read the config template
+    config_file="$DOTFILES_DIR/configs/gh-dash/config.yml"
+    config="$(<"$config_file")"
+
+    # Replace {{variable_name}} in config
+    replacements=(
+    "one_month_ago=$(date -v-1m '+%Y-%m-%d')"
+    "three_months_ago=$(date -v-3m '+%Y-%m-%d')"
+    "repo_paths=$(if [[ "$GIT_ROOT" == *"Lyft-iOS"* ]]; then echo "lyft/Lyft-iOS: $GIT_ROOT"; else echo ""; fi)"
+    )
+    for item in "${replacements[@]}"; do
+    key="${item%%=*}" # Everything before '='
+    val="${item##*=}" # Everything after '='
+    config="$(echo "$config" | sed "s|{{$key}}|$val|g")"
+    done
+
+    gh dash --config <(echo "$config")
+
+fi

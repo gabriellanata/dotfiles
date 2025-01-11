@@ -1,0 +1,50 @@
+git:
+  branchPrefix: "gabriel/"
+  pager: "diff-so-fancy"
+  commit:
+    signOff: true
+    autoWrapCommitMessage: false
+  mainBranches:
+    - master
+    - main
+gui:
+  nerdFontsVersion: "3"
+  branchColors:
+    'master': 'cyan'
+    'release': 'yellow'
+    'cherry': 'red'
+    'ci-': '#777777'
+    'auto-': '#777777'
+    'backup': '#777777'
+    # 'gabriel': 'green'
+
+  authorColors:
+    'Gabriel Lanata': 'green'
+    '*': 'white'
+  commandLogSize: 6
+  # expandFocusedSidePanel: true
+os:
+  editPreset: 'vscode'
+customCommands:
+  - key: 'u'
+    description: 'Undo last commit'
+    context: 'commits'
+    prompts:
+      - type: 'confirm'
+        title: 'Undo last commit'
+        body: 'Are you sure you want to undo the last commit?'
+    command: 'git reset --soft HEAD~1'
+  - key: 'x'
+    description: 'Open in Xcode'
+    context: 'global'
+    command: 'x ./{{.SelectedFile.Name}}'
+  - key: 'q'
+    description: 'Quick commit and PR'
+    context: 'global'
+    stream: true
+    prompts:
+      - type: 'input'
+        title: 'Commit message'
+        key: 'Message'
+        initialValue: ''
+    command: 'git commit -m "{{.Form.Message}}" && git submitpr'

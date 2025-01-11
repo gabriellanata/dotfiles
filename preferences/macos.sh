@@ -256,3 +256,7 @@ defaults write com.apple.TextEdit NSFixedPitchFontSize -int 16
 
 # https://mjtsai.com/blog/2021/03/29/how-to-stop-mac-app-store-notifications
 defaults write com.apple.appstored LastUpdateNotification -date "2029-12-12 12:00:00 +0000"
+
+# Paste and match style by default
+defaults write -g NSUserKeyEquivalents "{ 'Paste and Match Style' = '@V'; }"
+

@@ -1,0 +1,43 @@
+# This is a template used by bin/prs 
+
+prSections:
+  - title: "My Pull Requests"
+    filters: "is:pr is:open archived:false author:@me updated:>{{three_months_ago}} sort:updated"
+    layout:
+      author:
+        hidden: true
+  - title: "Needs My Review"
+    filters: "is:pr is:open archived:false review-requested:@me -author:lyft-lint-bot updated:>{{one_month_ago}} sort:updated"
+    limit: 50
+  - title: "Involved"
+    filters: "is:open involves:@me -author:@me -author:lyft-lint-bot updated:>{{one_month_ago}} sort:updated"
+    limit: 50
+  - title: "UI & Arch"
+    filters: "is:pr is:open archived:false repo:lyft/Lyft-iOS repo:lyft/instant-android author:julioacarrettoni author:danielskathyd updated:>{{one_month_ago}} sort:updated"
+    limit: 50
+  - title: "Lyft-iOS"
+    filters: "is:pr is:open archived:false repo:lyft/Lyft-iOS -author:lyft-lint-bot updated:>{{one_month_ago}} sort:updated"
+    limit: 50
+keybindings:
+  universal:
+    - key: "q"
+      command: true
+#   universal:
+#     - key: "tab"
+#       builtin: nextSection
+#     - key: "right"
+#       builtin: nextSection
+  prs:
+    - key: "esc"
+      command: true
+    - key: "a"
+      builtin: approve
+    - key: "A"
+      command: "gh pr review --repo {{.RepoName}} --approve {{.PrNumber}}"
+    - key: "alt+a"
+      builtin: assign
+    - key: "alt+A"
+      builtin: unassign
+repoPaths:
+    {{repo_paths}}
+    :owner/:repo: $HOME/Developer/:repo

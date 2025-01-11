@@ -17,6 +17,9 @@ brew "fzf" # Fuxxy file search
 brew "fd"
 brew "bat"
 brew "eza" # Modern, maintained replacement for ls/exa
+brew "tmux"
+brew "vim"
+brew "keith/formulae/tag"
 
 # Git
 tap "keith/formulae"
@@ -26,6 +29,7 @@ brew "git-lfs"
 brew "git-extras"
 brew "git-recent"
 brew "pre-commit"
+brew "diff-so-fancy"
 brew "gh" # GitHub CLI
 brew "act" # Run GitHub actions locally
 brew "jesseduffield/lazygit/lazygit" # Simple terminal UI for git commands
