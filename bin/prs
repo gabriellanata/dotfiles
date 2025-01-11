@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 
 # If there are any arguments, assume they are the command and search term
 if [[ $# -gt 0 ]]; then
@@ -12,7 +12,7 @@ if [[ $# -gt 0 ]]; then
 
     # Read each line from gh pr list, extracting only the PR number
     prs_found=false
-    gh pr list --search "$search_term" | xargs -L1 echo | cut -d " " -f1 | while IFS= read -r pr_number; do
+    while IFS= read -r pr_number; do
         [[ -z "$pr_number" ]] && continue # If pr_number is empty, skip
         if [[ "$command" == "approve" || "$command" == "-a" ]]; then
             gh pr review --approve "$pr_number"
@@ -23,7 +23,7 @@ if [[ $# -gt 0 ]]; then
             exit 1
         fi
         prs_found=true
-    done
+    done < <(gh pr list --search "$search_term" | xargs -L1 echo | cut -d " " -f1)
 
     if [[ ! $prs_found ]]; then
         echo "No PRs found for '$search_term'"
@@ -49,7 +49,7 @@ else
     for item in "${replacements[@]}"; do
     key="${item%%=*}" # Everything before '='
     val="${item##*=}" # Everything after '='
-    config="$(echo "$config" | sed "s|{{$key}}|$val|g")"
+    config="${config//\{\{$key\}\}/$val}"
     done
 
     gh dash --config <(echo "$config")
