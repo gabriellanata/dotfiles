@@ -44,7 +44,7 @@
 [pull]
   rebase = true
 [advice]
-  skippedCherryPicks = false
+	skippedCherryPicks = false
 [branch "main"]
   pushRemote = NOPE
 [branch "master"]
@@ -121,3 +121,5 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[gitbutler]
+	aiModelProvider = openai

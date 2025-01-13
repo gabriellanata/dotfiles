@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+### Argument Parsing ###
+
+select_branch() {
+    git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7
+}
+
+# Check if any arguments provided
+if [ $# -eq 0 ]; then
+    echo "Error: No arguments provided"
+    echo "Usage: prs-submit -t <title> [-b <body>] [-H <head>] [-B <base>] [-r <reviewer>] [--wed] [--draft]"
+    exit 1
+fi
+
+if git diff --quiet --staged; then
+    echo "Error: No staged changes to commit"
+    exit 1
+fi
+
+# Get arguments for operations
+title=""
+body=""
+head_sha="" # The change has not been commited yet so this is null
+base_branch=""
+signoff=""
+verbose=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+    -t | --title)
+        title="$2"
+        shift
+        shift
+        ;;
+    -b | --body)
+        body="$2"
+        shift
+        shift
+        ;;
+    -H | --head)
+        head_sha="$2"
+        shift
+        shift
+        ;;
+    -B | --base)
+        if [[ "$2" == -* ]]; then
+            # If $2 starts with "-" no branch was passed and we should run a fzf search for a base branch
+            base_branch="$(select_branch)"
+        else
+            base_branch="$2"
+            shift
+        fi
+
+
+        # if [[ ! "${2,,}" =~ ^(master|main)$ ]]; then
+        #     base_branch="$2"
+        # fi
+        shift
+        ;;
+    --signoff)
+        signoff=true
+        shift
+        ;;
+    --no-signoff)
+        signoff=false
+        shift
+        ;;
+    -v | --verbose)
+        verbose=true
+        shift
+        ;;
+    --quiet)
+        verbose=false
+        shift
+        ;;
+    -*)
+        echo "Unknown option $1"
+        exit 1
+        ;;
+    *)
+        positional_args+=("$1") # save positional args
+        shift
+        ;;
+    esac
+done
+
+# Check if base branch is empty
+if [[ -z "$base_branch" ]]; then
+    base_branch="@{upstream}"
+fi
+
+# Check if title is not empty
+if [[ -z "$title" ]]; then
+    echo "Error: Title (-t|--title) is required"
+    exit 1
+fi
+
+# Fill the args
+commit_args=()
+pr_args=()
+
+if [[ -n "$body" ]]; then
+    commit_args+=("-m" "$body")
+fi
+
+if [[ "$signoff" == true ]]; then
+    commit_args+=("--signoff")
+elif [[ "$signoff" == false ]]; then
+    commit_args+=("--no-signoff")
+fi
+
+if [[ "$verbose" == true ]]; then
+    commit_args+=("--verbose")
+    set -x
+else
+    commit_args+=("--quiet")
+fi
+
+### Execute Commands ###
+
+run_with_env() {
+    env GIT_PILE_VERBOSE="$verbose" "$@"
+}
+
+git commit --no-edit -m "$title" "${commit_args[@]}"
+if [[ -n "$head_sha" ]]; then
+    run_with_env git-submitpr "$head_sha" --base "$base_branch" "${pr_args[@]}" "${positional_args[@]}"
+else
+    run_with_env git-submitpr --base "$base_branch" "${pr_args[@]}" "${positional_args[@]}"
+fi

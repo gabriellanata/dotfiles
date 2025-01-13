@@ -77,7 +77,7 @@ defaults write com.apple.dt.XCBuild EnableBuildDebugging -bool true
 defaults write com.apple.dt.XCBuild EnableDebugActivityLogs -bool true
 
 # Make the tab key actually be a tab key
-defaults write com.apple.dt.Xcode DVTTextTabKeyIndentBehavior -string Never
+defaults write com.apple.dt.Xcode DVTTextTabKeyIndentBehavior -string Always
 
 # Set the keybindings to my customizations (see $DOTFILES/xcode)
 # Stored in ~/Library/Developer/Xcode/UserData/KeyBindings

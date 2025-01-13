@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Running branch cleanup"
+
+git fetch -p
+
+branches=$(git branch --list --format \
+    "%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)")
+
+for branch in $branches; do
+    if [ "$branch" != "master" ]; then
+        git branch -d "$branch" "$@"
+    fi
+done
+
+git prune

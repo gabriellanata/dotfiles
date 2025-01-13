@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+### Argument Parsing ###
+
+select_branch() {
+    git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7
+}
+
+if git diff --quiet --staged; then
+    echo "Error: No staged changes to commit"
+    exit 1
+fi
+
+# Get arguments for operations
+title=""
+base_branch=""
+signoff=""
+verbose=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+    -t | --title)
+        title="$2"
+        shift
+        shift
+        ;;
+    -B | --base)
+        if [[ "$2" == -* ]]; then
+            # If $2 starts with "-" no branch was passed and we should run a fzf search for a base branch
+            base_branch=$(select_branch)
+        else
+            base_branch="$2"
+            shift
+        fi
+        shift
+        ;;
+    --signoff)
+        signoff=true
+        shift
+        ;;
+    --no-signoff)
+        signoff=false
+        shift
+        ;;
+    -v | --verbose)
+        verbose=true
+        shift
+        ;;
+    --quiet)
+        verbose=false
+        shift
+        ;;
+    -*)
+        echo "Unknown option $1"
+        exit 1
+        ;;
+    *)
+        positional_args+=("$1") # save positional args
+        shift
+        ;;
+    esac
+done
+
+# Check if base branch is empty
+if [[ -z "$base_branch" ]]; then
+    base_branch=$(select_branch)
+fi
+
+# Check if title is empty
+if [[ -z "$title" ]]; then
+    title="fixup"
+fi
+
+# Fill the args
+commit_args=()
+pr_args=()
+
+if [[ "$signoff" == true ]]; then
+    commit_args+=("--signoff")
+elif [[ "$signoff" == false ]]; then
+    commit_args+=("--no-signoff")
+fi
+
+if [[ "$verbose" == true ]]; then
+    commit_args+=("--verbose")
+    set -x
+else
+    commit_args+=("--quiet")
+fi
+
+### Execute Commands ###
+
+run_with_env() {
+    env GIT_PILE_VERBOSE="$verbose" "$@"
+}
+
+# Find first non-fixup commit from base_branch
+if ! base_sha=$(git log "$base_branch" --pretty=format:'%H' --grep '^fixup' --invert-grep -1); then
+    echo "Error: Could not find non-fixup commit in $base_branch"
+    exit 1
+fi
+
+run_with_env git commit --no-edit -m "$title" "${commit_args[@]}"
+run_with_env git-updatepr "$base_sha" "${pr_args[@]}" "${positional_args[@]}"

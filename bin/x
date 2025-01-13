@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 file=$1
 # If no file is specified, just open the current directory in Xcode.
 if [ -z "$file" ]; then

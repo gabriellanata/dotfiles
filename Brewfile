@@ -13,12 +13,15 @@ brew "ripgrep"
 brew "has"
 brew "gpg"
 brew "gnupg"
-brew "fzf" # Fuxxy file search
+brew "fzf" # Fuzzy file search
 brew "fd"
 brew "bat"
 brew "eza" # Modern, maintained replacement for ls/exa
 brew "tmux"
 brew "vim"
+brew "rename"
+brew "micro"
+brew "yazi"
 brew "keith/formulae/tag"
 
 # Git
@@ -95,6 +98,7 @@ vscode "svanimpe.stencil"
 vscode "timonwong.shellcheck"
 vscode "vadimcn.vscode-lldb"
 vscode "dnicolson.binary-plist"
+vscode "shell-format" 
 
 # Lyft
 tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"

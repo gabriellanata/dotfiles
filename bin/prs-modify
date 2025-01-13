@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+command="$1"
+search_term="$2"
+if [[ -z "$search_term" ]]; then
+    echo "No search term was provided after '-a'"
+    exit 1
+fi
+
+# Read each line from gh pr list, extracting only the PR number
+prs_found=false
+while IFS= read -r pr_number; do
+    [[ -z "$pr_number" ]] && continue # If pr_number is empty, skip
+    if [[ "$command" == "approve" || "$command" == "-a" ]]; then
+        gh pr review --approve "$pr_number"
+    elif [[ "$command" == "merge" || "$command" == "automerge" || "$command" == "-m" ]]; then
+        gh pr merge --squash --auto "$pr_number"
+    else
+        echo "Unknown command '$command'"
+        exit 1
+    fi
+    prs_found=true
+done < <(gh pr list --search "$search_term" | xargs -L1 echo | cut -d " " -f1)
+
+if [[ ! $prs_found ]]; then
+    echo "No PRs found for '$search_term'"
+    exit 1
+fi

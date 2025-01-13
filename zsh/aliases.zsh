@@ -19,7 +19,7 @@ alias ....="cd ../../.."
 # system
 alias o="open"
 alias oo="open ."
-alias ls="ls -F"
+alias ls="eza --hyperlink --icons=always --group-directories-first --level 2"
 alias s="rg"
 
 # xcode
@@ -38,6 +38,7 @@ alias pre="pre-commit run --all-files"
 alias pb="pbcopy"
 alias desk="cd ~/Desktop"
 alias ql="qlmanage -p "$@" >& /dev/null" # Quick look
+alias e="micro" # Edit file
 
 # Commands starting with % for pasting from web
 alias %=" "
