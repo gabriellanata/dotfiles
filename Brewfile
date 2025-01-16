@@ -23,6 +23,7 @@ brew "rename"
 brew "micro"
 brew "yazi"
 brew "keith/formulae/tag"
+brew "sachaos/todoist/todoist"
 
 # Git
 tap "keith/formulae"

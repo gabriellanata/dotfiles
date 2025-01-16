@@ -1,5 +1,6 @@
-# zsh configuration
-export ZSH="$HOME/.oh-my-zsh"
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 # History settings
 # Save x items to the given history file
@@ -69,13 +70,6 @@ setopt CHECK_JOBS
 
 # Allow alt/option . to insert the argument from the previous command
 bindkey '\e.' insert-last-word
-
-# Load oh-my-zsh defaults
-source $ZSH/oh-my-zsh.sh
-
-# Prevent bypassing pushRemote config by explicitly adding the remote
-unalias ggpush
-unsetopt correct_all
 
 # Jump to start/end of line (needs override)
 bindkey "^E" end-of-line

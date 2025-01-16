@@ -30,23 +30,6 @@ customCommands:
     description: 'Open in Xcode'
     context: 'global'
     command: 'x {{if .SelectedFile}}./{{.SelectedFile.Name}}{{end}}'
-  - key: 'u'
-    description: 'Undo last commit'
-    context: 'commits'
-    prompts:
-      - type: 'confirm'
-        title: 'Undo last commit'
-        body: 'Are you sure you want to undo the last commit?'
-    command: 'git reset --soft HEAD~1'
-  - key: 'C'
-    description: 'Cleanup branches'
-    context: 'localBranches'
-    prompts:
-      - type: 'confirm'
-        title: 'Cleanup branches'
-        body: 'Are you sure you delete all branches that are merged upstream?'
-    command: 'git cleanup -f'
-    loadingText: 'Cleaning up branches'
   - key: 'q'
     description: 'Quick commit and PR'
     context: 'global'
@@ -73,7 +56,7 @@ customCommands:
           {{- end -}}
         suggestions:
           preset: 'branches'
-    command: 'prs submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base {{.Form.BaseBranch}} -v'
+    command: 'prs submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base {{.Form.BaseBranch}}'
     loadingText: 'Creating Quick PR'
   - key: 'Q'
     description: 'Quick commit and Fixup'
@@ -97,8 +80,42 @@ customCommands:
           {{- end -}}
         suggestions:
           preset: 'branches'
-    command: 'prs fixup --base {{.Form.BaseBranch}} -v'
+    command: 'prs fixup --base {{.Form.BaseBranch}} '
     loadingText: 'Creating Quick Fixup'
+  - key: 'l'
+    description: 'Lyft generate'
+    context: 'global'
+    stream: true
+    command: 'l'
+    loadingText: 'Generating Lyft project'
+  - key: 'L'
+    description: 'Lyft generate add module'
+    context: 'global'
+    stream: true
+    prompts:
+      - type: 'menuFromCommand'
+        title: 'Module:'
+        key: 'Module'
+        command: 'lyft-modules'
+    command: 'l {{.Form.Module}}'
+    loadingText: 'Generating Lyft project'
+  - key: 'u'
+    description: 'Undo last commit'
+    context: 'commits'
+    prompts:
+      - type: 'confirm'
+        title: 'Undo last commit'
+        body: 'Are you sure you want to undo the last commit?'
+    command: 'git reset --soft HEAD~1'
+  - key: 'C'
+    description: 'Cleanup branches'
+    context: 'localBranches'
+    prompts:
+      - type: 'confirm'
+        title: 'Cleanup branches'
+        body: 'Are you sure you delete all branches that are merged upstream?'
+    command: 'git cleanup -f'
+    loadingText: 'Cleaning up branches'
 
 
 

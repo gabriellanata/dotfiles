@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
 alias reload="exec zsh"
 
 alias install-dotfiles="$DOTFILES_DIR/install.sh"
@@ -15,6 +19,9 @@ alias dotfiles="$EDITOR $DOTFILES_DIR"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias cd..="cd .."
+alias cd...="cd ../.."
+alias cd....="cd ../../.."
 
 # system
 alias o="open"
@@ -49,6 +56,7 @@ export OP_PLUGIN_ALIASES_SOURCED=1
 alias gh="op plugin run -- gh"
 alias openai="op plugin run -- openai"
 alias sentry-cli="op plugin run -- sentry-cli"
+alias todoist="op plugin run -- todoist"
 
 # Copilot
 alias copilot="/opt/homebrew/bin/gh copilot"
@@ -58,10 +66,11 @@ alias 'git?'='copilot suggest -t git'
 alias 'explain'='gh copilot explain'
 
 # locations
-alias lyft="cd /Users/glanata/Developer/Lyft-iOS"
-alias lyft1="cd /Users/glanata/Developer/Lyft-iOS"
-alias lyft2="cd /Users/glanata/Developer/Lyft-iOS-2"
-alias l1="cd /Users/glanata/Developer/Lyft-iOS"
-alias l2="cd /Users/glanata/Developer/Lyft-iOS-2"
-alias lpl="cd /Users/glanata/Developer/LyftProductLanguage"
-alias hammer="cd /Users/glanata/Developer/Hammer"
+alias cdlyft="cd /Users/glanata/Developer/Lyft-iOS"
+alias cdlyft1="cd /Users/glanata/Developer/Lyft-iOS"
+alias cdlyft2="cd /Users/glanata/Developer/Lyft-iOS-2"
+alias cdl="cd /Users/glanata/Developer/Lyft-iOS"
+alias cdl1="cd /Users/glanata/Developer/Lyft-iOS"
+alias cdl2="cd /Users/glanata/Developer/Lyft-iOS-2"
+alias cdlpl="cd /Users/glanata/Developer/LyftProductLanguage"
+alias cdhammer="cd /Users/glanata/Developer/Hammer"

@@ -1,4 +1,8 @@
-function md () {
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function md() {
   mkdir -p $1 && cd $1;
 }
 
@@ -28,4 +32,13 @@ function opr() {
   fi
 
   BROWSER=open gh pr view --web
+}
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }

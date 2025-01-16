@@ -95,9 +95,11 @@
   hide-status = 1
   hide-dirty = 1
 [maintenance]
+  auto = false
   repo = /Users/glanata/Developer/lyft/Lyft-iOS
+  repo = /Users/glanata/Developer/lyft/Lyft-iOS-2
+  repo = /Users/glanata/Developer/lyft/LyftProductLanguage
   strategy = incremental
-  interval = hourly
 [init]
   defaultBranch = main
 [help]
