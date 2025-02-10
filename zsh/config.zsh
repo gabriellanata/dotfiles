@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 # History settings
 # Save x items to the given history file
 export HISTSIZE=100000000

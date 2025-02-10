@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+search_term="$1"
+if [[ -z "$search_term" ]]; then
+    echo "No search term was provided after '-a'"
+    exit 0
+fi
+shift
+
+# Read each line from gh pr list, extracting only the PR number
+prs_found=false
+while IFS= read -r pr_url; do
+    [[ -z "$pr_url" ]] && continue # If pr_number is empty, skip
+    echo "$pr_url"
+    prs_found=true
+done < <(gh pr list --search "$search_term" "$@")
+
+if [[ ! $prs_found ]]; then
+    echo "No PRs found for '$search_term'"
+    exit 0
+fi

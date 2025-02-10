@@ -7,17 +7,23 @@ if [[ $# -gt 0 ]]; then
     command="$1"
     shift
     if [[ "$command" == "approve" || "$command" == "-a" ]]; then
-        prs-modify approve "$@"
+        pr-modify approve "$@"
     elif [[ "$command" == "merge" || "$command" == "automerge" || "$command" == "-m" ]]; then
-        prs-modify merge "$@"
+        pr-modify merge "$@"
+    elif [[ "$command" == "rename" ]]; then
+        pr-modify rename "$@"
+    elif [[ "$command" == "comment" ]]; then
+        pr-modify comment "$@"
+    elif [[ "$command" == "list" || "$command" == "-l" ]]; then
+        pr-list "$@"
     elif [[ "$command" == "submit" || "$command" == "-s" ]]; then
         pr-quick-submit "$@"
     elif [[ "$command" == "update" || "$command" == "-u" || "$command" == "fixup" || "$command" == "-f" ]]; then
         pr-quick-update "$@"
     else
         echo "Unknown command '$command'"
-        exit 1
+        exit 0
     fi
 else
-    prs-default
+    pr-default
 fi

@@ -1,6 +1,6 @@
 git:
-  branchPrefix: "gabriel/"
-  pager: "diff-so-fancy"
+  branchPrefix: 'gabriel/'
+  pager: 'diff-so-fancy'
   commit:
     signOff: true
     autoWrapCommitMessage: false
@@ -8,7 +8,7 @@ git:
     - master
     - main
 gui:
-  nerdFontsVersion: "3"
+  nerdFontsVersion: '3'
   branchColors:
     'master': 'cyan'
     'release': 'yellow'
@@ -17,7 +17,6 @@ gui:
     'auto-': '#777777'
     'backup': '#777777'
     # 'gabriel': 'green'
-
   authorColors:
     'Gabriel Lanata': 'yellow'
     '*': 'white'
@@ -25,6 +24,22 @@ gui:
   # expandFocusedSidePanel: true
 os:
   editPreset: 'vscode'
+keybinding:
+  universal:
+    quit: '<disabled>'
+    quitWithoutChangingDirectory: '<disabled>'
+    prevItem-alt: '<disabled>'
+    nextItem-alt: '<disabled>'
+    prevBlock-alt: '<disabled>'
+    nextBlock-alt: '<disabled>'
+    scrollLeft: '<disabled>'
+    scrollRight: '<disabled>'
+    scrollUpMain-alt1: '<disabled>'
+    scrollDownMain-alt1: '<disabled>'
+    prevBlock: '<disabled>'
+    nextBlock:  '<disabled>'
+    # return: '<left>'
+    # goInto: '<right>'
 customCommands:
   - key: 'x'
     description: 'Open in Xcode'
@@ -56,7 +71,7 @@ customCommands:
           {{- end -}}
         suggestions:
           preset: 'branches'
-    command: 'prs submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base {{.Form.BaseBranch}}'
+    command: 'pr submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base "{{.Form.BaseBranch}}"'
     loadingText: 'Creating Quick PR'
   - key: 'Q'
     description: 'Quick commit and Fixup'
@@ -80,13 +95,13 @@ customCommands:
           {{- end -}}
         suggestions:
           preset: 'branches'
-    command: 'prs fixup --base {{.Form.BaseBranch}} '
+    command: 'pr fixup --base "{{.Form.BaseBranch}}"'
     loadingText: 'Creating Quick Fixup'
   - key: 'l'
     description: 'Lyft generate'
     context: 'global'
     stream: true
-    command: 'l'
+    command: 'lyft generate'
     loadingText: 'Generating Lyft project'
   - key: 'L'
     description: 'Lyft generate add module'
@@ -96,8 +111,8 @@ customCommands:
       - type: 'menuFromCommand'
         title: 'Module:'
         key: 'Module'
-        command: 'lyft-modules'
-    command: 'l {{.Form.Module}}'
+        command: 'lyft list-modules'
+    command: 'lyft generate {{.Form.Module}}'
     loadingText: 'Generating Lyft project'
   - key: 'u'
     description: 'Undo last commit'

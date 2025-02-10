@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# If there are any arguments, assume they are a command
+if [[ $# -gt 0 ]]; then
+    command="$1"
+    shift
+    if [[ "$command" == "generate" || "$command" == "g" ]]; then
+        lyft-generate "$@"
+    elif [[ "$command" == "list-modules" ]]; then
+        lyft-list-modules
+    else
+        echo "Unknown command '$command'"
+        exit 0
+    fi
+else
+    lyft-generate
+fi

@@ -2,11 +2,12 @@
 
 set -euo pipefail
 
-file=$1
+file=${1:-}
+
 # If no file is specified, just open the current directory in Xcode.
 if [ -z "$file" ]; then
     xed "."
-    return 0
+    exit 0
 fi
 
 # Check if the selected file is within an open project

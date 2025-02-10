@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ ! "$PWD" =~ "Lyft-iOS" ]]; then
+    echo "Error: Must be in Lyft-iOS directory"
+    exit 0
+fi
+
+./ios generate --include-previous --include-changed "$@"

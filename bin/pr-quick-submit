@@ -11,13 +11,13 @@ select_branch() {
 # Check if any arguments provided
 if [ $# -eq 0 ]; then
     echo "Error: No arguments provided"
-    echo "Usage: prs-submit -t <title> [-b <body>] [-H <head>] [-B <base>] [-r <reviewer>] [--wed] [--draft]"
-    exit 1
+    echo "Usage: pr-submit -t <title> [-b <body>] [-H <head>] [-B <base>] [-r <reviewer>] [--wed] [--draft]"
+    exit 0
 fi
 
 if git diff --quiet --staged; then
     echo "Error: No staged changes to commit"
-    exit 1
+    exit 0
 fi
 
 # Get arguments for operations
@@ -77,7 +77,7 @@ while [[ $# -gt 0 ]]; do
         ;;
     -*)
         echo "Unknown option $1"
-        exit 1
+        exit 0
         ;;
     *)
         positional_args+=("$1") # save positional args
@@ -94,7 +94,7 @@ fi
 # Check if title is not empty
 if [[ -z "$title" ]]; then
     echo "Error: Title (-t|--title) is required"
-    exit 1
+    exit 0
 fi
 
 # Fill the args

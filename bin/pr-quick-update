@@ -10,7 +10,7 @@ select_branch() {
 
 if git diff --quiet --staged; then
     echo "Error: No staged changes to commit"
-    exit 1
+    exit 0
 fi
 
 # Get arguments for operations
@@ -53,7 +53,7 @@ while [[ $# -gt 0 ]]; do
         ;;
     -*)
         echo "Unknown option $1"
-        exit 1
+        exit 0
         ;;
     *)
         positional_args+=("$1") # save positional args
@@ -98,7 +98,7 @@ run_with_env() {
 # Find first non-fixup commit from base_branch
 if ! base_sha=$(git log "$base_branch" --pretty=format:'%H' --grep '^fixup' --invert-grep -1); then
     echo "Error: Could not find non-fixup commit in $base_branch"
-    exit 1
+    exit 0
 fi
 
 run_with_env git commit --no-edit -m "$title" "${commit_args[@]}"

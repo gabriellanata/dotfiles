@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 alias reload="exec zsh"
 
 alias install-dotfiles="$DOTFILES_DIR/install.sh"
@@ -65,12 +63,14 @@ alias 'gh?'='copilot suggest -t gh'
 alias 'git?'='copilot suggest -t git'
 alias 'explain'='gh copilot explain'
 
-# locations
-alias cdlyft="cd /Users/glanata/Developer/Lyft-iOS"
-alias cdlyft1="cd /Users/glanata/Developer/Lyft-iOS"
-alias cdlyft2="cd /Users/glanata/Developer/Lyft-iOS-2"
+# Lyft
+alias l="lyft generate"
+alias la="lyft list-modules | fzf | lyft generate"
 alias cdl="cd /Users/glanata/Developer/Lyft-iOS"
 alias cdl1="cd /Users/glanata/Developer/Lyft-iOS"
 alias cdl2="cd /Users/glanata/Developer/Lyft-iOS-2"
+alias cdlyft="cd /Users/glanata/Developer/Lyft-iOS"
+alias cdlyft1="cd /Users/glanata/Developer/Lyft-iOS"
+alias cdlyft2="cd /Users/glanata/Developer/Lyft-iOS-2"
 alias cdlpl="cd /Users/glanata/Developer/LyftProductLanguage"
 alias cdhammer="cd /Users/glanata/Developer/Hammer"

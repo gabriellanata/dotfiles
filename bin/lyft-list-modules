@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ ! "$PWD" =~ "Lyft-iOS" ]]; then
+    echo "Error: Must be in Lyft-iOS directory"
+    exit 0
+fi
+
+find ./Modules -maxdepth 1 -mindepth 1 -type d \
+| sed -E 's/(Flow|UI|Plugins|PluginConfiguration|Service|-UITests)$/*/' \
+| sort -u \
+| awk '
+    {
+        full = $0
+        base = full
+        sub(/\*$/, "", base)
+        if (/\*$/) { haveAsterisk[base] = 1 }
+        if (!(base in firstLine)) { firstLine[base] = full }
+    }
+    END {
+        for (b in firstLine) {
+        if (haveAsterisk[b]) {
+            print b "*"
+        } else {
+            print b
+        }
+        }
+    }
+' \
+| sort

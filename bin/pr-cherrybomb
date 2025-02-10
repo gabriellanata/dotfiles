@@ -1,0 +1,141 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+### Argument Parsing ###
+
+# Check if any arguments provided
+if [ $# -eq 0 ]; then
+    echo "Error: No arguments provided"
+    echo "Usage: pr-cherrybomb <sha> -r <release>"
+    exit 0
+fi
+
+cherry_sha="$1"
+shift
+
+# Get arguments for operations
+branches="" # Example: origin/release*-2025.1-*
+signoff=""
+verbose=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+    -b | --branches)
+        branches="$2"
+        shift
+        shift
+        ;;
+    --signoff)
+        signoff=true
+        shift
+        ;;
+    --no-signoff)
+        signoff=false
+        shift
+        ;;
+    -v | --verbose)
+        verbose=true
+        shift
+        ;;
+    --quiet)
+        verbose=false
+        shift
+        ;;
+    -*)
+        echo "Unknown option $1"
+        exit 0
+        ;;
+    *)
+        positional_args+=("$1") # save positional args
+        shift
+        ;;
+    esac
+done
+
+# Check if sha is empty
+if [[ -z "$cherry_sha" ]]; then
+    echo "Error: Cherry-pick sha is required"
+    exit 0
+fi
+
+# Check if branches is empty
+if [[ -z "$branches" ]]; then
+    echo "Error: Branches (-b|--branches) is required"
+    exit 0
+fi
+
+# Fill the args
+commit_args=()
+
+if [[ "$signoff" == true ]]; then
+    commit_args+=("--signoff")
+    commit_args+=("--no-signoff")
+fi
+
+if [[ "$verbose" == true ]]; then
+    commit_args+=("--verbose")
+    set -x
+else
+    commit_args+=("--quiet")
+fi
+
+### Execute Commands ###
+
+run_with_env() {
+    env "$@"
+}
+
+# Find list of branches that match the "branches" regex
+branch_list=$(run_with_env git branch -r --list "origin/$branches" | tr '\n' ' ')
+
+# Exit if 0 found or > 100
+if [[ $(wc -w <<<"$branch_list") -eq 0 ]]; then
+    echo "Error: No branches found that match the regex '$branches'"
+    exit 0
+elif [[ $(wc -w <<<"$branch_list") -gt 100 ]]; then
+    echo "Error: More than 100 branches found that match the regex '$branches'"
+    exit 0
+fi
+
+# List branches and ask for confirmation
+echo "The following branches will be updated:"
+git branch -r --list "origin/$branches"
+read -p "Continue? [y/N] " -r
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Operation aborted by user"
+    exit 0
+fi
+
+# Get commit message
+if ! commit_message=$(git log -1 --pretty=%B "$cherry_sha"); then
+    echo "Error: Could not get commit message for $cherry_sha"
+    exit 0
+fi
+
+# Get first line for PR title
+pr_title=$(echo "$commit_message" | head -n 1)
+
+# Get the short sha of the cherry pick
+short_sha="${cherry_sha:0:7}"
+
+# Cherrypick to each branch
+echo "Generating cherry picks for $pr_title"
+for branch in $branch_list; do
+    local_branch="${branch//origin\//}"
+    cherry_branch="cherry-$short_sha-$local_branch"
+    echo "Working on local branch: $local_branch"
+    git fetch origin "$local_branch"
+    git checkout -B "$local_branch" "origin/$local_branch"
+    git checkout -b "$cherry_branch"
+    git cherry-pick -X theirs --no-edit "$cherry_sha"
+    git push --set-upstream origin "$cherry_branch"
+    gh pr create --base "$local_branch" --title "🍒 $pr_title" --body "(cherry-picked from commit $cherry_sha)"
+done
+
+# Print lisr of PR URLs
+echo "The following PRs have been created:"
+pr_list=$(gh pr list --search "🍒 $pr_title" --state open --json id,url)
+
+## extract the url from the json
+pr_urls=$(echo "$pr_list" | jq -r '.[] | .url')
+echo "$pr_urls" | xargs -n 1

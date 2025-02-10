@@ -10,6 +10,7 @@ dockApps=( \
     "Messages" \
     "Slack" \
     "Calendar" \
+    "Todoist" \
     "" \
     "Xcode" \
     "Xcode.app/Contents/Developer/Applications/Simulator"
