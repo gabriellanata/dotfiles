@@ -35,9 +35,6 @@ plugins=(
   colored-man-pages
 )
 
-# Load fzf
-source <(fzf --zsh)
-
 # Source all zsh files
 configs=($DOTFILES_DIR/zsh/*.zsh)
 for file in ${configs}; do

@@ -64,7 +64,7 @@ alias 'git?'='copilot suggest -t git'
 alias 'explain'='gh copilot explain'
 
 # Lyft
-alias l="lyft generate"
+alias l="lyft"
 alias la="lyft list-modules | fzf | lyft generate"
 alias cdl="cd /Users/glanata/Developer/Lyft-iOS"
 alias cdl1="cd /Users/glanata/Developer/Lyft-iOS"

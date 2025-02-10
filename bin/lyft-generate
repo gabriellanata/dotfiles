@@ -2,9 +2,60 @@
 
 set -euo pipefail
 
-if [[ ! "$PWD" =~ "Lyft-iOS" ]]; then
-    echo "Error: Must be in Lyft-iOS directory"
-    exit 0
+# Get arguments for operations
+include_previous=true
+include_changed=true
+verbose=false
+while [[ $# -gt 0 ]]; do
+    case $1 in
+    --no-previous)
+        include_previous=false
+        shift
+        ;;
+    --no-changed)
+        include_changed=false
+        shift
+        ;;
+    -c | --clean)
+        include_previous=false
+        shift
+        ;;
+    -v | --verbose)
+        verbose=true
+        shift
+        ;;
+    --quiet)
+        verbose=false
+        shift
+        ;;
+    -*)
+        echo "Unknown option $1"
+        exit 0
+        ;;
+    *)
+        positional_args+=("$1") # save positional args
+        shift
+        ;;
+    esac
+done
+
+# Fill the args
+args=()
+
+if [[ "$include_previous" == true ]]; then
+    args+=("--include-previous")
 fi
 
-./ios generate --include-previous --include-changed "$@"
+if [[ "$include_changed" == true ]]; then
+    args+=("--include-changed")
+fi
+
+if [[ "$verbose" == true ]]; then
+    args+=("--verbose")
+    set -x
+fi
+
+### Execute Commands ###
+
+echo "Running ios generate"
+./ios generate "${args[@]}" "${positional_args[@]}"
