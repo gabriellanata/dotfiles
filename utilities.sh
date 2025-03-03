@@ -26,8 +26,8 @@ ask() {
         read -rn 1 -rp "$1 (y/n)? " choice
         echo
         case "$choice" in 
-            y|Y ) return 1;;
-            n|N ) return 2;;
+            y|Y ) return 0;;
+            n|N ) return 1;;
             * ) echo "Invalid input. Please enter y or n.";;
         esac
     done

@@ -1,6 +1,5 @@
 # Taps
 tap "homebrew/bundle"
-tap "homebrew/cask-versions"
 tap "buo/cask-upgrade" # Upgrade casks with "brew cu"
 tap "robotsandpencils/made"
 tap "twostraws/brew"
@@ -71,7 +70,6 @@ brew "cmake" # Cross-platform make
 brew "unxip" # Extract .xip files
 brew "libxml2" # XML parser
 brew "dockutil" # Manage dock items
-brew "jordanbaird-ice" # Manage menu bar items
 brew "imagemagick" # Image processing
 brew "webp" # Image format
 brew "jpeg-xl" # Image format
@@ -104,6 +102,7 @@ brew "getsentry/tools/sentry-cli"
 cask "google-chrome"
 cask "setapp"
 cask "rancher"
+cask "jordanbaird-ice" # Manage menu bar items
 cask "kdiff3"
 cask "ghostty"
 cask "iterm2"

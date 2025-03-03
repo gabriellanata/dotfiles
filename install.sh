@@ -6,19 +6,7 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$DOTFILES_DIR/utilities.sh"
 
-setup_homebrew() {
-    if ! command_exists brew; then
-        log "Installing Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        if [[ $(uname -m) == 'arm64' ]]; then
-            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
-            eval "$(/opt/homebrew/bin/brew shellenv)"
-        fi
-        success "Homebrew installed"
-    else
-        success "Homebrew already installed"
-    fi
-    
+setup_homebrew_bundle() {
     log "Installing packages from Brewfile..."
     brew bundle --force --file="$DOTFILES_DIR/Brewfile" || true
     brew bundle --force cleanup --file="$DOTFILES_DIR/Brewfile" || true
@@ -66,7 +54,7 @@ else
 fi
 
 if ask "Do you want to update applications?"; then
-    setup_homebrew
+    setup_homebrew_bundle
 else
     log "Skipping update applications"
 fi
