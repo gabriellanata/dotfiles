@@ -258,5 +258,4 @@ defaults write com.apple.TextEdit NSFixedPitchFontSize -int 16
 defaults write com.apple.appstored LastUpdateNotification -date "2029-12-12 12:00:00 +0000"
 
 # Paste and match style by default
-defaults write -g NSUserKeyEquivalents "{ 'Paste and Match Style' = '@V'; }"
-
+# defaults write -g NSUserKeyEquivalents "{ 'Paste and Match Style' = '@V'; }"

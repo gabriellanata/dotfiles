@@ -1,0 +1,39 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "explorer.confirmDragAndDrop": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "files.autoSave": "afterDelay",
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": false,
+        "markdown": false
+    },
+    "remote.SSH.externalSSH_ASKPASS": true,
+    "window.zoomLevel": 1,
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "github.copilot.advanced": {},
+    "editor.rulers": [
+        110
+    ],
+    "git.enableSmartCommit": true,
+    "github.copilot.editor.enableAutoCompletions": true,
+    "markdown-preview-enhanced.enablePreviewZenMode": true,
+    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
+    "markdown-preview-enhanced.imageFolderPath": "/images",
+    "github.copilot.chat.edits.codesearch.enabled": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "github.copilot.chat.editor.temporalContext.enabled": true,
+    "python.analysis.generateWithTypeAnnotation": true,
+    "cursor.cpp.disabledLanguages": [
+        "yaml",
+        "plaintext",
+        "markdown"
+    ],
+    "lldb.library": "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
+    "lldb.launch.expressions": "native",
+    "cursor.composer.agentLoopOnLints": false
+}

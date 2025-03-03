@@ -8,7 +8,7 @@ set -euo pipefail
 if [ $# -eq 0 ]; then
     echo "Error: No arguments provided"
     echo "Usage: pr-cherrybomb <sha> -r <release>"
-    exit 0
+    exit 1
 fi
 
 cherry_sha="$1"
@@ -43,7 +43,7 @@ while [[ $# -gt 0 ]]; do
         ;;
     -*)
         echo "Unknown option $1"
-        exit 0
+        exit 1
         ;;
     *)
         positional_args+=("$1") # save positional args
@@ -55,13 +55,13 @@ done
 # Check if sha is empty
 if [[ -z "$cherry_sha" ]]; then
     echo "Error: Cherry-pick sha is required"
-    exit 0
+    exit 1
 fi
 
 # Check if branches is empty
 if [[ -z "$branches" ]]; then
     echo "Error: Branches (-b|--branches) is required"
-    exit 0
+    exit 1
 fi
 
 # Fill the args
@@ -91,10 +91,10 @@ branch_list=$(run_with_env git branch -r --list "origin/$branches" | tr '\n' ' '
 # Exit if 0 found or > 100
 if [[ $(wc -w <<<"$branch_list") -eq 0 ]]; then
     echo "Error: No branches found that match the regex '$branches'"
-    exit 0
+    exit 1
 elif [[ $(wc -w <<<"$branch_list") -gt 100 ]]; then
     echo "Error: More than 100 branches found that match the regex '$branches'"
-    exit 0
+    exit 1
 fi
 
 # List branches and ask for confirmation
@@ -109,7 +109,7 @@ fi
 # Get commit message
 if ! commit_message=$(git log -1 --pretty=%B "$cherry_sha"); then
     echo "Error: Could not get commit message for $cherry_sha"
-    exit 0
+    exit 1
 fi
 
 # Get first line for PR title

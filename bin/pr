@@ -22,7 +22,7 @@ if [[ $# -gt 0 ]]; then
         pr-quick-update "$@"
     else
         echo "Unknown command '$command'"
-        exit 0
+        exit 1
     fi
 else
     pr-default

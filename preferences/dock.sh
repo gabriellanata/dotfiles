@@ -14,8 +14,7 @@ dockApps=( \
     "" \
     "Xcode" \
     "Xcode.app/Contents/Developer/Applications/Simulator"
-    "Visual Studio Code" \
-    "Fork" \
+    "Cursor" \
     "Ghostty" \
     "" \
 )

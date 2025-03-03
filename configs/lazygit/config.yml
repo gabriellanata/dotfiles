@@ -1,6 +1,8 @@
+promptToReturnFromSubprocess: false
 git:
   branchPrefix: 'gabriel/'
-  pager: 'diff-so-fancy'
+  paging:
+    pager: 'diff-so-fancy'
   commit:
     signOff: true
     autoWrapCommitMessage: false
@@ -21,9 +23,9 @@ gui:
     'Gabriel Lanata': 'yellow'
     '*': 'white'
   commandLogSize: 6
-  # expandFocusedSidePanel: true
+  filterMode: substring
 os:
-  editPreset: 'vscode'
+  editPreset: 'cursor'
 keybinding:
   universal:
     quit: '<disabled>'
@@ -40,6 +42,14 @@ keybinding:
     nextBlock:  '<disabled>'
     # return: '<left>'
     # goInto: '<right>'
+  files:
+    commitChangesWithEditor: '<disabled>'
+  commits:
+    amendToCommit: 'a'
+    resetCommitAuthor: '<disabled>'
+    revertCommit: 'r'
+    renameCommit: 't'
+    renameCommitWithEditor: '<disabled>'
 customCommands:
   - key: 'x'
     description: 'Open in Xcode'
@@ -48,6 +58,27 @@ customCommands:
   - key: 'q'
     description: 'Quick commit and PR'
     context: 'global'
+    stream: true
+    prompts:
+      - type: 'input'
+        title: 'Title'
+        key: 'Title'
+        initialValue: ''
+      - type: 'input'
+        title: 'Body'
+        key: 'Body'
+        initialValue: ''
+      - type: 'input'
+        title: 'Base branch'
+        key: 'BaseBranch'
+        initialValue: 'master'
+        suggestions:
+          preset: 'branches'
+    command: 'pr submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base "{{.Form.BaseBranch}}"'
+    loadingText: 'Creating Quick PR'
+  - key: 'q'
+    description: 'Quick commit and PR'
+    context: 'localBranches'
     stream: true
     prompts:
       - type: 'input'
@@ -76,6 +107,23 @@ customCommands:
   - key: 'Q'
     description: 'Quick commit and Fixup'
     context: 'global'
+    stream: true
+    prompts:
+      - type: 'input'
+        title: 'Title'
+        key: 'Title'
+        initialValue: ''
+      - type: 'input'
+        title: 'Base branch'
+        key: 'BaseBranch'
+        initialValue: 'recent'
+        suggestions:
+          preset: 'branches'
+    command: 'pr fixup --base "{{.Form.BaseBranch}}"'
+    loadingText: 'Creating Quick Fixup'
+  - key: 'Q'
+    description: 'Quick commit and Fixup'
+    context: 'localBranches'
     stream: true
     prompts:
       - type: 'input'
@@ -116,13 +164,13 @@ customCommands:
     loadingText: 'Generating Lyft project'
   - key: 'u'
     description: 'Undo last commit'
-    context: 'commits'
+    context: 'global'
     prompts:
       - type: 'confirm'
         title: 'Undo last commit'
         body: 'Are you sure you want to undo the last commit?'
     command: 'git reset --soft HEAD~1'
-  - key: 'C'
+  - key: 'D'
     description: 'Cleanup branches'
     context: 'localBranches'
     prompts:
@@ -131,8 +179,3 @@ customCommands:
         body: 'Are you sure you delete all branches that are merged upstream?'
     command: 'git cleanup -f'
     loadingText: 'Cleaning up branches'
-
-
-
-
-

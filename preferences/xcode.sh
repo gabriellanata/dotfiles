@@ -76,8 +76,8 @@ defaults write com.apple.dt.Xcode NSUserKeyEquivalents -dict-add "Print..." "nil
 defaults write com.apple.dt.XCBuild EnableBuildDebugging -bool true
 defaults write com.apple.dt.XCBuild EnableDebugActivityLogs -bool true
 
-# Make the tab key actually be a tab key
-defaults write com.apple.dt.Xcode DVTTextTabKeyIndentBehavior -string Always
+# Make the tab key indent using leading whitespace
+defaults write com.apple.dt.Xcode DVTTextTabKeyIndentBehavior -string InLeadingWhitespace
 
 # Set the keybindings to my customizations (see $DOTFILES/xcode)
 # Stored in ~/Library/Developer/Xcode/UserData/KeyBindings

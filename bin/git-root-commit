@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+depth=20
+
+# Get the branch, if not provided, use the current branch
+if [ $# -eq 0 ]; then
+    branch=$(git branch --show-current)
+else
+    branch="$1"
+fi
+
+# Get branch commit sha
+branch_commit=$(git rev-parse "$branch")
+
+# Get the last 10 commits of our branch and create a lookup map of their indices
+mapfile -t branch_commits < <(git rev-list -n "$depth" "$branch_commit")
+declare -A branch_commit_map
+for ((i=0; i<${#branch_commits[@]}; i++)); do
+    branch_commit_map["${branch_commits[$i]}"]=$i
+done
+
+# Get all other branch heads and check their merge-bases
+closest_index=999999
+while IFS=' ' read -r check_commit branch_name; do
+    # Skip if the commit is the same as the branch commit
+    if [ "$check_commit" == "$branch_commit" ]; then
+        continue
+    fi
+
+    # Skip if the branch name starts with backup
+    if [[ "$branch_name" =~ ^backup ]]; then
+        continue
+    fi
+    
+    # Get merge-base and check if it matches one of our commits
+    merge_base=$(git merge-base "$branch_commit" "$check_commit")
+    # Skip if merge-base is the branch itself (not a common ancestor)
+    # Also check if merge-base exists in our branch commit map (within our depth)
+    if [ "$merge_base" != "$branch_commit" ] && [ -n "${branch_commit_map[$merge_base]:-}" ]; then
+        index=${branch_commit_map[$merge_base]}
+        if [ "$index" -lt "$closest_index" ]; then
+            closest_index=$index
+        fi
+    fi
+done < <(git for-each-ref refs/heads/ --format='%(objectname) %(refname:short)')
+
+# If we found a matching merge-base and it's not the first commit
+if [ "$closest_index" -lt 1000 ]; then
+    echo "${branch_commits[$((closest_index-1))]}"
+    exit 0
+fi
+
+echo "No root commit found in last $depth commits"
+exit 1

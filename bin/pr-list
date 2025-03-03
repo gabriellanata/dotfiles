@@ -5,7 +5,7 @@ set -euo pipefail
 search_term="$1"
 if [[ -z "$search_term" ]]; then
     echo "No search term was provided after '-a'"
-    exit 0
+    exit 1
 fi
 shift
 

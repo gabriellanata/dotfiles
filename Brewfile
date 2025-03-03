@@ -71,35 +71,13 @@ brew "cmake" # Cross-platform make
 brew "unxip" # Extract .xip files
 brew "libxml2" # XML parser
 brew "dockutil" # Manage dock items
+brew "jordanbaird-ice" # Manage menu bar items
 brew "imagemagick" # Image processing
 brew "webp" # Image format
 brew "jpeg-xl" # Image format
 brew "libpng" # Image format
 brew "curl" # Download files
 brew "aria2" # Download manager
-
-# VSCode
-vscode "davidanson.vscode-markdownlint"
-vscode "dbaeumer.vscode-eslint"
-vscode "github.copilot"
-vscode "github.copilot-chat"
-vscode "ms-python.debugpy"
-vscode "ms-python.flake8"
-vscode "ms-python.isort"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode-remote.remote-ssh-edit"
-vscode "ms-vscode.makefile-tools"
-vscode "ms-vscode.remote-explorer"
-vscode "shd101wyy.markdown-preview-enhanced"
-vscode "sswg.swift-lang"
-vscode "svanimpe.stencil"
-vscode "timonwong.shellcheck"
-vscode "vadimcn.vscode-lldb"
-vscode "dnicolson.binary-plist"
-vscode "shell-format" 
 
 # Lyft
 tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
@@ -133,7 +111,8 @@ cask "xcodes"
 cask "fork"
 cask "appcleaner"
 cask "quicken"
-cask "visual-studio-code"
+cask "cursor"
+cask "visual-studio-code@insiders"
 cask "1password@beta"
 cask "1password-cli"
 cask "steermouse"
@@ -191,3 +170,26 @@ mas "WhatsApp", id: 310633997
 # mas "Paste", id: 
 # mas "Mosaic"
 # mas "iStatMenus"
+
+# VSCode
+vscode "davidanson.vscode-markdownlint"
+vscode "dbaeumer.vscode-eslint"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "ms-python.debugpy"
+vscode "ms-python.flake8"
+vscode "ms-python.isort"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode.makefile-tools"
+vscode "ms-vscode.remote-explorer"
+vscode "shd101wyy.markdown-preview-enhanced"
+vscode "sswg.swift-lang"
+vscode "svanimpe.stencil"
+vscode "timonwong.shellcheck"
+vscode "vadimcn.vscode-lldb"
+vscode "dnicolson.binary-plist"
+vscode "shell-format" 

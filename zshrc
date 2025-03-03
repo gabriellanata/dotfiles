@@ -8,7 +8,7 @@ fi
 # system
 export PATH=$HOME/bin:$PATH
 export LC_ALL=en_US.UTF-8
-export EDITOR="$(which code)"
+export EDITOR="$(which cursor)"
 export BROWSER="/Applications/Google\ Chrome.app/Contents/MacOs/Google\ Chrome"
 
 # shell

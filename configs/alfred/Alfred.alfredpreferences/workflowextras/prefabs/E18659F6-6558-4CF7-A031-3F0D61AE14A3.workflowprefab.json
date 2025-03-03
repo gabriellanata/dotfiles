@@ -1,0 +1,123 @@
+{
+  "name" : "Xcode Get Current Info",
+  "data" : {
+    "items" : [
+      {
+        "workflowobjecttype" : "alfred.workflow.action.script",
+        "uid" : "7B89B224-8485-4557-AF52-B5D10090B9C4",
+        "note" : "Get Currently Focused Xcode File",
+        "workflowobjectconfig" : {
+          "script" : "tell application \"Xcode\"\n    return path of document 1 whose name ends with (word -1 of (get name of window 1))\nend tell",
+          "scriptfile" : "",
+          "escaping" : 68,
+          "scriptargtype" : 1,
+          "type" : 6,
+          "concurrently" : false
+        },
+        "colorindex" : 0,
+        "ypos" : 5,
+        "xpos" : 20
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.utility.split",
+        "uid" : "FED3B8C7-3ECD-4A43-899C-371EA5927512",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "variableprefix" : "split",
+          "delimiter" : "\/Modules",
+          "outputas" : 0,
+          "trimarguments" : true,
+          "discardemptyarguments" : true
+        },
+        "colorindex" : 0,
+        "ypos" : 35,
+        "xpos" : 155
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.utility.argument",
+        "uid" : "8B19F090-25AC-4589-97FA-88C2062D3A83",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "argument" : "{var:split2}",
+          "passthroughargument" : false,
+          "variables" : {
+            "projectPath" : "{var:split1}",
+            "filePath" : "{query}"
+          }
+        },
+        "colorindex" : 0,
+        "ypos" : 35,
+        "xpos" : 210
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.utility.split",
+        "uid" : "1D04A8F9-2E7C-40F3-B6C3-3458D6655429",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "variableprefix" : "moduleSplit",
+          "delimiter" : "\/",
+          "outputas" : 0,
+          "trimarguments" : true,
+          "discardemptyarguments" : true
+        },
+        "colorindex" : 0,
+        "ypos" : 35,
+        "xpos" : 265
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.utility.argument",
+        "uid" : "2D2FADBF-70A1-47C3-B5EF-FF58B8CE9BF7",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "argument" : "{var:filePath}",
+          "passthroughargument" : false,
+          "variables" : {
+            "module" : "{var:moduleSplit1}"
+          }
+        },
+        "colorindex" : 0,
+        "ypos" : 35,
+        "xpos" : 320
+      }
+    ],
+    "connections" : [
+      {
+        "sourceuid" : "FED3B8C7-3ECD-4A43-899C-371EA5927512",
+        "config" : {
+          "destinationuid" : "8B19F090-25AC-4589-97FA-88C2062D3A83",
+          "modifiers" : 0,
+          "modifiersubtext" : "",
+          "vitoclose" : false
+        }
+      },
+      {
+        "sourceuid" : "1D04A8F9-2E7C-40F3-B6C3-3458D6655429",
+        "config" : {
+          "destinationuid" : "2D2FADBF-70A1-47C3-B5EF-FF58B8CE9BF7",
+          "modifiers" : 0,
+          "modifiersubtext" : "",
+          "vitoclose" : false
+        }
+      },
+      {
+        "sourceuid" : "8B19F090-25AC-4589-97FA-88C2062D3A83",
+        "config" : {
+          "destinationuid" : "1D04A8F9-2E7C-40F3-B6C3-3458D6655429",
+          "modifiers" : 0,
+          "modifiersubtext" : "",
+          "vitoclose" : false
+        }
+      },
+      {
+        "sourceuid" : "7B89B224-8485-4557-AF52-B5D10090B9C4",
+        "config" : {
+          "destinationuid" : "FED3B8C7-3ECD-4A43-899C-371EA5927512",
+          "modifiers" : 0,
+          "modifiersubtext" : "",
+          "vitoclose" : false
+        }
+      }
+    ]
+  },
+  "description" : ""
+}

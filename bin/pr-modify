@@ -6,7 +6,7 @@ command="$1"
 search_term="$2"
 if [[ -z "$search_term" ]]; then
     echo "No search term was provided after '-a'"
-    exit 0
+    exit 1
 fi
 
 shift
@@ -23,25 +23,25 @@ while IFS= read -r pr_number; do
     elif [[ "$command" == "rename" ]]; then
         if [[ -z "$1" ]]; then
             echo "No new title was provided"
-            exit 0
+            exit 1
         fi
         gh pr edit "$pr_number" --title "$1"
     elif [[ "$command" == "comment" ]]; then
         if [[ -z "$1" ]]; then
             echo "No comment was provided"
-            exit 0
+            exit 1
         fi
         gh pr comment "$pr_number" --body "$1"
     elif [[ "$command" == "list" || "$command" == "-l" ]]; then
         echo "$pr_number'"
     else
         echo "Unknown command '$command'"
-        exit 0
+        exit 1
     fi
     prs_found=true
 done < <(gh pr list --search "$search_term" --state open --json url | jq -r '.[] | .url' | xargs -n 1)
 
 if [[ ! $prs_found ]]; then
     echo "No PRs found for '$search_term'"
-    exit 0
+    exit 1
 fi

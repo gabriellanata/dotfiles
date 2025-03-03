@@ -75,7 +75,7 @@ defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 # Don't use tabs in Finder
-defaults write com.apple.finder AppleWindowTabbingMode -string "manual"
+defaults write com.apple.finder AppleWindowTabbingMode -string "always"
 
 # Keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool "true"

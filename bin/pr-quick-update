@@ -4,13 +4,9 @@ set -euo pipefail
 
 ### Argument Parsing ###
 
-select_branch() {
-    git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7
-}
-
 if git diff --quiet --staged; then
     echo "Error: No staged changes to commit"
-    exit 0
+    exit 1
 fi
 
 # Get arguments for operations
@@ -28,7 +24,7 @@ while [[ $# -gt 0 ]]; do
     -B | --base)
         if [[ "$2" == -* ]]; then
             # If $2 starts with "-" no branch was passed and we should run a fzf search for a base branch
-            base_branch=$(select_branch)
+            base_branch=$(git-select-branch)
         else
             base_branch="$2"
             shift
@@ -53,7 +49,7 @@ while [[ $# -gt 0 ]]; do
         ;;
     -*)
         echo "Unknown option $1"
-        exit 0
+        exit 1
         ;;
     *)
         positional_args+=("$1") # save positional args
@@ -64,7 +60,25 @@ done
 
 # Check if base branch is empty
 if [[ -z "$base_branch" ]]; then
-    base_branch=$(select_branch)
+    base_branch=$(git-select-branch)
+fi
+
+# Fail if base branch is master or main
+if [[ "$base_branch" == "master" || "$base_branch" == "main" ]]; then
+    echo "Error: Base branch cannot be master or main"
+    exit 1
+fi
+
+# If base branch is "recent", find the most recently modified local branch
+if [[ "$base_branch" == "recent" || "$base_branch" == "previous" || "$base_branch" == "latest" ]]; then
+    # if current branch is master or main, use recent-branch
+    current_branch=$(git branch --show-current)
+    if [[ "$current_branch" == "master" || "$current_branch" == "main" ]]; then
+        base_branch=$(git-recent-branch)
+    else
+        base_branch="$current_branch"
+    fi
+    echo "Using recent base branch: $base_branch"
 fi
 
 # Check if title is empty
@@ -95,11 +109,20 @@ run_with_env() {
     env GIT_PILE_VERBOSE="$verbose" "$@"
 }
 
-# Find first non-fixup commit from base_branch
-if ! base_sha=$(git log "$base_branch" --pretty=format:'%H' --grep '^fixup' --invert-grep -1); then
-    echo "Error: Could not find non-fixup commit in $base_branch"
+# If the base branch is the current branch we just need to push the current commit
+if [[ "$base_branch" == "$(git branch --show-current)" ]]; then
+    run_with_env git commit --no-edit -m "$title" "${commit_args[@]}"
+    run_with_env git push
     exit 0
 fi
+
+# Find first non-fixup commit from base_branch
+if ! base_sha=$(git-root-commit "$base_branch"); then
+    echo "Error: Could not find root commit for $base_branch"
+    exit 1
+fi
+
+echo "Base SHA: $base_sha of $base_branch"
 
 run_with_env git commit --no-edit -m "$title" "${commit_args[@]}"
 run_with_env git-updatepr "$base_sha" "${pr_args[@]}" "${positional_args[@]}"

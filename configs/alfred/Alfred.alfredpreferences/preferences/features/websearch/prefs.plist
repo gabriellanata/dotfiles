@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>customSites</key>
+	<dict>
+		<key>3290531E-4300-42DC-B1A8-9D9D0E966AA0</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>family</string>
+			<key>text</key>
+			<string>Lyft Family</string>
+			<key>url</key>
+			<string>https://home.lyft.net/search?q={query}</string>
+		</dict>
+		<key>59AFAB0B-903C-4A27-8E0F-63EA92C82F91</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>go</string>
+			<key>text</key>
+			<string>Lyft Go Links</string>
+			<key>url</key>
+			<string>https://go.lyft.net/{query}</string>
+		</dict>
+		<key>984329A3-4A8B-48AE-9AEC-C226879C8058</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>lyft-ios</string>
+			<key>text</key>
+			<string>Lyft GitHub</string>
+			<key>url</key>
+			<string>https://github.com/search?type=code&amp;q=repo%3Alyft%2FLyft-iOS%20{query}</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -4,7 +4,7 @@ set -euo pipefail
 
 if [[ ! "$PWD" =~ "Lyft-iOS" ]]; then
     echo "Error: Must be in Lyft-iOS directory"
-    exit 0
+    exit 1
 fi
 
 find ./Modules -maxdepth 1 -mindepth 1 -type d \
