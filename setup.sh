@@ -33,8 +33,15 @@ setup_1password() {
 
 setup_xcode() {
     if ! command_exists xcodes; then
-        log "Installing Xcode..."
+        log "Installing Xcodes..."
         brew install xcodes
+        success "Xcodes installed"
+    else
+        success "Xcodes already installed"
+    fi
+
+    if [ ! -d "/Applications/Xcode.app" ]; then
+        log "Installing Xcode..."
         xcodes install --latest --experimental-unxip
         success "Xcode installed"
     else
