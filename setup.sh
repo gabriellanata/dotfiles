@@ -32,6 +32,7 @@ setup_1password() {
         brew install --cask 1password-cli
         success "1Password installed"
         op signin
+        ask "Ensure 1Password CLI is set up"
     else
         success "1Password already installed"
     fi
@@ -40,25 +41,35 @@ setup_1password() {
 setup_xcode() {
     if ! command_exists xcodes; then
         log "Installing Xcodes..."
-        brew install xcodes
         brew install xcodes-cli
         success "Xcodes installed"
     else
         success "Xcodes already installed"
     fi
 
-    # if [ ! -d "/Applications/Xcode.app" ]; then
+    if [ ! -d "/Applications/Xcode.app" ]; then
         log "Installing Xcode..."
         "$DOTFILES_DIR/bin/x-install"
         success "Xcode installed"
-    # else
-    #     success "Xcode already installed"
-    # fi
+    else
+        success "Xcode already installed"
+    fi
+}
+
+setup_gh() {
+    if ! command_exists gh; then
+        log "Installing GitHub CLI..."
+        brew install gh
+        success "GitHub CLI installed"
+        gh auth login
+    else
+        success "GitHub CLI already installed"
+    fi
 }
 
 setup_developer_tools
 setup_homebrew
 setup_1password
+setup_gh
 setup_xcode
-
 success "Setup complete! Ensure you're logged in to your apple account, 1Password, and Xcodes."

@@ -40,7 +40,6 @@ brew "keith/formulae/git-pile" # Git extension to manage stacked commits
 
 # iOS / Swift
 tap "dduan/formulae"
-brew "twostraws/brew/sitrep"
 brew "swiftformat"
 brew "swiftlint"
 brew "xcbeautify"
