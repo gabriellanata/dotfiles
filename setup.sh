@@ -46,7 +46,7 @@ setup_1password() {
         success "1Password already installed"
     fi
 
-    if ! op signin; then
+    if ! eval "$(op signin)"; then
         success "1Password CLI  logged in"
     else
         success "1Password CLI already logged in"

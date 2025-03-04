@@ -39,8 +39,6 @@ alias lg="lazygit"
 alias oprs="BROWSER=open open 'https://github.com/pulls'"
 
 # other
-alias g="gh"
-alias git="gh"
 alias pre="pre-commit run --all-files"
 alias pb="pbcopy"
 alias desk="cd ~/Desktop"
@@ -52,6 +50,7 @@ alias %=" "
 # alias $=" "
 
 # 1password auth
+export OP_BIOMETRIC_UNLOCK_ENABLED=true
 export OP_PLUGIN_ALIASES_SOURCED=1
 alias gh="op plugin run -- gh"
 alias openai="op plugin run -- openai"
