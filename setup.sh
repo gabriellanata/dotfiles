@@ -6,7 +6,14 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$DOTFILES_DIR/utilities.sh"
 
+setup_ssh() {
+    log "Setting up SSH..."
+    source "$DOTFILES_DIR/preferences/ssh.sh" || true
+    success "SSH set up"
+}
+
 setup_developer_tools() {
+    success "Installing developer tools..."
     xcode-select --install || true
     success "Developer tools installed"
 }
@@ -35,10 +42,27 @@ setup_1password() {
         success "1Password already installed"
     fi
 
-    if ! op whoami; then
-        op signin
+    if ! op signin; then
+        success "1Password CLI  logged in"
     else
-        success "1Password CLI already set up"
+        success "1Password CLI already logged in"
+    fi
+}
+
+setup_git() {
+    if ! command_exists gh; then
+        log "Installing GitHub CLI..."
+        brew install gh
+        success "GitHub CLI installed"
+    else
+        success "GitHub CLI already installed"
+    fi
+
+    if ! gh auth status &>/dev/null; then
+        gh auth login
+        success "Git logged in"
+    else
+        success "Git already logged in"
     fi
 }
 
@@ -60,22 +84,7 @@ setup_xcode() {
     fi
 }
 
-setup_git() {
-    if ! command_exists gh; then
-        log "Installing GitHub CLI..."
-        brew install gh
-        success "GitHub CLI installed"
-    else
-        success "GitHub CLI already installed"
-    fi
-
-    # if ! git ls-remote -h "https://github.com/gabriellanata/private" &>/dev/null; then
-    #     log "Ensure Git is logged in"
-    # else
-    #     success "Git already logged in"
-    # fi
-}
-
+setup_ssh
 setup_developer_tools
 setup_homebrew
 setup_1password

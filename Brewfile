@@ -107,6 +107,7 @@ cask "ghostty"
 cask "iterm2"
 cask "xcodes"
 cask "fork"
+cask "jordanbaird-ice" # Manage menu bar items
 cask "appcleaner"
 cask "quicken"
 cask "cursor"
