@@ -29,7 +29,7 @@
   prompt = false
 [core]
   editor = nano
-  excludesfile = /Users/glanata/Developer/Dotfiles/.gitignore
+  excludesfile = /Users/glanata/Developer/dotfiles/.gitignore
   trustctime = false # Ref: http://www.git-tower.com/blog/make-git-rebase-safe-on-osx
   untrackedCache = true
   pager = diff-so-fancy | less --tabs=4 -RF
@@ -46,8 +46,6 @@
   rebase = true
 [advice]
   skippedCherryPicks = false
-[branch "main"]
-  pushRemote = NOPE
 [branch "master"]
   pushRemote = NOPE
 [rebase]
@@ -97,7 +95,6 @@
   auto = false
   repo = /Users/glanata/Developer/lyft/Lyft-iOS
   repo = /Users/glanata/Developer/lyft/Lyft-iOS-2
-  repo = /Users/glanata/Developer/lyft/LyftProductLanguage
   strategy = incremental
 [init]
   defaultBranch = main
