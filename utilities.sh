@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -38,8 +36,8 @@ command_exists() {
 }
 
 if_sudo_active() {
-    if sudo -nv 2>/dev/null; then
-        eval "$1"
+    if [[ "$EUID" -eq 0 ]]; then
+        eval "$@"
     fi
 }
 

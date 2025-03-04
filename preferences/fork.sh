@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 link_file "$DOTFILES_DIR/configs/fork/custom-commands.json" "$HOME/Library/Application Support/com.DanPristupov.Fork/custom-commands.json"
 
 defaults write com.DanPristupov.Fork "defaultSourceFolder" -string "/Users/glanata/Developer"

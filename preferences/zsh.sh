@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 ZSH_PLUGINS=(
     "zsh-syntax-highlighting:https://github.com/zsh-users/zsh-syntax-highlighting.git"
     "zsh-autosuggestions:https://github.com/zsh-users/zsh-autosuggestions.git"

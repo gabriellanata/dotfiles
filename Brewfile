@@ -77,24 +77,23 @@ brew "curl" # Download files
 brew "aria2" # Download manager
 
 # Lyft
-tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
-tap "lyft/lyft-ios-runner", "git@github.com:lyft/lyft-ios-runner.git"
-tap "lyft/private-formulae"
+# tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
+# tap "lyft/lyft-ios-runner", "git@github.com:lyft/lyft-ios-runner.git"
+
 tap "getsentry/tools"
-brew "lyft/localdevtools/aws-okta"
-brew "lyft/localdevtools/protoc-gen-lyftpython"
-brew "lyft/localdevtools/protoc-gen-lyftswift"
-brew "lyft/localdevtools/protoc-gen-pynamodb"
-brew "lyft/localdevtools/idltools"
-brew "lyft/localdevtools/kubernetes-cli@1.22"
-brew "lyft/localdevtools/lyft-gitwrapper"
+# brew "lyft/localdevtools/python-310-bundle-arm64"
+# brew "lyft/localdevtools/python-311-bundle-arm64"
+# brew "lyft/localdevtools/python-bundle-arm64"
+# brew "lyft/localdevtools/aws-okta"
+# brew "lyft/localdevtools/protoc-gen-lyftpython"
+# brew "lyft/localdevtools/protoc-gen-lyftswift"
+# brew "lyft/localdevtools/protoc-gen-pynamodb"
+# brew "lyft/localdevtools/idltools"
+# brew "lyft/localdevtools/kubernetes-cli@1.22"
+# brew "lyft/localdevtools/lyft-gitwrapper"
 # brew "lyft/localdevtools/lyftdev"
-brew "lyft/localdevtools/lyftdevtools"
-brew "lyft/localdevtools/python-310-bundle-arm64"
-brew "lyft/localdevtools/python-311-bundle-arm64"
-brew "lyft/localdevtools/python-bundle-arm64"
-brew "lyft/lyft-ios-runner/runlyft", args: ["HEAD"]
-brew "lyft/private-formulae/gitstack", args: ["HEAD"], link: false
+# brew "lyft/localdevtools/lyftdevtools"
+# brew "lyft/lyft-ios-runner/runlyft", args: ["HEAD"]
 brew "getsentry/tools/sentry-cli"
 
 # Applications
@@ -111,7 +110,7 @@ cask "jordanbaird-ice" # Manage menu bar items
 cask "appcleaner"
 cask "quicken"
 cask "cursor"
-cask "visual-studio-code@insiders"
+cask "visual-studio-code"
 cask "1password@beta"
 cask "1password-cli"
 cask "steermouse"
@@ -191,4 +190,3 @@ vscode "svanimpe.stencil"
 vscode "timonwong.shellcheck"
 vscode "vadimcn.vscode-lldb"
 vscode "dnicolson.binary-plist"
-vscode "shell-format" 

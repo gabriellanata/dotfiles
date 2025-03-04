@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 link_file "$DOTFILES_DIR/configs/xcode/keybindings" "$HOME/Library/Developer/Xcode/UserData/KeyBindings"
 link_file "$DOTFILES_DIR/configs/xcode/themes" "$HOME/Library/Developer/Xcode/UserData/FontAndColorThemes"
 link_file "$DOTFILES_DIR/configs/xcode/snippets" "$HOME/Library/Developer/Xcode/UserData/CodeSnippets"

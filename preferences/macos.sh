@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 
 #
 # General Settings
@@ -11,7 +9,10 @@ set -euo pipefail
 if_sudo_active scutil --set ComputerName "GaboMac"
 if_sudo_active scutil --set HostName "GaboMac"
 if_sudo_active scutil --set LocalHostName "GaboMac"
-if_sudo_active defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "GaboMac"
+
+if [ -f "/Library/Preferences/SystemConfiguration/com.apple.smb.server" ]; then
+  if_sudo_active defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "GaboMac"
+fi
 
 # Default sidebar icon size to small
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2

@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$DOTFILES_DIR/utilities.sh"
 
 setup_ssh() {
     log "Setting up SSH..."
-    source "$DOTFILES_DIR/preferences/ssh.sh" || true
+    source "$DOTFILES_DIR/preferences/ssh.sh"
     success "SSH set up"
+}
+
+setup_gitconfig() {
+    log "Setting up Git config..."
+    source "$DOTFILES_DIR/preferences/git.sh"
+    success "Git config set up"
 }
 
 setup_developer_tools() {
@@ -85,6 +89,7 @@ setup_xcode() {
 }
 
 setup_ssh
+setup_gitconfig
 setup_developer_tools
 setup_homebrew
 setup_1password

@@ -11,3 +11,6 @@ fi
 XCODES_USERNAME=$(op read "op://Private/Apple - Xcodes/username") \
 XCODES_PASSWORD=$(op read "op://Private/Apple - Xcodes/password") \
 xcodes install "$version" --experimental-unxip
+
+XCODES_VERSION=$(xcodes installed | head -n 1 | cut -d ' ' -f 1)
+xcodes select "$XCODES_VERSION"

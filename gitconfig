@@ -6,14 +6,15 @@
   user = gabriellanata
 [alias]
   c = "!f() { if [ -z \"$1\" ]; then git commit -v -m 'Changes'; else git commit -v -m \"$1\"; fi }; f"
-	co = "!f() { if [ -z \"$1\" ]; then git checkout $(git branch --sort=committerdate | fzf); else git checkout \"$1\"; fi }; f"
-	s = status
+  co = "!f() { if [ -z \"$1\" ]; then git checkout $(git branch --sort=committerdate | fzf); else git checkout \"$1\"; fi }; f"
+  s = status
   p = pull
-	b = checkout -b
-	cp = cherry-pick
+  b = checkout -b
+  cp = cherry-pick
+  undo = "reset --soft HEAD^"
 [diff]
   tool = Kaleidoscope
-	renames = copies # Detect copies as well as renames
+  renames = copies # Detect copies as well as renames
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
@@ -29,12 +30,12 @@
 [core]
   editor = nano
   excludesfile = /Users/glanata/Developer/Dotfiles/.gitignore
-	trustctime = false # Ref: http://www.git-tower.com/blog/make-git-rebase-safe-on-osx
-	untrackedCache = true
-	pager = diff-so-fancy | less --tabs=4 -RF
+  trustctime = false # Ref: http://www.git-tower.com/blog/make-git-rebase-safe-on-osx
+  untrackedCache = true
+  pager = diff-so-fancy | less --tabs=4 -RF
 [color]
   pager = true
-	ui = true
+  ui = true
   status = auto
   diff = auto
   branch = auto
@@ -44,7 +45,7 @@
 [pull]
   rebase = true
 [advice]
-	skippedCherryPicks = false
+  skippedCherryPicks = false
 [branch "main"]
   pushRemote = NOPE
 [branch "master"]
@@ -65,8 +66,6 @@
   fsckobjects = true
 [push]
   default = upstream
-[alias]
-  undo = "reset --soft HEAD^"
 [pile]
   cleanupRemoteOnSubmitFailure = true
 [log]
@@ -83,14 +82,14 @@
 [commit]
   gpgsign = true
 [apply]
-	whitespace = fix # Detect whitespace errors when applying a patch
+  whitespace = fix # Detect whitespace errors when applying a patch
 [gpg "ssh"]
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [gpg]
   format = ssh
   program = /opt/homebrew/bin/gpg
 [tag]
-	gpgSign = true
+  gpgSign = true
 [oh-my-zsh]
   hide-status = 1
   hide-dirty = 1
@@ -105,23 +104,25 @@
 [help]
   autocorrect = 1
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+  added = yellow
+  changed = green
+  untracked = cyan
 [interactive]
-	diffFilter = diff-so-fancy --patch
+  diffFilter = diff-so-fancy --patch
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 [color "diff"]
-	meta = 11
-	frag = magenta bold
-	func = 146 bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+  meta = 11
+  frag = magenta bold
+  func = 146 bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
 [gitbutler]
-	aiModelProvider = openai
+  aiModelProvider = openai
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/

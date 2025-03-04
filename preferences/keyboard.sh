@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 # We should copy this instead of linking it because it can cause crashes
 cp -R "$DOTFILES_DIR/configs/keyboard/Gabriel.bundle" "$HOME/Library/Keyboard Layouts/"
 

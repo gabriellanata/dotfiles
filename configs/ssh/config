@@ -9,7 +9,6 @@ ForwardAgent no
 ForwardX11 no
 UseKeychain yes
 AddKeysToAgent yes
-IdentityFile ~/.ssh/id_ed25519
 
 # 1password Agent
 Host *

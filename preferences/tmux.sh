@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 link_file "$DOTFILES_DIR/configs/tmux/tmux.conf" "$HOME/.tmux.conf"
 link_file "$DOTFILES_DIR/configs/tmux/ressurect" "$HOME/.tmux/resurrect"
 

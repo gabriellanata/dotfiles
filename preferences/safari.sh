@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 # defaults write -app Safari AlwaysRestoreSessionAtLaunch -bool true
 defaults write -app Safari AlwaysShowTabBar -bool true
 defaults write -app Safari AutoFillPasswords -bool false
