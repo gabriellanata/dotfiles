@@ -39,6 +39,8 @@ alias lg="lazygit"
 alias oprs="BROWSER=open open 'https://github.com/pulls'"
 
 # other
+alias g="gh"
+alias git="gh"
 alias pre="pre-commit run --all-files"
 alias pb="pbcopy"
 alias desk="cd ~/Desktop"
@@ -74,3 +76,4 @@ alias cdlyft1="cd /Users/glanata/Developer/Lyft-iOS"
 alias cdlyft2="cd /Users/glanata/Developer/Lyft-iOS-2"
 alias cdlpl="cd /Users/glanata/Developer/LyftProductLanguage"
 alias cdhammer="cd /Users/glanata/Developer/Hammer"
+alias cddev="cd /Users/glanata/Developer"

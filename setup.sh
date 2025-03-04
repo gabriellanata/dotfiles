@@ -69,11 +69,11 @@ setup_git() {
         success "GitHub CLI already installed"
     fi
 
-    if ! git ls-remote -h "https://github.com/gabriellanata/private" &>/dev/null; then
-        log "Ensure Git is logged in"
-    else
-        success "Git already logged in"
-    fi
+    # if ! git ls-remote -h "https://github.com/gabriellanata/private" &>/dev/null; then
+    #     log "Ensure Git is logged in"
+    # else
+    #     success "Git already logged in"
+    # fi
 }
 
 setup_developer_tools
