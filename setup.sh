@@ -31,10 +31,14 @@ setup_1password() {
         brew install --cask 1password@beta
         brew install --cask 1password-cli
         success "1Password installed"
-        op signin
-        ask "Ensure 1Password CLI is set up"
     else
         success "1Password already installed"
+    fi
+
+    if ! op whoami; then
+        op signin
+    else
+        success "1Password CLI already set up"
     fi
 }
 
@@ -56,20 +60,25 @@ setup_xcode() {
     fi
 }
 
-setup_gh() {
+setup_git() {
     if ! command_exists gh; then
         log "Installing GitHub CLI..."
         brew install gh
         success "GitHub CLI installed"
-        gh auth login
     else
         success "GitHub CLI already installed"
+    fi
+
+    if ! git ls-remote -h "https://github.com/gabriellanata/private" &>/dev/null; then
+        log "Ensure Git is logged in"
+    else
+        success "Git already logged in"
     fi
 }
 
 setup_developer_tools
 setup_homebrew
 setup_1password
-setup_gh
+setup_git
 setup_xcode
-success "Setup complete! Ensure you're logged in to your apple account, 1Password, and Xcodes."
+success "Setup complete!"
