@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ $# -gt 0 ]; then
+    version="$1"
+else
+    version="--latest"
+fi
+
+XCODES_USERNAME=$(op read "op://Private/Apple - Xcodes/username") \
+XCODES_PASSWORD=$(op read "op://Private/Apple - Xcodes/password") \
+xcodes install "$version" --experimental-unxip

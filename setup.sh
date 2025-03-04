@@ -6,6 +6,11 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$DOTFILES_DIR/utilities.sh"
 
+setup_developer_tools() {
+    xcode-select --install || true
+    success "Developer tools installed"
+}
+
 setup_homebrew() {
     if ! command_exists brew; then
         log "Installing Homebrew..."
@@ -26,6 +31,7 @@ setup_1password() {
         brew install --cask 1password@beta
         brew install --cask 1password-cli
         success "1Password installed"
+        op signin
     else
         success "1Password already installed"
     fi
@@ -35,20 +41,22 @@ setup_xcode() {
     if ! command_exists xcodes; then
         log "Installing Xcodes..."
         brew install xcodes
+        brew install xcodes-cli
         success "Xcodes installed"
     else
         success "Xcodes already installed"
     fi
 
-    if [ ! -d "/Applications/Xcode.app" ]; then
+    # if [ ! -d "/Applications/Xcode.app" ]; then
         log "Installing Xcode..."
-        xcodes install --latest --experimental-unxip
+        "$DOTFILES_DIR/bin/x-install"
         success "Xcode installed"
-    else
-        success "Xcode already installed"
-    fi
+    # else
+    #     success "Xcode already installed"
+    # fi
 }
 
+setup_developer_tools
 setup_homebrew
 setup_1password
 setup_xcode
