@@ -28,3 +28,7 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.twoFingerFromRight
 
 # Enable El Capitan shake to magnify cursor
 defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool false
+
+# Increase size of mouse cursor
+defaults write com.apple.AppleMultitouchMouse MouseDriverCursorSize -float 2.5
+

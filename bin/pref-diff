@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Read all prefs into a temporary file.
+defaults read > /tmp/prefsA.txt
+
+# Wait for confirmation
+read -p "Change the setting and press Enter to continue" -r
+
+# Read all prefs into a temporary file
+defaults read > /tmp/prefsB.txt
+
+# Compare the two files. Removing any lines with dates because they change every time, include 2 context lines
+diff <(sed '/ +0000/d' /tmp/prefsA.txt) \
+     <(sed '/ +0000/d' /tmp/prefsB.txt)
+
+# Remove the temporary files
+rm /tmp/prefsA.txt /tmp/prefsB.txt

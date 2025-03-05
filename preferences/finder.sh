@@ -31,6 +31,9 @@ defaults write com.apple.finder FXPreferredViewStyle -string clmv
 # Allow text selection in QuickLook
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
+# Make jump to the spot that's clicked for scrollbars
+defaults write com.apple.finder AppleScrollerPagingBehavior -int 1
+
 # Display full POSIX path as Finder window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
@@ -72,6 +75,13 @@ defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
+# Hide status bar items
+defaults write com.apple.finder NSStatusItem Visible AirDrop -bool false
+defaults write com.apple.finder NSStatusItem Visible Bluetooth -bool false
+defaults write com.apple.finder NSStatusItem Visible ScreenMirroring -bool false
+defaults write com.apple.finder NSStatusItem Visible StageManager -bool false
+defaults write com.apple.finder NSStatusItem Visible WiFi -bool false
+
 # Don't use tabs in Finder
 defaults write com.apple.finder AppleWindowTabbingMode -string "always"
 
@@ -99,3 +109,7 @@ defaults write com.apple.finder _FXSortFoldersFirst -bool "true"
 /usr/libexec/PlistBuddy -c "Delete :FavoriteTagNames" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Add :FavoriteTagNames array" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Add :FavoriteTagNames:0 string" ~/Library/Preferences/com.apple.finder.plist
+
+
+
+
