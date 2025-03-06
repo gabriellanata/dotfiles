@@ -29,13 +29,9 @@ while [[ $# -gt 0 ]]; do
         verbose=false
         shift
         ;;
-    -*)
+    *)
         echo "Unknown option $1"
         exit 1
-        ;;
-    *)
-        positional_args+=("$1") # save positional args
-        shift
         ;;
     esac
 done
@@ -58,5 +54,5 @@ fi
 
 ### Execute Commands ###
 
-echo "Running ios generate: ./ios generate ${args[*]} ${positional_args[*]}"
-./ios generate "${args[@]}" "${positional_args[@]}"
+echo "Running ios generate: ./ios generate ${args[*]}"
+./ios generate "${args[@]}"

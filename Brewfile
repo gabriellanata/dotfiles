@@ -128,6 +128,7 @@ cask "figma"
 cask "sf-symbols"
 cask "gpg-suite"
 cask "imageoptim"
+cask "yubico-authenticator"
 
 # App Store
 mas "1Password for Safari", id: 1569813296

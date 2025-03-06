@@ -52,8 +52,8 @@ while [[ $# -gt 0 ]]; do
         exit 1
         ;;
     *)
-        positional_args+=("$1") # save positional args
-        shift
+        echo "Error: Unknown argument '$1'"
+        exit 1
         ;;
     esac
 done
@@ -88,7 +88,6 @@ fi
 
 # Fill the args
 commit_args=()
-pr_args=()
 
 if [[ "$signoff" == true ]]; then
     commit_args+=("--signoff")
@@ -125,4 +124,4 @@ fi
 echo "Base SHA: $base_sha of $base_branch"
 
 run_with_env git commit --no-edit -m "$title" "${commit_args[@]}"
-run_with_env git-updatepr "$base_sha" "${pr_args[@]}" "${positional_args[@]}"
+run_with_env git-updatepr "$base_sha"
