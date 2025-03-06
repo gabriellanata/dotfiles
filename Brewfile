@@ -61,6 +61,7 @@ brew "node"
 brew "ruby"
 brew "rbenv"
 brew "yarn"
+brew "fnm" # Node version manager
 
 # Other
 brew "coreutils" # Those that come with macOS are outdated
@@ -77,23 +78,22 @@ brew "curl" # Download files
 brew "aria2" # Download manager
 
 # Lyft
-# tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
-# tap "lyft/lyft-ios-runner", "git@github.com:lyft/lyft-ios-runner.git"
-
+tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
+tap "lyft/lyft-ios-runner", "git@github.com:lyft/lyft-ios-runner.git"
 tap "getsentry/tools"
-# brew "lyft/localdevtools/python-310-bundle-arm64"
-# brew "lyft/localdevtools/python-311-bundle-arm64"
-# brew "lyft/localdevtools/python-bundle-arm64"
-# brew "lyft/localdevtools/aws-okta"
-# brew "lyft/localdevtools/protoc-gen-lyftpython"
-# brew "lyft/localdevtools/protoc-gen-lyftswift"
-# brew "lyft/localdevtools/protoc-gen-pynamodb"
-# brew "lyft/localdevtools/idltools"
-# brew "lyft/localdevtools/kubernetes-cli@1.22"
-# brew "lyft/localdevtools/lyft-gitwrapper"
-# brew "lyft/localdevtools/lyftdev"
-# brew "lyft/localdevtools/lyftdevtools"
-# brew "lyft/lyft-ios-runner/runlyft", args: ["HEAD"]
+brew "lyft/localdevtools/python-310-bundle-arm64"
+brew "lyft/localdevtools/python-311-bundle-arm64"
+brew "lyft/localdevtools/python-bundle-arm64"
+brew "lyft/localdevtools/aws-okta"
+brew "lyft/localdevtools/protoc-gen-lyftpython"
+brew "lyft/localdevtools/protoc-gen-lyftswift"
+brew "lyft/localdevtools/protoc-gen-pynamodb"
+brew "lyft/localdevtools/idltools"
+brew "lyft/localdevtools/kubernetes-cli@1.22"
+brew "lyft/localdevtools/lyft-gitwrapper"
+brew "lyft/localdevtools/lyftdev"
+brew "lyft/localdevtools/lyftdevtools"
+brew "lyft/lyft-ios-runner/runlyft", args: ["HEAD"]
 brew "getsentry/tools/sentry-cli"
 
 # Applications

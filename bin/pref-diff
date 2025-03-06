@@ -2,18 +2,62 @@
 
 set -euo pipefail
 
-# Read all prefs into a temporary file.
-defaults read > /tmp/prefsA.txt
+process_prefs() {
+    # Lines containing any of these strings will be skipped
+    skip_patterns=(
+        "0000"
+        " GMT"
+        "PST"
+        "recentSessions"
+        "DKThrottledActivityLast"
+        "UUID"
+        "uuid"
+        "bytes "
+        "Timestamp"
+        "Window Frame"
+    )
+    
+    echo "Process_prefs" >&2
+    declare -a prefix_stack=()
+    while IFS= read -r line || [ -n "$line" ]; do
+        # Check if line contains any of the skip patterns
+        skip_line=false
+        for pattern in "${skip_patterns[@]}"; do
+            if [[ $line == *"$pattern"* ]]; then
+                skip_line=true
+                break
+            fi
+        done
+        if [[ $skip_line == true ]]; then
+            continue
+        fi
+
+        # Check if the line contains a brace, bracket, or parenthesis
+        if [[ $line == *"{" || $line == *"(" ]]; then
+            line=${line//\{/}
+            line=${line//=/}
+            prefix_stack+=("$line")
+        elif [[ $line == *"    }"* || $line == *"    )"* ]]; then
+            [[ ${#prefix_stack[@]} -gt 0 ]] && unset "prefix_stack[$((${#prefix_stack[@]}-1))]"
+        else 
+            [[ ${#prefix_stack[@]} -gt 0 ]] && echo "${prefix_stack[*]} $line" || echo "$line"
+        fi
+    done | tr -s ' '
+}
+
+# Read all prefs into a temporary file
+# shellcheck disable=SC2086
+defaults read ${1:-} | process_prefs > /tmp/prefsA.txt
 
 # Wait for confirmation
 read -p "Change the setting and press Enter to continue" -r
 
 # Read all prefs into a temporary file
-defaults read > /tmp/prefsB.txt
+# shellcheck disable=SC2086
+defaults read ${1:-} | process_prefs > /tmp/prefsB.txt
 
-# Compare the two files. Removing any lines with dates because they change every time, include 2 context lines
-diff <(sed '/ +0000/d' /tmp/prefsA.txt) \
-     <(sed '/ +0000/d' /tmp/prefsB.txt)
+# Compare the prefs before and after
+diff /tmp/prefsA.txt /tmp/prefsB.txt || echo "No changes"
 
 # Remove the temporary files
 rm /tmp/prefsA.txt /tmp/prefsB.txt

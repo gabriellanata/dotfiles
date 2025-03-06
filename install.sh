@@ -20,7 +20,7 @@ setup_preferences() {
     # Run scripts
     preferences="$DOTFILES_DIR/preferences/*.sh"
     for file in ${preferences}; do
-        log "Linking $(basename "$file" .sh) configuration..."
+        log "Configuring $(basename "$file" .sh)..."
         # shellcheck source=/dev/null
         source "$file" || true
     done

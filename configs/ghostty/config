@@ -42,6 +42,7 @@ font-thicken = true
 # macOS-specific settings
 macos-titlebar-style = tabs
 macos-option-as-alt = true
+macos-titlebar-proxy-icon = visible
 
 # Shell integration
 shell-integration-features = true

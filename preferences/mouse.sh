@@ -32,3 +32,11 @@ defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool false
 # Increase size of mouse cursor
 defaults write com.apple.AppleMultitouchMouse MouseDriverCursorSize -float 2.5
 
+# Trackpad configuration
+defaults write com.apple.trackpad FirstClickThreshold 0
+defaults write com.apple.trackpad SecondClickThreshold 0
+defaults write com.apple.trackpad showAppExposeGestureEnabled 1
+defaults write com.apple.trackpad showLaunchpadGestureEnabled 1
+defaults write com.apple.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture 3
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.scaling -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.forceClick -int 0

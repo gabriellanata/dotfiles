@@ -76,3 +76,33 @@ link_file() {
     ln -sfn "$src" "$dest"
     success "Linked $(echo "$src to $dest" | sed "s|$DOTFILES_DIR|.|; s|$HOME|~|")"
 }
+
+# Set a preference value
+function defaults_write() {
+    local file=$1
+    local key=$2
+    local type=$3
+    local value=$4
+    
+    # if the key has a dot, we need to use plutil to set the value
+    if [[ "$key" == *.* ]]; then
+        defaults export "$file" - |
+            plutil -replace "$key" "$type" "$value" -o - - |
+            defaults import "$file" -
+    else
+        defaults write "$file" "$key" "$type" "$value"
+    fi
+}
+
+# Set a preference value
+function defaults_read() {
+    local file=$1
+    local key=$2
+    # if the key has a dot, we need to use plutil to set the value
+    if [[ "$key" == *.* ]]; then
+        defaults export "$file" - |
+            plutil -extract "$key" - -
+    else
+        defaults read "$file" "$key"
+    fi
+}

@@ -76,11 +76,11 @@ defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 # Hide status bar items
-defaults write com.apple.finder NSStatusItem Visible AirDrop -bool false
-defaults write com.apple.finder NSStatusItem Visible Bluetooth -bool false
-defaults write com.apple.finder NSStatusItem Visible ScreenMirroring -bool false
-defaults write com.apple.finder NSStatusItem Visible StageManager -bool false
-defaults write com.apple.finder NSStatusItem Visible WiFi -bool false
+defaults write com.apple.controlcenter "NSStatusItem Visible AirDrop" -bool false
+defaults write com.apple.controlcenter "NSStatusItem Visible Bluetooth" -bool false
+defaults write com.apple.controlcenter "NSStatusItem Visible ScreenMirroring" -bool false
+defaults write com.apple.controlcenter "NSStatusItem Visible StageManager" -bool false
+defaults write com.apple.controlcenter "NSStatusItem Visible WiFi" -bool false
 
 # Don't use tabs in Finder
 defaults write com.apple.finder AppleWindowTabbingMode -string "always"

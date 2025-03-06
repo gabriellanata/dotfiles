@@ -33,6 +33,7 @@ plugins=(
   zsh-syntax-highlighting
   zsh-autosuggestions
   colored-man-pages
+  fzf
 )
 
 # Source all zsh files
