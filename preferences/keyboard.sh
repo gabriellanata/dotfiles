@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # We should copy this instead of linking it because it can cause crashes
-cp -R "$DOTFILES_DIR/configs/keyboard/Gabriel.bundle" "$HOME/Library/Keyboard Layouts/"
+cp -R "$DOTFILES_DIR/configs/keyboard/Gabriel.bundle" "/Library/Keyboard Layouts/"
 
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false

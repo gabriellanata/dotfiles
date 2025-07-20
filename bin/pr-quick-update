@@ -110,7 +110,7 @@ run_with_env() {
 
 # If the base branch is the current branch we just need to push the current commit
 if [[ "$base_branch" == "$(git branch --show-current)" ]]; then
-    run_with_env git commit --no-edit -m "$title" "${commit_args[@]}"
+    run_with_env git commit --no-edit -m "$title" "${commit_args[@]:---}"
     run_with_env git push
     exit 0
 fi
@@ -123,5 +123,9 @@ fi
 
 echo "Base SHA: $base_sha of $base_branch"
 
-run_with_env git commit --no-edit -m "$title" "${commit_args[@]}"
+# Pull the base branch to get the latest changes and ensure no issues when pushing
+run_with_env git pull origin "$base_branch"
+
+# shellcheck disable=SC2068
+run_with_env git commit --no-edit -m "$title" "${commit_args[@]:---}"
 run_with_env git-updatepr "$base_sha"

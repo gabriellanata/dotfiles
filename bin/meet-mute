@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+osascript <<EOF
+tell application "Google Chrome"
+    repeat with aWindow in windows
+        set tabList to (every tab in aWindow whose URL contains "meet.google.com")
+        repeat with meetTab in tabList
+            set jscriptCommand to "
+                (() => {
+                    const labels = ['turn off microphone', 'turn on microphone'];
+                    
+                    // Look for button elements and elements with role='button'
+                    const selectors = [
+                        'button[aria-label]',
+                        '[role=\"button\"][aria-label]'
+                    ];
+                    
+                    let btn = null;
+                    for (const selector of selectors) {
+                        btn = [...document.querySelectorAll(selector)].find(b => {
+                            const label = b.getAttribute('aria-label')?.toLowerCase();
+                            return labels.some(l => label.includes(l));
+                        });
+                        if (btn) break;
+                    }
+                    
+                    if (btn) {
+                        btn.click();
+                        console.log('Clicked microphone button:', btn.getAttribute('aria-label'));
+                        return true;
+                    } else {
+                        console.log('Microphone button not found');
+                        return false;
+                    }
+                })();
+            "
+            tell meetTab to execute javascript jscriptCommand
+        end repeat
+    end repeat
+end tell
+EOF

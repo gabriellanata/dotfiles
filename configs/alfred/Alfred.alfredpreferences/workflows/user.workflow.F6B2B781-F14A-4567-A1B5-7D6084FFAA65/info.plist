@@ -147,7 +147,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>cd $projectPath &amp;&amp; ./ios generate</string>
+				<string>cd $projectPath &amp;&amp; lyft generate</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

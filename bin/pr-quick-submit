@@ -22,7 +22,10 @@ body=""
 head_sha="" # The change has not been commited yet so this is null
 base_branch=""
 signoff=""
+draft=""
 verbose=""
+reviewers=""
+auto_merge=""
 while [[ $# -gt 0 ]]; do
     case $1 in
     -t | --title)
@@ -54,12 +57,25 @@ while [[ $# -gt 0 ]]; do
         # fi
         shift
         ;;
+    -r | --reviewer | --reviewers | --approver | --approvers)
+        reviewers="$2"
+        shift
+        shift
+        ;;
+    --auto-merge | --merge | --merge-squash)
+        auto_merge=true
+        shift
+        ;;
     --signoff)
         signoff=true
         shift
         ;;
     --no-signoff)
         signoff=false
+        shift
+        ;;
+    --draft)
+        draft=true
         shift
         ;;
     -v | --verbose)
@@ -96,9 +112,23 @@ fi
 
 # Fill the args
 declare -a commit_args=()
+declare -a pr_args=()
 
 if [[ -n "$body" ]]; then
     commit_args+=("-m" "$body")
+fi
+
+if [[ -n "$reviewers" ]]; then
+    reviewers_full=$(pr-reviewers "$reviewers")
+    pr_args+=("--reviewer" "$reviewers_full")
+fi
+
+if [[ "$auto_merge" == true ]]; then
+    pr_args+=("--merge-squash")
+fi
+
+if [[ "$draft" == true ]]; then
+    pr_args+=("--draft")
 fi
 
 if [[ "$signoff" == true ]]; then
@@ -120,9 +150,12 @@ run_with_env() {
     env GIT_PILE_VERBOSE="$verbose" "$@"
 }
 
-git commit --no-edit -m "$title" "${commit_args[@]}"
+    # shellcheck disable=SC2068
+git commit --no-edit -m "$title" "${commit_args[@]:---}"
 if [[ -n "$head_sha" ]]; then
-    run_with_env git-submitpr "$head_sha" --base "$base_branch"
+    # shellcheck disable=SC2068
+    run_with_env git-submitpr "$head_sha" --base "$base_branch" "${pr_args[@]:---}"
 else
-    run_with_env git-submitpr --base "$base_branch"
+    # shellcheck disable=SC2068
+    run_with_env git-submitpr --base "$base_branch" "${pr_args[@]:---}"
 fi

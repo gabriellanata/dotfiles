@@ -6,6 +6,7 @@ else
 fi
 
 # system
+export PATH="$HOME/.rd/bin:$PATH"
 export PATH=$HOME/bin:$PATH
 export LC_ALL=en_US.UTF-8
 export EDITOR="$(which cursor)"

@@ -8,6 +8,8 @@ brew "mas"
 # Terminal
 brew "zsh"
 brew "zsh-completions"
+brew "zsh-syntax-highlighting"
+brew "zsh-autosuggestions"
 brew "ripgrep"
 brew "has"
 brew "gpg"
@@ -36,7 +38,7 @@ brew "diff-so-fancy"
 brew "gh" # GitHub CLI
 brew "act" # Run GitHub actions locally
 brew "jesseduffield/lazygit/lazygit" # Simple terminal UI for git commands
-brew "keith/formulae/git-pile" # Git extension to manage stacked commits
+brew "keith/formulae/git-pile", args: ["HEAD"] # Git extension to manage stacked commits
 
 # iOS / Swift
 tap "dduan/formulae"
@@ -52,16 +54,18 @@ brew "dduan/formulae/drstring"
 
 # Languages
 brew "python-setuptools"
-brew "python@3.11", link: false
-brew "python@3.10", link: false
-brew "python@3.9"
+# brew "python@3.11", link: false
+brew "python@3.10"
+# brew "python@3.9", link: false
 brew "pylint"
 brew "php"
 brew "node"
+brew "fnm" # Node version manager
 brew "ruby"
 brew "rbenv"
 brew "yarn"
-brew "fnm" # Node version manager
+brew "go"
+brew "postgresql"
 
 # Other
 brew "coreutils" # Those that come with macOS are outdated
@@ -76,25 +80,28 @@ brew "jpeg-xl" # Image format
 brew "libpng" # Image format
 brew "curl" # Download files
 brew "aria2" # Download manager
+brew "trufflehog" # Scan for secrets
+brew "pillow" # Python image library
 
 # Lyft
 tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
 tap "lyft/lyft-ios-runner", "git@github.com:lyft/lyft-ios-runner.git"
 tap "getsentry/tools"
+brew "lyft/localdevtools/lyftdev"
+brew "lyft/localdevtools/lyftdevtools"
+brew "lyft/localdevtools/lyft-gitwrapper"
 brew "lyft/localdevtools/python-310-bundle-arm64"
 brew "lyft/localdevtools/python-311-bundle-arm64"
 brew "lyft/localdevtools/python-bundle-arm64"
-brew "lyft/localdevtools/aws-okta"
 brew "lyft/localdevtools/protoc-gen-lyftpython"
 brew "lyft/localdevtools/protoc-gen-lyftswift"
 brew "lyft/localdevtools/protoc-gen-pynamodb"
+brew "lyft/localdevtools/aws-okta"
 brew "lyft/localdevtools/idltools"
-brew "lyft/localdevtools/kubernetes-cli@1.22"
-brew "lyft/localdevtools/lyft-gitwrapper"
-brew "lyft/localdevtools/lyftdev"
-brew "lyft/localdevtools/lyftdevtools"
+brew "lyft/localdevtools/bubble"
 brew "lyft/lyft-ios-runner/runlyft", args: ["HEAD"]
 brew "getsentry/tools/sentry-cli"
+brew "bazel"
 
 # Applications
 cask "google-chrome"
@@ -114,7 +121,7 @@ cask "visual-studio-code"
 cask "1password@beta"
 cask "1password-cli"
 cask "yaak"
-cask "steermouse"
+cask "karabiner-elements"
 cask "shapr3d"
 cask "bambu-studio"
 cask "github-copilot-for-xcode"
@@ -129,6 +136,11 @@ cask "sf-symbols"
 cask "gpg-suite"
 cask "imageoptim"
 cask "yubico-authenticator"
+cask "moom" # Window management
+cask "chatgpt"
+cask "bruno" # API client
+cask "textbuddy"
+cask "limitless" # Personal AI-powered transcription and notetaking service
 
 # App Store
 mas "1Password for Safari", id: 1569813296

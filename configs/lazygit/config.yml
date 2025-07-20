@@ -23,7 +23,7 @@ gui:
     'Gabriel Lanata': 'yellow'
     '*': 'white'
   commandLogSize: 6
-  filterMode: substring
+  filterMode: fuzzy
 os:
   editPreset: 'cursor'
 keybinding:
@@ -69,12 +69,16 @@ customCommands:
         key: 'Body'
         initialValue: ''
       - type: 'input'
+        title: 'Reviewers'
+        key: 'Reviewers'
+        initialValue: 'uia'
+      - type: 'input'
         title: 'Base branch'
         key: 'BaseBranch'
         initialValue: 'master'
         suggestions:
           preset: 'branches'
-    command: 'pr submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base "{{.Form.BaseBranch}}"'
+    command: 'pr submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base "{{.Form.BaseBranch}}" --reviewer "{{.Form.Reviewers}}" --merge'
     loadingText: 'Creating Quick PR'
   - key: 'q'
     description: 'Quick commit and PR'
@@ -90,6 +94,10 @@ customCommands:
         key: 'Body'
         initialValue: ''
       - type: 'input'
+        title: 'Reviewers'
+        key: 'Reviewers'
+        initialValue: 'uia'
+      - type: 'input'
         title: 'Base branch'
         key: 'BaseBranch'
         initialValue: >-
@@ -102,7 +110,7 @@ customCommands:
           {{- end -}}
         suggestions:
           preset: 'branches'
-    command: 'pr submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base "{{.Form.BaseBranch}}"'
+    command: 'pr submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base "{{.Form.BaseBranch}}" --reviewer "{{.Form.Reviewers}}" --merge'
     loadingText: 'Creating Quick PR'
   - key: 'Q'
     description: 'Quick commit and Fixup'

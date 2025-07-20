@@ -68,6 +68,45 @@
 						<string>semibold</string>
 					</dict>
 				</dict>
+				<key>LabelGraph</key>
+				<dict>
+					<key>Graph</key>
+					<dict>
+						<key>Charged</key>
+						<dict>
+							<key>Value</key>
+							<dict>
+								<key>Light</key>
+								<dict>
+									<key>Color</key>
+									<string>0.3843137254901961 0.7294117647058823 0.2745098039215687 1</string>
+								</dict>
+							</dict>
+						</dict>
+						<key>Draining</key>
+						<dict>
+							<key>Value</key>
+							<dict>
+								<key>Light</key>
+								<dict>
+									<key>Color</key>
+									<string>0.9686274509803922 0.3098039215686275 0.6196078431372549 1</string>
+								</dict>
+							</dict>
+						</dict>
+						<key>Paused</key>
+						<dict>
+							<key>Value</key>
+							<dict>
+								<key>Light</key>
+								<dict>
+									<key>Color</key>
+									<string>1 0.7764705882352941 0 1</string>
+								</dict>
+							</dict>
+						</dict>
+					</dict>
+				</dict>
 			</dict>
 		</dict>
 	</dict>
@@ -77,10 +116,20 @@
 		<dict>
 			<key>Graph</key>
 			<dict>
+				<key>Efficiency</key>
+				<dict>
+					<key>Color</key>
+					<string>0 0.4784313725490196 1 1</string>
+				</dict>
 				<key>GPU</key>
 				<dict>
 					<key>Color</key>
 					<string>1 0.7764705882352941 0 1</string>
+				</dict>
+				<key>Performance</key>
+				<dict>
+					<key>Color</key>
+					<string>0.9686274509803922 0.3098039215686275 0.6196078431372549 1</string>
 				</dict>
 				<key>System</key>
 				<dict>
@@ -177,7 +226,25 @@
 							<key>State</key>
 							<dict/>
 						</dict>
+						<key>Efficiency</key>
+						<dict>
+							<key>Light</key>
+							<dict>
+								<key>Color</key>
+								<string>0 0.4784313725490196 1 1</string>
+							</dict>
+						</dict>
+						<key>Performance</key>
+						<dict>
+							<key>Light</key>
+							<dict>
+								<key>Color</key>
+								<string>0.9686274509803922 0.3098039215686275 0.6196078431372549 1</string>
+							</dict>
+						</dict>
 					</dict>
+					<key>Width</key>
+					<integer>32</integer>
 				</dict>
 			</dict>
 		</dict>
@@ -195,9 +262,9 @@
 		<key>Auth-Identifier</key>
 		<string>D796AB5A-6801-445A-A6FB-31F760B036F2</string>
 		<key>Device</key>
-		<string>27b0fb507d1bf05b2d47c5daff5d8d2f119b6a87</string>
+		<string>ac96cb927dfccfe4bd93b868c07cdcf7b2e90588</string>
 		<key>Model</key>
-		<string>MacBookPro18,4</string>
+		<string>Mac16,6</string>
 	</dict>
 	<key>Disks</key>
 	<dict>
@@ -371,7 +438,10 @@
 		<key>Global</key>
 		<dict>
 			<key>Bandwidth</key>
-			<dict/>
+			<dict>
+				<key>Format</key>
+				<integer>1</integer>
+			</dict>
 		</dict>
 		<key>Menu</key>
 		<dict>
@@ -394,10 +464,7 @@
 			<key>Graph</key>
 			<dict>
 				<key>Download</key>
-				<dict>
-					<key>Color</key>
-					<string>0.3843137254901961 0.7294117647058823 0.2745098039215687 1</string>
-				</dict>
+				<dict/>
 			</dict>
 			<key>Processes</key>
 			<dict>
@@ -410,7 +477,7 @@
 					<key>enabled</key>
 					<true/>
 					<key>key</key>
-					<string>network-bandwidth</string>
+					<string>network-location</string>
 				</dict>
 				<dict>
 					<key>enabled</key>
@@ -422,13 +489,13 @@
 					<key>enabled</key>
 					<true/>
 					<key>key</key>
-					<string>network-addresses-public</string>
+					<string>network-bandwidth</string>
 				</dict>
 				<dict>
 					<key>enabled</key>
 					<true/>
 					<key>key</key>
-					<string>network-addresses-private</string>
+					<string>network-addresses-public</string>
 				</dict>
 				<dict>
 					<key>enabled</key>
@@ -438,7 +505,7 @@
 				</dict>
 				<dict>
 					<key>enabled</key>
-					<false/>
+					<true/>
 					<key>key</key>
 					<string>network-ping</string>
 				</dict>
@@ -463,10 +530,10 @@
 				<key>Decimals</key>
 				<dict>
 					<key>MB</key>
-					<integer>1</integer>
+					<integer>2</integer>
 				</dict>
 				<key>UnitSize</key>
-				<integer>0</integer>
+				<integer>3</integer>
 			</dict>
 			<key>Mode</key>
 			<dict>
@@ -479,6 +546,22 @@
 						<key>Weight</key>
 						<string>semibold</string>
 					</dict>
+					<key>Upload</key>
+					<dict>
+						<key>Value</key>
+						<dict>
+							<key>Light</key>
+							<dict>
+								<key>Text</key>
+								<dict/>
+							</dict>
+						</dict>
+					</dict>
+				</dict>
+				<key>HistoryGraph</key>
+				<dict>
+					<key>Width</key>
+					<integer>32</integer>
 				</dict>
 				<key>Value</key>
 				<dict/>
@@ -553,13 +636,26 @@
 						<integer>1</integer>
 						<key>Items</key>
 						<dict>
-							<key>Charged</key>
+							<key>Bluetooth</key>
 							<array/>
+							<key>Charged</key>
+							<array>
+								<dict>
+									<key>source</key>
+									<integer>8</integer>
+									<key>subtype</key>
+									<integer>3</integer>
+									<key>type</key>
+									<integer>4</integer>
+								</dict>
+							</array>
 							<key>Charging</key>
 							<array>
 								<dict>
 									<key>source</key>
 									<integer>8</integer>
+									<key>subtype</key>
+									<integer>3</integer>
 									<key>type</key>
 									<integer>4</integer>
 								</dict>
@@ -569,16 +665,10 @@
 								<dict>
 									<key>source</key>
 									<integer>8</integer>
+									<key>subtype</key>
+									<integer>3</integer>
 									<key>type</key>
 									<integer>4</integer>
-								</dict>
-								<dict>
-									<key>source</key>
-									<integer>8</integer>
-									<key>subtype</key>
-									<integer>7</integer>
-									<key>type</key>
-									<integer>7</integer>
 								</dict>
 							</array>
 							<key>NotCharging</key>
@@ -586,16 +676,10 @@
 								<dict>
 									<key>source</key>
 									<integer>8</integer>
+									<key>subtype</key>
+									<integer>3</integer>
 									<key>type</key>
 									<integer>4</integer>
-								</dict>
-								<dict>
-									<key>source</key>
-									<integer>8</integer>
-									<key>subtype</key>
-									<integer>7</integer>
-									<key>type</key>
-									<integer>7</integer>
 								</dict>
 							</array>
 						</dict>
@@ -639,6 +723,8 @@
 				<dict>
 					<key>Menubar</key>
 					<dict>
+						<key>Enabled</key>
+						<integer>0</integer>
 						<key>Items</key>
 						<array/>
 					</dict>
@@ -673,12 +759,14 @@
 							<dict>
 								<key>source</key>
 								<integer>6</integer>
-								<key>subtype</key>
-								<integer>7</integer>
 								<key>type</key>
-								<integer>7</integer>
-								<key>useroptions</key>
-								<dict/>
+								<integer>1</integer>
+							</dict>
+							<dict>
+								<key>source</key>
+								<integer>6</integer>
+								<key>type</key>
+								<integer>5</integer>
 							</dict>
 						</array>
 					</dict>
@@ -687,6 +775,8 @@
 				<dict>
 					<key>Menubar</key>
 					<dict>
+						<key>Enabled</key>
+						<integer>0</integer>
 						<key>Items</key>
 						<array/>
 					</dict>
@@ -694,7 +784,67 @@
 				<key>Time</key>
 				<dict>
 					<key>Menubar</key>
-					<dict/>
+					<dict>
+						<key>Clocks</key>
+						<array>
+							<dict>
+								<key>line1</key>
+								<dict>
+									<key>items</key>
+									<array>
+										<dict>
+											<key>format</key>
+											<string>icon-calendar-color-fill-day</string>
+											<key>format-type</key>
+											<string>icons</string>
+											<key>type</key>
+											<string>token</string>
+										</dict>
+										<dict>
+											<key>type</key>
+											<string>string</string>
+											<key>value</key>
+											<string> </string>
+										</dict>
+										<dict>
+											<key>format</key>
+											<string>h</string>
+											<key>format-type</key>
+											<string>hour</string>
+											<key>type</key>
+											<string>token</string>
+										</dict>
+										<dict>
+											<key>type</key>
+											<string>string</string>
+											<key>value</key>
+											<string>:</string>
+										</dict>
+										<dict>
+											<key>format</key>
+											<string>mm</string>
+											<key>format-type</key>
+											<string>minute</string>
+											<key>type</key>
+											<string>token</string>
+										</dict>
+										<dict>
+											<key>format</key>
+											<string>a</string>
+											<key>format-type</key>
+											<string>ampm</string>
+											<key>type</key>
+											<string>token</string>
+										</dict>
+									</array>
+								</dict>
+								<key>lines</key>
+								<string>1</string>
+							</dict>
+						</array>
+						<key>Enabled</key>
+						<integer>1</integer>
+					</dict>
 				</dict>
 				<key>Weather</key>
 				<dict>
@@ -778,7 +928,7 @@
 			<key>Calendar</key>
 			<dict>
 				<key>ShowWeeks</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>Type</key>
 				<integer>2</integer>
 			</dict>
@@ -786,21 +936,122 @@
 			<dict>
 				<key>Disabled</key>
 				<array>
-					<string>0F587C54-92A0-4D8D-884D-6394DAFE9F5A</string>
-					<string>0902A9BD-CC70-4E6E-9090-DAD33A0FA3E0</string>
-					<string>DE955AA9-B451-4CFE-9C00-68F7634D79BC</string>
-					<string>08B1703F-683E-4B0D-A43D-F55E2D8BBCCE</string>
-					<string>955A75B0-CD52-450A-8C55-7C09096D8105</string>
-					<string>E64688E8-D922-4637-BA00-45AE6BF22F66</string>
-					<string>CF0A5F61-568F-4911-BBA9-5B8070932CAA</string>
-					<string>03857802-B4AC-426E-885A-08BE5200306E</string>
-					<string>C924D7B1-F62E-4F11-9A04-F919651353BE</string>
+					<string>55C3037C-4744-41DE-B1FF-675435A039D5</string>
+					<string>58B28D1F-3B90-4AB3-9C82-E7D928478EB7</string>
+					<string>640A4887-C405-499D-8637-DFC454B9C29D</string>
+					<string>510C89B5-09B4-4F55-9B06-E92A15842742</string>
+					<string>C5149BE5-5C3B-49E8-B6F6-7B03D91DF52D</string>
+					<string>01EECA17-5825-48A4-AA06-5986D73AA7D8</string>
+					<string>A7EDA65D-2F26-4457-A279-1C8D69FE072C</string>
+					<string>8EAEE184-622B-4AEF-B348-C23D98A8CBFC</string>
+					<string>1678BFE2-2238-4CF3-8D71-C271DACAEBCB</string>
 				</array>
 			</dict>
 			<key>Cities</key>
 			<dict>
 				<key>Items</key>
-				<array/>
+				<array>
+					<dict>
+						<key>city</key>
+						<string>San Francisco</string>
+						<key>country</key>
+						<string>United States</string>
+						<key>countrycode</key>
+						<string>US</string>
+						<key>identifier</key>
+						<integer>5391959</integer>
+						<key>latitude</key>
+						<real>37.774929999999998</real>
+						<key>longitude</key>
+						<real>-122.41942</real>
+						<key>region</key>
+						<string>City and County of San Francisco</string>
+						<key>state</key>
+						<string>California</string>
+						<key>timezone</key>
+						<string>America/Los_Angeles</string>
+					</dict>
+					<dict>
+						<key>city</key>
+						<string>New York City</string>
+						<key>country</key>
+						<string>United States</string>
+						<key>countrycode</key>
+						<string>US</string>
+						<key>identifier</key>
+						<integer>5128581</integer>
+						<key>latitude</key>
+						<real>40.714269999999999</real>
+						<key>longitude</key>
+						<real>-74.005970000000005</real>
+						<key>region</key>
+						<string></string>
+						<key>state</key>
+						<string>New York</string>
+						<key>timezone</key>
+						<string>America/New_York</string>
+					</dict>
+					<dict>
+						<key>city</key>
+						<string>Lima</string>
+						<key>country</key>
+						<string>Peru</string>
+						<key>countrycode</key>
+						<string>PE</string>
+						<key>identifier</key>
+						<integer>3936456</integer>
+						<key>latitude</key>
+						<real>-12.04318</real>
+						<key>longitude</key>
+						<real>-77.028239999999997</real>
+						<key>region</key>
+						<string></string>
+						<key>state</key>
+						<string>Lima Province</string>
+						<key>timezone</key>
+						<string>America/Lima</string>
+					</dict>
+					<dict>
+						<key>city</key>
+						<string>Toronto</string>
+						<key>country</key>
+						<string>Canada</string>
+						<key>countrycode</key>
+						<string>CA</string>
+						<key>identifier</key>
+						<integer>6167865</integer>
+						<key>latitude</key>
+						<real>43.706429999999997</real>
+						<key>longitude</key>
+						<real>-79.39864</real>
+						<key>region</key>
+						<string></string>
+						<key>state</key>
+						<string>Ontario</string>
+						<key>timezone</key>
+						<string>America/Toronto</string>
+					</dict>
+					<dict>
+						<key>city</key>
+						<string>Kyiv</string>
+						<key>country</key>
+						<string>Ukraine</string>
+						<key>countrycode</key>
+						<string>UA</string>
+						<key>identifier</key>
+						<integer>703448</integer>
+						<key>latitude</key>
+						<real>50.454659999999997</real>
+						<key>longitude</key>
+						<real>30.523800000000001</real>
+						<key>region</key>
+						<string></string>
+						<key>state</key>
+						<string>Kyiv City</string>
+						<key>timezone</key>
+						<string>Europe/Kyiv</string>
+					</dict>
+				</array>
 				<key>TimeFormat</key>
 				<integer>0</integer>
 			</dict>
@@ -831,6 +1082,20 @@
 					<string>time-launcher</string>
 				</dict>
 			</array>
+		</dict>
+		<key>Menubar</key>
+		<dict>
+			<key>Mode</key>
+			<dict>
+				<key>SingleValue</key>
+				<dict>
+					<key>Font</key>
+					<dict>
+						<key>Size</key>
+						<integer>1</integer>
+					</dict>
+				</dict>
+			</dict>
 		</dict>
 	</dict>
 	<key>Weather</key>

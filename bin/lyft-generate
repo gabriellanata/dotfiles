@@ -6,6 +6,8 @@ set -euo pipefail
 include_previous=true
 include_changed=true
 verbose=false
+modules=()
+
 while [[ $# -gt 0 ]]; do
     case $1 in
     --no-previous)
@@ -29,14 +31,18 @@ while [[ $# -gt 0 ]]; do
         verbose=false
         shift
         ;;
-    *)
+    -*)
         echo "Unknown option $1"
         exit 1
+        ;;
+    *)
+        modules+=("$1")
+        shift
         ;;
     esac
 done
 
-# Fill the args
+# Fill the args with our processed flags
 args=()
 
 if [[ "$include_previous" == true ]]; then
@@ -52,7 +58,12 @@ if [[ "$verbose" == true ]]; then
     set -x
 fi
 
+# Add any unprocessed arguments
+if [[ ${#modules[@]} -gt 0 ]]; then
+    args+=("${modules[@]}")
+fi
+
 ### Execute Commands ###
 
 echo "Running ios generate: ./ios generate ${args[*]}"
-./ios generate "${args[@]}"
+FOCUS_FLOW_PLUGIN_CONFIGURATION_DISCOVERY_ITERATIONS=1 ./ios generate "${args[@]}"

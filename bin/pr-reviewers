@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+REVIEWERS_MAPPING_FILE="$DOTFILES_DIR/reviewers.txt"
+
+# Must provide at least one approver, can be comma separated or multiple arguments
+if [[ $# -eq 0 ]]; then
+    echo ""
+    exit 0
+fi
+
+# Get the reviewers from all arguments, split them by comma and trim any whitespace
+reviewers=()
+for arg in "$@"; do
+    # Split the argument by comma and trim any whitespace
+    IFS=',' read -r -a reviewers_elements <<< "$arg"
+    for approver in "${reviewers_elements[@]}"; do
+        approver=$(echo "$approver" | xargs)
+        reviewers+=("$approver")
+    done
+done
+
+# End early if no reviewers were provided
+if [[ ${#reviewers[@]} -eq 0 ]]; then
+    echo ""
+    exit 0
+fi
+
+# Read the reviewers mapping file and create a mapping of key to value
+declare -A reviewers_mapping
+while IFS= read -r line; do
+    # Skip empty lines and comments
+    if [[ -z "$line" || "$line" =~ ^# ]]; then
+        continue
+    fi
+
+    # Split the line into key and value
+    IFS='=' read -r key value <<< "$line"
+    
+    # Add the key and value to the mapping
+    reviewers_mapping["$key"]="$value"
+done < "$REVIEWERS_MAPPING_FILE"
+
+# For each element in the reviewers array that matches a key, replace it with the value
+for i in "${!reviewers[@]}"; do
+    if [[ -n "${reviewers_mapping["${reviewers[$i]}"]}" ]]; then
+        # Split the mapped value by comma and add each value
+        IFS=',' read -r -a mapped_values <<< "${reviewers_mapping["${reviewers[$i]}"]}"
+        # Replace the current value with the first mapped value
+        # shellcheck disable=SC2004
+        reviewers[i]="${mapped_values[0]}"
+        # Add any additional mapped values
+        for ((j=1; j<${#mapped_values[@]}; j++)); do
+            reviewers+=("$(echo "${mapped_values[j]}" | xargs)")
+        done
+    fi
+done
+
+# Remove duplicates from the reviewers array and print as comma separated values
+echo "${reviewers[@]}" | tr ' ' '\n' | sort -u | tr '\n' ',' | sed 's/,$//' && echo 

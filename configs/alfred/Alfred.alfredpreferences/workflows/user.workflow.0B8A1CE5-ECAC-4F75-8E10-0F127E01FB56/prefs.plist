@@ -4,5 +4,9 @@
 <dict>
 	<key>decimal_places</key>
 	<integer>2</integer>
+	<key>split_feet</key>
+	<true/>
+	<key>thousands_group</key>
+	<true/>
 </dict>
 </plist>

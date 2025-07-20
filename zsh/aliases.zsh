@@ -32,7 +32,6 @@ alias xcode-select-default="sudo xcode-select -s /Applications/Xcode.app/Content
 alias xsp="xcode-select -p"
 
 # git
-type hub &>/dev/null && eval "$(hub alias -s)" # Alias `git` as `hub`
 alias lg="lazygit"
 
 # github
@@ -49,31 +48,9 @@ alias e="micro" # Edit file
 alias %=" "
 # alias $=" "
 
-# 1password auth
-export OP_BIOMETRIC_UNLOCK_ENABLED=true
-export OP_PLUGIN_ALIASES_SOURCED=1
-alias gh="op plugin run -- gh"
-alias openai="op plugin run -- openai"
-alias sentry-cli="op plugin run -- sentry-cli"
-alias todoist="op plugin run -- todoist"
-
 # Copilot
 alias copilot="/opt/homebrew/bin/gh copilot"
 alias '??'='copilot suggest -t shell'
 alias 'gh?'='copilot suggest -t gh'
 alias 'git?'='copilot suggest -t git'
 alias 'explain'='gh copilot explain'
-
-# Lyft
-alias l="lyft"
-alias la="lyft list-modules | fzf | lyft generate"
-alias cdl="cd /Users/glanata/Developer/Lyft-iOS"
-alias cdl1="cd /Users/glanata/Developer/Lyft-iOS"
-alias cdl2="cd /Users/glanata/Developer/Lyft-iOS-2"
-alias cdlyft="cd /Users/glanata/Developer/Lyft-iOS"
-alias cdlyft1="cd /Users/glanata/Developer/Lyft-iOS"
-alias cdlyft2="cd /Users/glanata/Developer/Lyft-iOS-2"
-alias cdlpl="cd /Users/glanata/Developer/LyftProductLanguage"
-alias cdhammer="cd /Users/glanata/Developer/Hammer"
-alias cddotfiles="cd /Users/glanata/Developer/dotfiles"
-alias cddev="cd /Users/glanata/Developer"
