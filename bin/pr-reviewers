@@ -27,35 +27,54 @@ if [[ ${#reviewers[@]} -eq 0 ]]; then
     exit 0
 fi
 
-# Read the reviewers mapping file and create a mapping of key to value
-declare -A reviewers_mapping
-while IFS= read -r line; do
-    # Skip empty lines and comments
-    if [[ -z "$line" || "$line" =~ ^# ]]; then
-        continue
-    fi
-
-    # Split the line into key and value
-    IFS='=' read -r key value <<< "$line"
+# Function to lookup a reviewer mapping
+lookup_reviewer() {
+    local key="$1"
     
-    # Add the key and value to the mapping
-    reviewers_mapping["$key"]="$value"
-done < "$REVIEWERS_MAPPING_FILE"
+    while IFS= read -r line; do
+        # Skip empty lines and comments
+        if [[ -z "$line" || "$line" =~ ^# ]]; then
+            continue
+        fi
+        
+        # Split the line into key and value
+        IFS='=' read -r file_key file_value <<< "$line"
+        
+        # If we found a match, return the value
+        if [[ "$file_key" == "$key" ]]; then
+            echo "$file_value"
+            return 0
+        fi
+    done < "$REVIEWERS_MAPPING_FILE"
+    
+    # If no match found, return the original key
+    echo "$key"
+}
 
-# For each element in the reviewers array that matches a key, replace it with the value
-for i in "${!reviewers[@]}"; do
-    if [[ -n "${reviewers_mapping["${reviewers[$i]}"]}" ]]; then
-        # Split the mapped value by comma and add each value
-        IFS=',' read -r -a mapped_values <<< "${reviewers_mapping["${reviewers[$i]}"]}"
-        # Replace the current value with the first mapped value
-        # shellcheck disable=SC2004
-        reviewers[i]="${mapped_values[0]}"
-        # Add any additional mapped values
-        for ((j=1; j<${#mapped_values[@]}; j++)); do
-            reviewers+=("$(echo "${mapped_values[j]}" | xargs)")
+# Create a new array to store the expanded reviewers
+expanded_reviewers=()
+
+# For each reviewer, look up their mapping and expand
+for reviewer in "${reviewers[@]}"; do
+    mapped_value=$(lookup_reviewer "$reviewer")
+    
+    # If the mapped value contains commas, split it
+    if [[ "$mapped_value" == *","* ]]; then
+        IFS=',' read -r -a mapped_values <<< "$mapped_value"
+        for mapped_reviewer in "${mapped_values[@]}"; do
+            # Trim whitespace and add to expanded array
+            mapped_reviewer=$(echo "$mapped_reviewer" | xargs)
+            expanded_reviewers+=("$mapped_reviewer")
         done
+    else
+        # Single value, just add it (trimmed)
+        mapped_value=$(echo "$mapped_value" | xargs)
+        expanded_reviewers+=("$mapped_value")
     fi
 done
+
+# Replace the original reviewers array with the expanded one
+reviewers=("${expanded_reviewers[@]}")
 
 # Remove duplicates from the reviewers array and print as comma separated values
 echo "${reviewers[@]}" | tr ' ' '\n' | sort -u | tr '\n' ',' | sed 's/,$//' && echo 

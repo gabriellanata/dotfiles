@@ -1,5 +1,31 @@
 #!/usr/bin/env bash
 
+# pr-cherrybomb: Automate cherry-picking commits across multiple branches
+#
+# This script cherry-picks a specific commit to multiple branches matching a pattern,
+# creates a new branch for each cherry-pick, pushes them, and opens PRs.
+#
+# Use case: When you need to backport a fix/feature to multiple release branches
+#
+# Example usage:
+#   pr-cherrybomb abc1234 -b "release*-2025.1-*"
+#   pr-cherrybomb abc1234 -b "release-2025.1" --signoff
+#
+# How it works:
+#   1. Finds all remote branches matching your pattern
+#   2. For each branch: fetches latest, creates cherry-pick branch, pushes it
+#   3. Creates a PR for each cherry-pick
+#   Note: You don't need to have branches checked out locally - the script
+#         automatically fetches and creates them as needed.
+#
+# Arguments:
+#   <sha>          The commit SHA to cherry-pick
+#   -b, --branches Branch pattern to match (supports wildcards)
+#   --signoff      Add sign-off to the cherry-pick commit
+#   --no-signoff   Don't add sign-off (default)
+#   -v, --verbose  Show detailed output
+#   --quiet        Suppress detailed output (default)
+
 set -euo pipefail
 
 ### Argument Parsing ###
@@ -7,17 +33,21 @@ set -euo pipefail
 # Check if any arguments provided
 if [ $# -eq 0 ]; then
     echo "Error: No arguments provided"
-    echo "Usage: pr-cherrybomb <sha> -r <release>"
+    echo ""
+    echo "Usage: pr-cherrybomb <sha> -b <branch-pattern> [options]"
+    echo ""
+    echo "Example: pr-cherrybomb abc1234 -b 'release*-2025.1-*'"
     exit 1
 fi
 
+# First positional argument is the commit SHA to cherry-pick
 cherry_sha="$1"
 shift
 
-# Get arguments for operations
-branches="" # Example: origin/release*-2025.1-*
-signoff=""
-verbose=""
+# Parse optional arguments
+branches="" # Branch pattern to match (e.g., "release*-2025.1-*")
+signoff=""  # Whether to add sign-off to cherry-pick commits
+verbose=""  # Whether to show detailed output
 while [[ $# -gt 0 ]]; do
     case $1 in
     -b | --branches)
@@ -52,29 +82,33 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Check if sha is empty
+### Validation ###
+
+# Validate that required arguments are provided
 if [[ -z "$cherry_sha" ]]; then
     echo "Error: Cherry-pick sha is required"
     exit 1
 fi
 
-# Check if branches is empty
 if [[ -z "$branches" ]]; then
     echo "Error: Branches (-b|--branches) is required"
     exit 1
 fi
 
-# Fill the args
+### Build Git Command Arguments ###
+
+# Prepare arguments for git cherry-pick command
 commit_args=()
 
 if [[ "$signoff" == true ]]; then
     commit_args+=("--signoff")
+elif [[ "$signoff" == false ]]; then
     commit_args+=("--no-signoff")
 fi
 
 if [[ "$verbose" == true ]]; then
     commit_args+=("--verbose")
-    set -x
+    set -x  # Enable bash debug mode for verbose output
 else
     commit_args+=("--quiet")
 fi
@@ -85,19 +119,22 @@ run_with_env() {
     env "$@"
 }
 
-# Find list of branches that match the "branches" regex
+# Find all remote branches that match the provided pattern
+# Example: "release*-2025.1-*" will match "release-ios-2025.1-patch", etc.
 branch_list=$(run_with_env git branch -r --list "origin/$branches" | tr '\n' ' ')
 
-# Exit if 0 found or > 100
+# Safety checks: ensure we have a reasonable number of branches
+# Prevents accidental mass operations
 if [[ $(wc -w <<<"$branch_list") -eq 0 ]]; then
-    echo "Error: No branches found that match the regex '$branches'"
+    echo "Error: No branches found that match the pattern '$branches'"
     exit 1
 elif [[ $(wc -w <<<"$branch_list") -gt 100 ]]; then
-    echo "Error: More than 100 branches found that match the regex '$branches'"
+    echo "Error: More than 100 branches found that match the pattern '$branches'"
+    echo "This might be too broad. Please refine your branch pattern."
     exit 1
 fi
 
-# List branches and ask for confirmation
+# Show the user which branches will be affected and ask for confirmation
 echo "The following branches will be updated:"
 git branch -r --list "origin/$branches"
 read -p "Continue? [y/N] " -r
@@ -106,36 +143,71 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 0
 fi
 
-# Get commit message
+### Prepare Commit Information ###
+
+# Extract the commit message to use in PR titles and bodies
 if ! commit_message=$(git log -1 --pretty=%B "$cherry_sha"); then
     echo "Error: Could not get commit message for $cherry_sha"
     exit 1
 fi
 
-# Get first line for PR title
+# Use the first line of the commit message as the PR title
 pr_title=$(echo "$commit_message" | head -n 1)
 
-# Get the short sha of the cherry pick
+# Get shortened SHA for branch naming (first 7 characters)
 short_sha="${cherry_sha:0:7}"
 
-# Cherrypick to each branch
-echo "Generating cherry picks for $pr_title"
+### Cherry-Pick to Each Branch ###
+
+echo "Generating cherry picks for: $pr_title"
+echo ""
+
 for branch in $branch_list; do
+    # Strip "origin/" prefix to get the local branch name
     local_branch="${branch//origin\//}"
+
+    # Create a unique branch name for this cherry-pick
+    # Format: cherry-<short-sha>-<base-branch-name>
     cherry_branch="cherry-$short_sha-$local_branch"
-    echo "Working on local branch: $local_branch"
+
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "Working on: $local_branch"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+    # Fetch the latest version of the target branch
     git fetch origin "$local_branch"
+
+    # Create/update local branch to match remote
     git checkout -B "$local_branch" "origin/$local_branch"
+
+    # Create a new branch for the cherry-pick
     git checkout -b "$cherry_branch"
+
+    # Cherry-pick the commit
+    # -X theirs: In case of conflicts, prefer the changes being cherry-picked
+    # --no-edit: Don't open an editor for the commit message
     git cherry-pick -X theirs --no-edit "$cherry_sha"
+
+    # Push the new branch to remote
     git push --set-upstream origin "$cherry_branch"
-    gh pr create --base "$local_branch" --title "🍒 $pr_title" --body "(cherry-picked from commit $cherry_sha)"
+
+    # Create a PR for this cherry-pick
+    # 🍒 emoji helps identify cherry-pick PRs at a glance
+    gh pr create --base "$local_branch" --title "$pr_title 🍒" --body "(cherry-picked from commit $cherry_sha)"
+
+    echo ""
 done
 
-# Print lisr of PR URLs
-echo "The following PRs have been created:"
+### Summary ###
+
+# Print list of PR URLs for easy access
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✅ Successfully created PRs:"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Query GitHub for all PRs with the cherry-pick title
 pr_list=$(gh pr list --search "🍒 $pr_title" --state open --json id,url)
 
-## extract the url from the json
+# Extract URLs from the JSON response and display them
 pr_urls=$(echo "$pr_list" | jq -r '.[] | .url')
 echo "$pr_urls" | xargs -n 1

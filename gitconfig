@@ -14,7 +14,7 @@
   undo = "reset --soft HEAD^"
 [diff]
   tool = Kaleidoscope
-  renames = copies # Detect copies as well as renames
+  # renames = copies # Detect copies as well as renames
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
@@ -55,7 +55,7 @@
   stat = true
 [rerere]
   enabled = true
-  autoupdate = true
+	autoupdate = true
 [fetch]
   prune = true
   pruneTags = true
@@ -96,8 +96,9 @@
   repo = /Users/glanata/Developer/lyft/Lyft-iOS
   repo = /Users/glanata/Developer/lyft/Lyft-iOS-2
   strategy = incremental
+	repo = /Users/glanata/Developer/Lyft-iOS
 [init]
-  defaultBranch = main
+	defaultBranch = master
 [help]
   autocorrect = 1
 [color "status"]

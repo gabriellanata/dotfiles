@@ -5,12 +5,19 @@ else
   export BREW_PREFIX=/usr/local
 fi
 
-# system
+# path (the last one is the highest priority)
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
 export PATH="$HOME/.rd/bin:$PATH"
-export PATH=$HOME/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+
+# system
 export LC_ALL=en_US.UTF-8
 export EDITOR="$(which cursor)"
 export BROWSER="/Applications/Google\ Chrome.app/Contents/MacOs/Google\ Chrome"
+
+# pip fallback
+export PIP_EXTRA_INDEX_URL=https://pypi.org/simple
 
 # shell
 ZSH_THEME="robbyrussell"
@@ -42,13 +49,3 @@ configs=($DOTFILES_DIR/zsh/*.zsh)
 for file in ${configs}; do
   source "$file"
 done
-
-### lyft_localdevtools_shell_rc start
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
-    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
-fi
-### lyft_localdevtools_shell_rc end
-
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"

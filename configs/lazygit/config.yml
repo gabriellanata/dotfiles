@@ -1,8 +1,8 @@
 promptToReturnFromSubprocess: false
 git:
   branchPrefix: 'gabriel/'
-  paging:
-    pager: 'diff-so-fancy'
+  pagers:
+    - pager: 'diff-so-fancy'
   commit:
     signOff: true
     autoWrapCommitMessage: false
@@ -39,7 +39,7 @@ keybinding:
     scrollUpMain-alt1: '<disabled>'
     scrollDownMain-alt1: '<disabled>'
     prevBlock: '<disabled>'
-    nextBlock:  '<disabled>'
+    nextBlock: '<disabled>'
     # return: '<left>'
     # goInto: '<right>'
   files:
@@ -58,7 +58,6 @@ customCommands:
   - key: 'q'
     description: 'Quick commit and PR'
     context: 'global'
-    stream: true
     prompts:
       - type: 'input'
         title: 'Title'
@@ -80,10 +79,10 @@ customCommands:
           preset: 'branches'
     command: 'pr submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base "{{.Form.BaseBranch}}" --reviewer "{{.Form.Reviewers}}" --merge'
     loadingText: 'Creating Quick PR'
+    output: log
   - key: 'q'
     description: 'Quick commit and PR'
     context: 'localBranches'
-    stream: true
     prompts:
       - type: 'input'
         title: 'Title'
@@ -102,20 +101,26 @@ customCommands:
         key: 'BaseBranch'
         initialValue: >-
           {{- if .SelectedLocalBranch.Name -}}
+
+
             {{.SelectedLocalBranch.Name}}
           {{- else if .SelectedRemoteBranch.Name -}}
+
+
             {{.SelectedRemoteBranch.Name}}
           {{- else -}}
+
+
             {{.CheckedOutBranch.Name}}
           {{- end -}}
         suggestions:
           preset: 'branches'
     command: 'pr submit --title "{{.Form.Title}}" --body "{{.Form.Body}}" --base "{{.Form.BaseBranch}}" --reviewer "{{.Form.Reviewers}}" --merge'
     loadingText: 'Creating Quick PR'
+    output: log
   - key: 'Q'
     description: 'Quick commit and Fixup'
     context: 'global'
-    stream: true
     prompts:
       - type: 'input'
         title: 'Title'
@@ -129,10 +134,10 @@ customCommands:
           preset: 'branches'
     command: 'pr fixup --base "{{.Form.BaseBranch}}"'
     loadingText: 'Creating Quick Fixup'
+    output: log
   - key: 'Q'
     description: 'Quick commit and Fixup'
     context: 'localBranches'
-    stream: true
     prompts:
       - type: 'input'
         title: 'Title'
@@ -143,26 +148,32 @@ customCommands:
         key: 'BaseBranch'
         initialValue: >-
           {{- if .SelectedLocalBranch.Name -}}
+
+
             {{.SelectedLocalBranch.Name}}
           {{- else if .SelectedRemoteBranch.Name -}}
+
+
             {{.SelectedRemoteBranch.Name}}
           {{- else -}}
+
+
             {{.CheckedOutBranch.Name}}
           {{- end -}}
         suggestions:
           preset: 'branches'
     command: 'pr fixup --base "{{.Form.BaseBranch}}"'
     loadingText: 'Creating Quick Fixup'
+    output: log
   - key: 'l'
     description: 'Lyft generate'
     context: 'global'
-    stream: true
     command: 'lyft generate'
     loadingText: 'Generating Lyft project'
+    output: log
   - key: 'L'
     description: 'Lyft generate add module'
     context: 'global'
-    stream: true
     prompts:
       - type: 'menuFromCommand'
         title: 'Module:'
@@ -170,6 +181,7 @@ customCommands:
         command: 'lyft list-modules'
     command: 'lyft generate {{.Form.Module}}'
     loadingText: 'Generating Lyft project'
+    output: log
   - key: 'u'
     description: 'Undo last commit'
     context: 'global'

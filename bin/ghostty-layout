@@ -1,0 +1,58 @@
+#!/bin/bash
+
+osascript <<'EOF'
+-- Helper function to run a command
+on runCommand(cmd)
+    tell application "System Events"
+        keystroke cmd
+        delay 0.1
+        key code 36 -- Press Return
+        delay 0.3
+    end tell
+end runCommand
+
+-- Helper function to split pane horizontally (bottom)
+on splitBottom()
+    tell application "System Events"
+        keystroke "d" using {command down}
+        delay 0.5
+    end tell
+end splitBottom
+
+-- Helper function to split pane vertically (right)
+on splitRight()
+    tell application "System Events"
+        keystroke "r" using {command down}
+        delay 0.5
+    end tell
+end splitRight
+
+-- Helper function to create a new tab
+on newTab()
+    tell application "System Events"
+        keystroke "t" using {command down}
+        delay 0.5
+    end tell
+end newTab
+
+-- Main workflow
+on run
+    tell application "Ghostty"
+        activate
+        delay 0.5
+    end tell
+
+    -- TAB 1: Top pane
+    runCommand("cdl")
+    runCommand("lg")
+    splitBottom()
+
+    -- TAB 2: Create new tab
+    newTab()
+    runCommand("cdl2")
+    runCommand("lg")
+    splitBottom()
+    runCommand("copilot")
+
+end run
+EOF

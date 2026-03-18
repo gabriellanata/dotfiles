@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "{isodatetime}",
+    "uid" : "0DBEEA57-087A-46A9-AF01-35BE65C3B179",
+    "name" : "Current date - iso",
+    "keyword" : "isodate"
+  }
+}

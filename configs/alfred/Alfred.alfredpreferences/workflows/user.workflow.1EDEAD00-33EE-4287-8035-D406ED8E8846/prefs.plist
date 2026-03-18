@@ -6,5 +6,7 @@
 	<string>color</string>
 	<key>show_nscolor</key>
 	<true/>
+	<key>show_rgba</key>
+	<true/>
 </dict>
 </plist>

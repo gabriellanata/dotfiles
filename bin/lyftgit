@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Making git perform faster
+
+echo "Making git perform faster"

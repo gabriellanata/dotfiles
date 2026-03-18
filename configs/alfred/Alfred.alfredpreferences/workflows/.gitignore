@@ -1,0 +1,22 @@
+# Ignore all workflow files (reinstall from Alfred Gallery)
+*
+
+# Allow git to traverse into subdirectories
+!*/
+
+# Track these root-level files
+!.gitignore
+!WORKFLOWS.md
+
+# Ignore nested .gitignore files from vendored deps
+*/**/.gitignore
+
+# Track per-workflow user configurations (except those with secrets)
+!*/prefs.plist
+user.workflow.23B94CE3-FFDC-4EB2-9FF5-5EBDEC91A7D8/prefs.plist
+
+# Track custom workflows in full (Fake Type)
+!user.workflow.F0D92C96-246B-47C9-A56E-9EAA539CE0D9/**
+
+# Track custom workflows in full (Lyft Generate)
+!user.workflow.F6B2B781-F14A-4567-A1B5-7D6084FFAA65/**

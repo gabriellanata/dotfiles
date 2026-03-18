@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>me.lanata.fake-type</string>
+	<key>connections</key>
+	<dict>
+		<key>D98EA05C-4C68-4C09-BBBC-5C511DCA238A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A7D03CDE-6D8B-4B31-AE4F-77F7E839AC1C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Gabriel Lanata</string>
+	<key>description</key>
+	<string>Pretend to type</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Fake Type</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run argv
+  if (count of argv) is 0 then return
+  set theText to item 1 of argv
+
+  delay 0.2
+
+  tell application "System Events"
+    repeat with ch in characters of theText
+      keystroke (ch as text)
+      delay 0.05 -- tweak: 0.005 faster, 0.05 slower
+    end repeat
+  end tell
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A7D03CDE-6D8B-4B31-AE4F-77F7E839AC1C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>type</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Fake Type</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D98EA05C-4C68-4C09-BBBC-5C511DCA238A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>A7D03CDE-6D8B-4B31-AE4F-77F7E839AC1C</key>
+		<dict>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>105</real>
+		</dict>
+		<key>D98EA05C-4C68-4C09-BBBC-5C511DCA238A</key>
+		<dict>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>105</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>

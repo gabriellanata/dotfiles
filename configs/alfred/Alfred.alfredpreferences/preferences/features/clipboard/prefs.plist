@@ -2,8 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>autoExpandMidString</key>
+	<true/>
+	<key>autoExpandSimulatedKeyEventPadding</key>
+	<real>2</real>
 	<key>clearKeywordEnabled</key>
 	<false/>
+	<key>fastAppendBackToClipboard</key>
+	<true/>
+	<key>fastAppendPlaySound</key>
+	<false/>
+	<key>fastAppendSeparator</key>
+	<integer>1</integer>
 	<key>hotkey</key>
 	<dict>
 		<key>key</key>
@@ -13,7 +23,7 @@
 		<key>string</key>
 		<string></string>
 	</dict>
-	<key>viewerKeywordEnabled</key>
-	<false/>
+	<key>viewerKeyword</key>
+	<string>clip</string>
 </dict>
 </plist>

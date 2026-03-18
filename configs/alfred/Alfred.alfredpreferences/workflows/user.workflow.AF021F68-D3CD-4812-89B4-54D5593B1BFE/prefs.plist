@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>calendar_names</key>
+	<string>Lyft
+Personal</string>
+	<key>conf_keyword</key>
+	<string>meet</string>
+	<key>use_direct_gmeet</key>
+	<false/>
+	<key>use_direct_msteams</key>
+	<false/>
+	<key>use_direct_zoom</key>
+	<false/>
 	<key>use_icalbuddy</key>
 	<true/>
 </dict>

@@ -54,6 +54,26 @@
 				<key>Alternate</key>
 				<string>NO</string>
 				<key>CommandID</key>
+				<string>IDESourceEditorExtension:com.github.CopilotForXcode.EditorExtension,IDESourceEditorExtensionCommand:com.github.CopilotForXcode.EditorExtensionCopilot.AcceptNESSuggestionCommand</string>
+				<key>Group</key>
+				<string>Editor Menu for Source Code</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Editor</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Parent Title</key>
+				<string>GitHub Copilot</string>
+				<key>Title</key>
+				<string>Accept Next Edit Suggestion</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>_invokeSourceEditorExtensionCommand:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandID</key>
 				<string>IDESourceEditorExtension:com.github.CopilotForXcode.EditorExtension,IDESourceEditorExtensionCommand:com.github.CopilotForXcode.EditorExtensionCopilot.AcceptSuggestionCommand</string>
 				<key>Group</key>
 				<string>Editor Menu for Source Code</string>
@@ -101,6 +121,8 @@
 				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Editor</string>
 				<key>GroupedAlternate</key>
 				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>~&gt;</string>
 				<key>Navigation</key>
 				<string>NO</string>
 				<key>Parent Title</key>
@@ -121,6 +143,8 @@
 				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Editor</string>
 				<key>GroupedAlternate</key>
 				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>~?</string>
 				<key>Navigation</key>
 				<string>NO</string>
 				<key>Parent Title</key>
@@ -161,12 +185,34 @@
 				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Editor</string>
 				<key>GroupedAlternate</key>
 				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>~&lt;</string>
 				<key>Navigation</key>
 				<string>NO</string>
 				<key>Parent Title</key>
 				<string>GitHub Copilot</string>
 				<key>Title</key>
 				<string>Previous Suggestion</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>_invokeSourceEditorExtensionCommand:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandID</key>
+				<string>IDESourceEditorExtension:com.github.CopilotForXcode.EditorExtension,IDESourceEditorExtensionCommand:com.github.CopilotForXcode.EditorExtensionCopilot.RejectNESSuggestionCommand</string>
+				<key>Group</key>
+				<string>Editor Menu for Source Code</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Editor</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Parent Title</key>
+				<string>GitHub Copilot</string>
+				<key>Title</key>
+				<string>Decline Next Edit Suggestion</string>
 			</dict>
 			<dict>
 				<key>Action</key>
@@ -401,8 +447,6 @@
 				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Editor</string>
 				<key>GroupedAlternate</key>
 				<string>NO</string>
-				<key>Keyboard Shortcut</key>
-				<string>~	</string>
 				<key>Navigation</key>
 				<string>NO</string>
 				<key>Parent Title</key>
@@ -769,30 +813,6 @@
 				<string>Navigators</string>
 				<key>Title</key>
 				<string>Show Navigator</string>
-			</dict>
-			<dict>
-				<key>Action</key>
-				<string>newFolder:</string>
-				<key>Alternate</key>
-				<string>NO</string>
-				<key>CommandGroupID</key>
-				<string>IDENewGrouping</string>
-				<key>CommandID</key>
-				<string>Xcode.IDEKit.CmdDefinition.NewFolder</string>
-				<key>Group</key>
-				<string>File Menu</string>
-				<key>GroupID</key>
-				<string>Xcode.IDEKit.MenuDefinition.Main</string>
-				<key>GroupedAlternate</key>
-				<string>NO</string>
-				<key>Keyboard Shortcut</key>
-				<string>~@n</string>
-				<key>Navigation</key>
-				<string>NO</string>
-				<key>Parent Title</key>
-				<string>New</string>
-				<key>Title</key>
-				<string>Folder</string>
 			</dict>
 			<dict>
 				<key>Action</key>
@@ -1490,13 +1510,9 @@
 			<array>
 				<string>complete:</string>
 				<string>insertTabIgnoringFieldEditor:</string>
+				<string>insertLineBreak:</string>
 				<string>moveToEndOfParagraphAndModifySelection:</string>
 			</array>
-			<key>^
-</key>
-			<string>insertLineBreak:</string>
-			<key>^</key>
-			<string>insertLineBreak:</string>
 			<key></key>
 			<string>deleteForward:</string>
 		</dict>

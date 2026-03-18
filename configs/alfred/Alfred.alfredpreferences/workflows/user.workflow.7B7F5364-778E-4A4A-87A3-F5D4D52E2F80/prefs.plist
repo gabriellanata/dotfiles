@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>include_all_lists</key>
+	<true/>
+	<key>include_no_duedate</key>
+	<true/>
+	<key>quickadd_nextMonday_keyword</key>
+	<string>nextweek</string>
+	<key>quickadd_today_keyword</key>
+	<string>today</string>
+	<key>quickadd_tomorrow_keyword</key>
+	<string>tomorrow</string>
+	<key>reminder_list</key>
+	<string>Work</string>
+	<key>select_reminder_keyword</key>
+	<string>todos</string>
+</dict>
+</plist>

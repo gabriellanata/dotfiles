@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "{datetime:long}",
+    "uid" : "F4408702-40B1-4F63-B996-B0285DF977DD",
+    "name" : "Current date - full",
+    "keyword" : "\/\/date"
+  }
+}

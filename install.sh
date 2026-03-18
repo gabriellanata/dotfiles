@@ -16,7 +16,7 @@ setup_preferences() {
 
     # Close open System Preferences panes, to prevent them from overriding settings.
     osascript -e 'tell application "System Preferences" to quit' || true
-    
+
     # Run scripts
     preferences="$DOTFILES_DIR/preferences/*.sh"
     for file in ${preferences}; do
@@ -28,7 +28,7 @@ setup_preferences() {
     success "All preferences configured"
 }
 
-restart_processes() {    
+restart_processes() {
     log "Restarting processes.. "
 
     for app in "Address Book" "Calendar" "Contacts" "Dashboard" "Dock" "Finder" \

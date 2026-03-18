@@ -1,3 +1,5 @@
+# Check diff with: brew bundle cleanup --file="$DOTFILES_DIR/Brewfile"
+
 # Taps
 tap "homebrew/bundle"
 tap "buo/cask-upgrade" # Upgrade casks with "brew cu"
@@ -25,10 +27,11 @@ brew "micro"
 brew "yazi"
 brew "keith/formulae/tag"
 brew "sachaos/todoist/todoist"
+brew "findutils"
+brew "wget"
 
 # Git
 tap "keith/formulae"
-tap "jesseduffield/lazygit"
 brew "git"
 brew "git-lfs"
 brew "git-extras"
@@ -37,7 +40,7 @@ brew "pre-commit"
 brew "diff-so-fancy"
 brew "gh" # GitHub CLI
 brew "act" # Run GitHub actions locally
-brew "jesseduffield/lazygit/lazygit" # Simple terminal UI for git commands
+brew "lazygit" # Simple terminal UI for git commands
 brew "keith/formulae/git-pile", args: ["HEAD"] # Git extension to manage stacked commits
 
 # iOS / Swift
@@ -54,7 +57,8 @@ brew "dduan/formulae/drstring"
 
 # Languages
 brew "python-setuptools"
-# brew "python@3.11", link: false
+brew "python@3.12", link: false
+brew "python@3.11", link: false
 brew "python@3.10"
 # brew "python@3.9", link: false
 brew "pylint"
@@ -82,6 +86,8 @@ brew "curl" # Download files
 brew "aria2" # Download manager
 brew "trufflehog" # Scan for secrets
 brew "pillow" # Python image library
+brew "ical-buddy" # Calendar management
+# brew "copilot" # This is not the copilot you want
 
 # Lyft
 tap "lyft/localdevtools", "git@github.com:lyft/localdevtools"
@@ -90,18 +96,22 @@ tap "getsentry/tools"
 brew "lyft/localdevtools/lyftdev"
 brew "lyft/localdevtools/lyftdevtools"
 brew "lyft/localdevtools/lyft-gitwrapper"
+brew "lyft/localdevtools/lyft-dev-cli"
 brew "lyft/localdevtools/python-310-bundle-arm64"
 brew "lyft/localdevtools/python-311-bundle-arm64"
 brew "lyft/localdevtools/python-bundle-arm64"
 brew "lyft/localdevtools/protoc-gen-lyftpython"
 brew "lyft/localdevtools/protoc-gen-lyftswift"
 brew "lyft/localdevtools/protoc-gen-pynamodb"
+brew "lyft/localdevtools/infrahelpcli"
+brew "lyft/localdevtools/run-piptools"
 brew "lyft/localdevtools/aws-okta"
 brew "lyft/localdevtools/idltools"
 brew "lyft/localdevtools/bubble"
 brew "lyft/lyft-ios-runner/runlyft", args: ["HEAD"]
 brew "getsentry/tools/sentry-cli"
 brew "bazel"
+cask "bubble"
 
 # Applications
 cask "google-chrome"
@@ -179,7 +189,7 @@ mas "WhatsApp", id: 310633997
 # SetApp
 # mas "Spark", id: 1176895641
 # mas "Yoink", id: 457622435
-# mas "Paste", id: 
+# mas "Paste", id:
 # mas "Mosaic"
 # mas "iStatMenus"
 
