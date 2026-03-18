@@ -36,6 +36,9 @@ alias lg="lazygit"
 # github
 alias oprs="BROWSER=open open 'https://github.com/pulls'"
 
+# python
+alias venv="source venv/bin/activate"
+
 # other
 alias pre="pre-commit run --all-files"
 alias pb="pbcopy"

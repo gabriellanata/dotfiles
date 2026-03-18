@@ -18,3 +18,14 @@ alias cddocs="cd /Users/glanata/Developer/docs"
 alias cddotfiles="cd /Users/glanata/Developer/dotfiles"
 alias cddev="cd /Users/glanata/Developer"
 alias cdlanata="cd /Users/glanata/Developer/Lanata-Server"
+
+# Gearbox
+gearboxdb() {
+  local env="${1:-production}"
+  local output="$(source venv/bin/activate && make db-connect ENV="$env" PASS=1 2>&1)"
+  local url=$(echo "$output" | grep "^URL:" | cut -d" " -f2-)
+  open -a TablePlus "$url"
+}
+alias gearboxdb-prod='gearboxdb production'
+alias gearboxdb-staging='gearboxdb staging'
+alias gearboxdb-local='open -a TablePlus "postgresql://postgres@127.0.0.1:5432/gearboxapi"'

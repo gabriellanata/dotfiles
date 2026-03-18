@@ -1,0 +1,39 @@
+# Shared
+davidanson.vscode-markdownlint
+dbaeumer.vscode-eslint
+dnicolson.binary-plist
+github.vscode-pull-request-github
+ms-python.debugpy
+ms-python.flake8
+ms-python.isort
+ms-python.python
+ms-vscode-remote.remote-containers
+ms-vscode-remote.remote-ssh
+ms-vscode-remote.remote-ssh-edit
+ms-vscode.makefile-tools
+ms-vscode.remote-explorer
+prettier.prettier-vscode
+shd101wyy.markdown-preview-enhanced
+svanimpe.stencil
+timonwong.shellcheck
+vadimcn.vscode-lldb
+
+# Cursor only
+# cursor: anthropic.claude-code
+# cursor: anysphere.cursorpyright
+# cursor: anysphere.remote-containers
+# cursor: jeronimoekerdt.color-picker-universal
+# cursor: llvm-vs-code-extensions.lldb-dap
+# cursor: llvm-vs-code-extensions.vscode-clangd
+# cursor: ms-azuretools.vscode-containers
+# cursor: ms-azuretools.vscode-docker
+# cursor: sswg.swift-lang
+# cursor: sweetpad.sweetpad
+# cursor: swiftlang.swift-vscode
+# cursor: yoavbls.pretty-ts-errors
+
+# VSCode only
+# vscode: github.copilot-chat
+# vscode: ms-python.vscode-pylance
+# vscode: ms-vscode.cpptools
+# vscode: platformio.platformio-ide
