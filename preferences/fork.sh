@@ -2,7 +2,7 @@
 
 link_file "$DOTFILES_DIR/configs/fork/custom-commands.json" "$HOME/Library/Application Support/com.DanPristupov.Fork/custom-commands.json"
 
-defaults write com.DanPristupov.Fork "defaultSourceFolder" -string "/Users/glanata/Developer"
+defaults write com.DanPristupov.Fork "defaultSourceFolder" -string "$SRC_DIR"
 defaults write com.DanPristupov.Fork "mergeTool" -int 10 # Kaleidoscope
 defaults write com.DanPristupov.Fork "mergeTool" -int 10 # Kaleidoscope
 defaults write com.DanPristupov.Fork "terminalClient" -int 1 # iTerm

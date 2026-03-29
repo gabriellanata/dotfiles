@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-# Cursor settings and keybindings are shared with VSCode.
+# Cursor and Cursor Personal settings/keybindings are shared with VS Code.
 # See preferences/vscode.sh for the symlink setup.

@@ -19,7 +19,7 @@
     "git.enableSmartCommit": true,
     "github.copilot.editor.enableAutoCompletions": true,
     "markdown-preview-enhanced.enablePreviewZenMode": true,
-    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
+    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
     "markdown-preview-enhanced.imageFolderPath": "/images",
     "github.copilot.chat.edits.codesearch.enabled": true,
     "github.copilot.nextEditSuggestions.enabled": true,
@@ -47,16 +47,11 @@
     "cursor.enable_git_worktrees_setting": true,
     "terminal.integrated.tabs.location": "left",
     "workbench.editor.enablePreview": false,
-    "workbench.colorCustomizations": {
-        "titleBar.activeBackground": "#560049",
-        "titleBar.inactiveBackground": "#22001d",
-        "window.activeBorder": "#870072",
-        "window.inactiveBorder": "#22001d"
-    },
     "search.exclude": {
         "**/node_modules": true,
         "**/build": true,
         "**/dist": true,
+        "**/.dist*": true,
         "**/.next": true,
         "**/bazel-*": true,
         "**/DerivedData": true,
@@ -71,23 +66,38 @@
         "**/.idea": true,
         "**/Pods": true,
         "**/.sourcery": true,
-        "**/buck-out": true
+        "**/buck-out": true,
+        "**/.lyft": true,
+        "**/.git": true,
+        "**/.swc": true,
+        "**/.pytest_cache": true
+    },
+    "files.exclude": {
+        "**/.mypy_cache": true,
+        "**/__pycache__": true,
+        "**/.swc": true,
+        "**/.pytest_cache": true
     },
     "files.watcherExclude": {
         "**/node_modules/**": true,
         "**/build/**": true,
         "**/dist/**": true,
+        "**/.dist*/**": true,
         "**/.next/**": true,
         "**/bazel-*/**": true,
         "**/DerivedData/**": true,
         "**/external/**": true,
         "**/__pycache__/**": true,
         "**/venv/**": true,
+        "**/.mypy_cache/**": true,
         "**/coverage/**": true,
         "**/.cache/**": true,
         "**/.gradle/**": true,
         "**/Pods/**": true,
         "**/buck-out/**": true,
+        "**/.lyft/**": true,
+        "**/.swc/**": true,
+        "**/.pytest_cache/**": true,
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true
     },
@@ -120,5 +130,11 @@
     "git.confirmSync": false,
     "diffEditor.ignoreTrimWhitespace": true,
     "editor.gotoLocation.multipleDefinitions": "goto",
-    "editor.gotoLocation.multipleReferences": "goto"
+    "editor.gotoLocation.multipleReferences": "goto",
+    "markdownlint.ignore": [
+        "/Users/glanata/.cursor/plans/**"
+    ],
+    "cSpell.ignorePaths": [
+        "/Users/glanata/.cursor/plans/**"
+    ]
 }

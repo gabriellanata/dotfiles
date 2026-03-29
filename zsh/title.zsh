@@ -3,12 +3,12 @@
 DISABLE_AUTO_TITLE="true"
 
 function precmd () {
-  local folder="$(print -rD $PWD | sed 's|.*/Developer/||')"
+  local folder="${PWD/#$SRC_DIR\//}"
   echo -ne "\033]0;$folder\007"
 }
 
 function preexec () {
-  local folder="$(print -rD $PWD | sed 's|.*/Developer/||')"
+  local folder="${PWD/#$SRC_DIR\//}"
   print -Pn "\e]0;$folder\a"
 }
 

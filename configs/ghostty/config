@@ -8,7 +8,7 @@ keybind = global:ctrl+grave_accent=toggle_quick_terminal
 keybind = super+d=new_split:down
 keybind = super+r=new_split:right
 
-# split navigation 
+# split navigation
 keybind = super+shift+w=goto_split:top
 keybind = super+shift+a=goto_split:left
 keybind = super+shift+s=goto_split:bottom
@@ -18,7 +18,7 @@ keybind = super+shift+left=goto_split:left
 keybind = super+shift+down=goto_split:bottom
 keybind = super+shift+right=goto_split:right
 
-# Tmux cmd + num tabbing 
+# Tmux cmd + num tabbing
 # keybind = super+1=text:\x021
 # keybind = super+2=text:\x022
 # keybind = super+3=text:\x023
@@ -30,7 +30,7 @@ keybind = super+shift+right=goto_split:right
 # keybind = super+9=text:\x029
 
 # Appearance
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 font-thicken = true
 
 # macOS-specific settings

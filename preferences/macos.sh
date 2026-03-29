@@ -191,6 +191,31 @@ defaults write com.apple.appleseed.FeedbackAssistant AttentionPrefBundleIDs -boo
 
 
 #
+# Background Processes
+#
+
+# Disable Siri menu bar icon
+defaults write com.apple.Siri SiriPrefStashedStatusMenuVisible -bool false
+
+# Disable personalized ads
+defaults write com.apple.AdLib forceLimitAdTracking -bool true
+defaults write com.apple.AdLib allowApplePersonalizedAdvertising -bool false
+
+# Disable Game Center (gamed daemon)
+defaults write com.apple.gamed Disabled -bool true
+
+# Disable App Store video auto-play
+defaults write com.apple.AppStore AutoPlayVideoSetting -string "off"
+defaults write com.apple.AppStore UserSetAutoPlayVideoSetting -int 1
+
+#
+# Animation & Responsiveness
+#
+
+# Speed up Mission Control animation
+defaults write com.apple.dock expose-animation-duration -float 0.1
+
+#
 # Other Interface changes
 #
 
@@ -227,8 +252,9 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 if_sudo_active defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 if_sudo_active defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true
 
-# Avoid creating .DS_Store files on network volumes
+# Avoid creating .DS_Store files on network and USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Shows ethernet connected computers in airdrop
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true

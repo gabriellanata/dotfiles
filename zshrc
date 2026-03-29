@@ -1,9 +1,5 @@
 export DOTFILES_DIR="$(dirname "$(readlink "$HOME/.zshrc")")"
-if [[ $(arch) == arm64* ]]; then
-  export BREW_PREFIX=/opt/homebrew
-else
-  export BREW_PREFIX=/usr/local
-fi
+source "$DOTFILES_DIR/env.sh"
 
 # path (the last one is the highest priority)
 export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
@@ -13,7 +9,7 @@ export PATH="$HOME/bin:$PATH"
 
 # system
 export LC_ALL=en_US.UTF-8
-export EDITOR="$(which cursor)"
+export EDITOR="$BREW_PREFIX/bin/cursor"
 export BROWSER="/Applications/Google\ Chrome.app/Contents/MacOs/Google\ Chrome"
 
 # pip fallback
@@ -26,14 +22,7 @@ DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# zsh configuration
-export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh # Must be ran before other config files
-
-# git
-export GIT_PILE_PREFIX="gabriel/"
-
-# plugins
+# plugins (must be set before sourcing oh-my-zsh)
 plugins=(
   git
   dotenv
@@ -43,6 +32,13 @@ plugins=(
   colored-man-pages
   fzf
 )
+
+# zsh configuration
+export ZSH="$HOME/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh # Must be ran before other config files
+
+# git
+export GIT_PILE_PREFIX="gabriel/"
 
 # Source all zsh files
 configs=($DOTFILES_DIR/zsh/*.zsh)

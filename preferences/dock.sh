@@ -59,31 +59,30 @@ defaults_write com.apple.symbolichotkeys AppleSymbolicHotKeys.52.enabled -bool N
 
 ### Update Dock
 
-log "Updating Dock..."
+if [[ "${UPDATE_DOCK:-0}" == "1" ]]; then
+    log "Updating Dock..."
 
-# Clear items
-dockutil --remove all --no-restart
+    dockutil --remove all --no-restart
 
-# Add apps
-for app in "${dockApps[@]}"; do
-    if [ -d "/System/Applications/$app.app" ]; then
-        dockutil --add "/System/Applications/$app.app" --no-restart
-    elif [ -d "/Applications/$app.app" ]; then
-        dockutil --add "/Applications/$app.app" --no-restart
-    elif [[ "$app" == /* ]]; then
-        dockutil --add "$app" --no-restart
-    elif [ -z "$app" ]; then
-        dockutil --add "" --type spacer --section apps --no-restart
-    else
-        echo "Unable to find the specified app: $app"
-    fi
-done
+    for app in "${dockApps[@]}"; do
+        if [ -d "/System/Applications/$app.app" ]; then
+            dockutil --add "/System/Applications/$app.app" --no-restart
+        elif [ -d "/Applications/$app.app" ]; then
+            dockutil --add "/Applications/$app.app" --no-restart
+        elif [[ "$app" == /* ]]; then
+            dockutil --add "$app" --no-restart
+        elif [ -z "$app" ]; then
+            dockutil --add "" --type spacer --section apps --no-restart
+        else
+            echo "Unable to find the specified app: $app"
+        fi
+    done
 
-# Add folders
-for folder in "${dockFolders[@]}"; do
-    if [ -d "$folder" ]; then
-        dockutil --add "$folder" --view fan --display folder --sort dateadded --no-restart
-    else
-        echo "Unable to find the specified folder: $folder"
-    fi
-done
+    for folder in "${dockFolders[@]}"; do
+        if [ -d "$folder" ]; then
+            dockutil --add "$folder" --view fan --display folder --sort dateadded --no-restart
+        else
+            echo "Unable to find the specified folder: $folder"
+        fi
+    done
+fi

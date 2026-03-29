@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -23,7 +25,7 @@ ask() {
     while true; do
         read -rn 1 -rp "$1 (y/n)? " choice
         echo
-        case "$choice" in 
+        case "$choice" in
             y|Y ) return 0;;
             n|N ) return 1;;
             * ) echo "Invalid input. Please enter y or n.";;
@@ -37,7 +39,7 @@ command_exists() {
 
 if_sudo_active() {
     if [[ "$EUID" -eq 0 ]]; then
-        eval "$@"
+        "$@"
     fi
 }
 
@@ -50,8 +52,8 @@ sudo_start() {
 
 sudo_stop() {
     if [ -n "${SUDO_PID:-}" ]; then
-        kill "$SUDO_PID"
-        trap - SIGINT SIGTERM
+        trap - EXIT
+        kill "$SUDO_PID" 2>/dev/null || true
         sudo -k
     fi
 }
@@ -72,7 +74,7 @@ link_file() {
         log "Backing up $dest to $backup"
         mv "$dest" "$backup"
     fi
-    
+
     ln -sfn "$src" "$dest"
     success "Linked $(echo "$src to $dest" | sed "s|$DOTFILES_DIR|.|; s|$HOME|~|")"
 }
@@ -108,11 +110,24 @@ defaults_write() {
     local type=$3
     local value=$4
 
-    # if the key has a dot, we need to use plutil to set the value
     if [[ "$key" == *.* ]]; then
-        defaults export "$file" - |
-            plutil -replace "$key" "$type" "$value" -o - - |
-            defaults import "$file" -
+        local tmpfile
+        tmpfile=$(mktemp)
+        defaults export "$file" "$tmpfile"
+
+        # Ensure parent dictionaries exist along the key path
+        IFS='.' read -ra parts <<< "$key"
+        local path=""
+        for ((i=0; i<${#parts[@]}-1; i++)); do
+            path="${path:+$path.}${parts[$i]}"
+            plutil -insert "$path" -dictionary "$tmpfile" 2>/dev/null || true
+        done
+
+        plutil -replace "$key" "$type" "$value" "$tmpfile" 2>/dev/null ||
+            plutil -insert "$key" "$type" "$value" "$tmpfile"
+
+        defaults import "$file" "$tmpfile"
+        rm -f "$tmpfile"
     else
         defaults write "$file" "$key" "$type" "$value"
     fi

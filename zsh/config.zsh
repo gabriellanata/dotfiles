@@ -2,12 +2,11 @@
 
 # History settings
 # Save x items to the given history file
-export HISTSIZE=100000000
-export SAVEHIST=100000000
-# export HISTFILE=$HOME/.marcos_zsh_history
+export HISTSIZE=100000
+export SAVEHIST=100000
 
-# No autocorrect
-unsetopt correct_all
+
+# Autocorrect is configured below via setopt correct / correct_all
 
 # Append history to the zsh_history file
 setopt APPEND_HISTORY
@@ -73,8 +72,11 @@ bindkey '\e.' insert-last-word
 bindkey "^E" end-of-line
 bindkey "^B" beginning-of-line
 
-# Auto-completion
-autoload -Uz compinit && compinit
-
-# Load fzf
-source <(fzf --zsh)
+# Load fzf (cached to avoid subprocess on every shell)
+_fzf_cache="$HOME/.cache/fzf-zsh.zsh"
+if [[ ! -f "$_fzf_cache" || "$(which fzf)" -nt "$_fzf_cache" ]]; then
+    mkdir -p "$HOME/.cache"
+    fzf --zsh > "$_fzf_cache"
+fi
+source "$_fzf_cache"
+unset _fzf_cache

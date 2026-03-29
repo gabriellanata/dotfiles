@@ -40,4 +40,4 @@ keybindings:
       builtin: unassign
 repoPaths:
     {{repo_paths}}
-    :owner/:repo: $HOME/Developer/:repo
+    :owner/:repo: $SRC_DIR/:repo

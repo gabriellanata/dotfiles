@@ -17,7 +17,7 @@
                                     }
                                 ],
                                 "from": { "key_code": "c" },
-                                "to": [{ "shell_command": " /Users/glanata/Developer/dotfiles/bin/meet-mute" }],
+                                "to": [{ "shell_command": " $HOME/src/dotfiles/bin/meet-mute" }],
                                 "type": "basic"
                             },
                             {

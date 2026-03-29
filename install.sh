@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 source "$DOTFILES_DIR/utilities.sh"
 
@@ -36,10 +36,6 @@ restart_processes() {
         killall "$app" > /dev/null 2>&1 || true
     done
 
-    if [ -f "$HOME/.zshrc" ]; then
-        source "$HOME/.zshrc"
-    fi
-
     success "Done. Note that some of these changes require a logout/restart to take effect."
 }
 
@@ -55,6 +51,12 @@ if ask "Do you want to update applications?"; then
     setup_homebrew_bundle
 else
     log "Skipping update applications"
+fi
+
+if ask "Do you want to update Dock applications?"; then
+    export UPDATE_DOCK=1
+else
+    log "Skipping Dock applications"
 fi
 
 setup_preferences

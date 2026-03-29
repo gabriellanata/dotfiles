@@ -36,27 +36,64 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string>on run argv
-  if (count of argv) is 0 then return
-  set theText to item 1 of argv
+				<string>/usr/bin/python3 - "$1" &lt;&lt; 'PYEOF'
+import sys, time, ctypes, ctypes.util
 
-  delay 0.2
+cg = ctypes.cdll.LoadLibrary(ctypes.util.find_library("CoreGraphics"))
+cf = ctypes.cdll.LoadLibrary(ctypes.util.find_library("CoreFoundation"))
 
-  tell application "System Events"
-    repeat with ch in characters of theText
-      keystroke (ch as text)
-      delay 0.05 -- tweak: 0.005 faster, 0.05 slower
-    end repeat
-  end tell
-end run</string>
+cg.CGEventCreateKeyboardEvent.argtypes = [ctypes.c_void_p, ctypes.c_uint16, ctypes.c_bool]
+cg.CGEventCreateKeyboardEvent.restype = ctypes.c_void_p
+cg.CGEventPost.argtypes = [ctypes.c_uint32, ctypes.c_void_p]
+cg.CGEventSetFlags.argtypes = [ctypes.c_void_p, ctypes.c_uint64]
+cf.CFRelease.argtypes = [ctypes.c_void_p]
+
+SHIFT = 0x00020000
+KEY = {
+    "a":0,"b":11,"c":8,"d":2,"e":14,"f":3,"g":5,"h":4,
+    "i":34,"j":38,"k":40,"l":37,"m":46,"n":45,"o":31,"p":35,
+    "q":12,"r":15,"s":1,"t":17,"u":32,"v":9,"w":13,"x":7,
+    "y":16,"z":6," ":49,"-":27,"=":24,"[":33,"]":30,
+    "\\":42,";":41,"'":39,",":43,".":47,"/":44,"`":50,
+    "0":29,"1":18,"2":19,"3":20,"4":21,"5":23,"6":22,
+    "7":26,"8":28,"9":25,
+}
+SKEY = {
+    "!":18,"@":19,"#":20,"$":21,"%":23,"^":22,"&amp;":26,
+    "*":28,"(":25,")":29,"_":27,"+":24,"{":33,"}":30,
+    "|":42,":":41,'"':39,"&lt;":43,"&gt;":47,"?":44,"~":50,
+}
+
+def press(kc, flags=0):
+    d = cg.CGEventCreateKeyboardEvent(None, kc, True)
+    u = cg.CGEventCreateKeyboardEvent(None, kc, False)
+    cg.CGEventSetFlags(d, flags)
+    cg.CGEventSetFlags(u, flags)
+    cg.CGEventPost(0, d)
+    cg.CGEventPost(0, u)
+    cf.CFRelease(d)
+    cf.CFRelease(u)
+
+text = sys.argv[1] if len(sys.argv) &gt; 1 else ""
+time.sleep(0.3)
+for c in text:
+    lo = c.lower()
+    if c.isalpha() and lo in KEY:
+        press(KEY[lo], SHIFT if c.isupper() else 0)
+    elif c in KEY:
+        press(KEY[c])
+    elif c in SKEY:
+        press(SKEY[c], SHIFT)
+    time.sleep(0.02)
+PYEOF</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>6</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>

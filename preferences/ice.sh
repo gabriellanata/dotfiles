@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 PLIST_FILE="$HOME/Library/Preferences/com.jordanbaird.Ice.plist"
 
 plist_write "IceBarLocation" "integer" "0" "$PLIST_FILE"
