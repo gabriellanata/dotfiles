@@ -10,42 +10,72 @@
                                 "conditions": [
                                     {
                                         "identifiers": [
-                                            { "product_id": 34960 },
-                                            { "product_id": 556 }
+                                            {
+                                                "product_id": 34960
+                                            },
+                                            {
+                                                "product_id": 556
+                                            }
                                         ],
                                         "type": "device_if"
                                     }
                                 ],
-                                "from": { "key_code": "c" },
-                                "to": [{ "shell_command": " $HOME/src/dotfiles/bin/meet-mute" }],
+                                "from": {
+                                    "key_code": "c"
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": " $HOME/src/dotfiles/bin/meet-mute"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "conditions": [
                                     {
                                         "identifiers": [
-                                            { "product_id": 34960 },
-                                            { "product_id": 556 }
+                                            {
+                                                "product_id": 34960
+                                            },
+                                            {
+                                                "product_id": 556
+                                            }
                                         ],
                                         "type": "device_if"
                                     }
                                 ],
-                                "from": { "key_code": "d" },
-                                "to": [{ "key_code": "volume_decrement" }],
+                                "from": {
+                                    "key_code": "d"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "volume_decrement"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "conditions": [
                                     {
                                         "identifiers": [
-                                            { "product_id": 34960 },
-                                            { "product_id": 556 }
+                                            {
+                                                "product_id": 34960
+                                            },
+                                            {
+                                                "product_id": 556
+                                            }
                                         ],
                                         "type": "device_if"
                                     }
                                 ],
-                                "from": { "key_code": "f" },
-                                "to": [{ "key_code": "volume_increment" }],
+                                "from": {
+                                    "key_code": "f"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "volume_increment"
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
@@ -57,46 +87,106 @@
                                 "conditions": [
                                     {
                                         "identifiers": [
-                                            { "product_id": 34960 },
-                                            { "product_id": 556 }
+                                            {
+                                                "product_id": 34960
+                                            },
+                                            {
+                                                "product_id": 556
+                                            }
                                         ],
                                         "type": "device_if"
                                     }
                                 ],
                                 "from": {
                                     "key_code": "a",
-                                    "modifiers": { "optional": ["caps_lock"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
                                 },
                                 "to": [
-                                    { "key_code": "caps_lock" },
-                                    { "key_code": "spacebar" },
-                                    { "key_code": "delete_or_backspace" },
-                                    { "key_code": "delete_or_backspace" },
-                                    { "key_code": "delete_or_backspace" },
-                                    { "key_code": "delete_or_backspace" },
-                                    { "key_code": "delete_or_backspace" },
+                                    {
+                                        "key_code": "caps_lock"
+                                    },
+                                    {
+                                        "key_code": "spacebar"
+                                    },
+                                    {
+                                        "key_code": "delete_or_backspace"
+                                    },
+                                    {
+                                        "key_code": "delete_or_backspace"
+                                    },
+                                    {
+                                        "key_code": "delete_or_backspace"
+                                    },
+                                    {
+                                        "key_code": "delete_or_backspace"
+                                    },
+                                    {
+                                        "key_code": "delete_or_backspace"
+                                    },
                                     {
                                         "key_code": "d",
-                                        "modifiers": ["shift"]
+                                        "modifiers": [
+                                            "shift"
+                                        ]
                                     },
-                                    { "key_code": "e" },
-                                    { "key_code": "s" },
-                                    { "key_code": "d" },
-                                    { "key_code": "e" },
-                                    { "key_code": "d" },
-                                    { "key_code": "e" },
-                                    { "key_code": "s" },
-                                    { "key_code": "d" },
-                                    { "key_code": "e" },
-                                    { "key_code": "1" },
-                                    { "key_code": "1" },
-                                    { "key_code": "1" },
-                                    { "key_code": "1" },
+                                    {
+                                        "key_code": "e"
+                                    },
+                                    {
+                                        "key_code": "s"
+                                    },
+                                    {
+                                        "key_code": "d"
+                                    },
+                                    {
+                                        "key_code": "e"
+                                    },
+                                    {
+                                        "key_code": "d"
+                                    },
+                                    {
+                                        "key_code": "e"
+                                    },
+                                    {
+                                        "key_code": "s"
+                                    },
+                                    {
+                                        "key_code": "d"
+                                    },
+                                    {
+                                        "key_code": "e"
+                                    },
+                                    {
+                                        "key_code": "1"
+                                    },
+                                    {
+                                        "key_code": "1"
+                                    },
+                                    {
+                                        "key_code": "1"
+                                    },
+                                    {
+                                        "key_code": "1"
+                                    },
                                     {
                                         "key_code": "1",
-                                        "modifiers": ["shift"]
+                                        "modifiers": [
+                                            "shift"
+                                        ]
                                     },
-                                    { "key_code": "return_or_enter" }
+                                    {
+                                        "key_code": "1",
+                                        "modifiers": [
+                                            "shift"
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "return_or_enter"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -117,11 +207,15 @@
                                         "type": "device_if"
                                     }
                                 ],
-                                "from": { "key_code": "6" },
+                                "from": {
+                                    "key_code": "6"
+                                },
                                 "to": [
                                     {
                                         "key_code": "up_arrow",
-                                        "modifiers": ["control"]
+                                        "modifiers": [
+                                            "control"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -138,11 +232,15 @@
                                         "type": "device_if"
                                     }
                                 ],
-                                "from": { "key_code": "9" },
+                                "from": {
+                                    "key_code": "9"
+                                },
                                 "to": [
                                     {
                                         "key_code": "w",
-                                        "modifiers": ["command"]
+                                        "modifiers": [
+                                            "command"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -155,7 +253,11 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 4176 }],
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 4176
+                                            }
+                                        ],
                                         "type": "device_if"
                                     },
                                     {
@@ -168,15 +270,27 @@
                                 ],
                                 "from": {
                                     "key_code": "a",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "vk_none" }],
+                                "to": [
+                                    {
+                                        "key_code": "vk_none"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 4176 }],
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 4176
+                                            }
+                                        ],
                                         "type": "device_if"
                                     },
                                     {
@@ -189,15 +303,27 @@
                                 ],
                                 "from": {
                                     "key_code": "e",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "vk_none" }],
+                                "to": [
+                                    {
+                                        "key_code": "vk_none"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 4176 }],
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 4176
+                                            }
+                                        ],
                                         "type": "device_if"
                                     },
                                     {
@@ -210,15 +336,27 @@
                                 ],
                                 "from": {
                                     "key_code": "s",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "vk_none" }],
+                                "to": [
+                                    {
+                                        "key_code": "vk_none"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 4176 }],
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 4176
+                                            }
+                                        ],
                                         "type": "device_if"
                                     },
                                     {
@@ -231,15 +369,27 @@
                                 ],
                                 "from": {
                                     "key_code": "d",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "vk_none" }],
+                                "to": [
+                                    {
+                                        "key_code": "vk_none"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 4176 }],
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 4176
+                                            }
+                                        ],
                                         "type": "device_if"
                                     },
                                     {
@@ -252,15 +402,27 @@
                                 ],
                                 "from": {
                                     "key_code": "1",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "vk_none" }],
+                                "to": [
+                                    {
+                                        "key_code": "vk_none"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 4176 }],
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 4176
+                                            }
+                                        ],
                                         "type": "device_if"
                                     },
                                     {
@@ -271,8 +433,14 @@
                                         "type": "frontmost_application_if"
                                     }
                                 ],
-                                "from": { "key_code": "return_or_enter" },
-                                "to": [{ "key_code": "vk_none" }],
+                                "from": {
+                                    "key_code": "return_or_enter"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "vk_none"
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
@@ -292,14 +460,20 @@
                                 "from": {
                                     "key_code": "r",
                                     "modifiers": {
-                                        "mandatory": ["command"],
-                                        "optional": ["any"]
+                                        "mandatory": [
+                                            "command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
                                     }
                                 },
                                 "to": [
                                     {
                                         "key_code": "return_or_enter",
-                                        "modifiers": ["command"]
+                                        "modifiers": [
+                                            "command"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -313,8 +487,12 @@
                                 "from": {
                                     "key_code": "grave_accent_and_tilde",
                                     "modifiers": {
-                                        "mandatory": ["option"],
-                                        "optional": ["any"]
+                                        "mandatory": [
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
                                     }
                                 },
                                 "to": [
@@ -334,8 +512,12 @@
                                 "from": {
                                     "key_code": "grave_accent_and_tilde",
                                     "modifiers": {
-                                        "mandatory": ["command"],
-                                        "optional": ["any"]
+                                        "mandatory": [
+                                            "command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
                                     }
                                 },
                                 "to": [

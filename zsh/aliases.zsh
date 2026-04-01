@@ -38,6 +38,7 @@ alias oprs="BROWSER=open open 'https://github.com/pulls'"
 
 # python
 alias venv-clean="lyftvenv venv -f"
+alias venv-fix="lyftvenv venv -f"
 alias venv="source venv/bin/activate"
 
 # other

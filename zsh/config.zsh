@@ -11,12 +11,7 @@ export SAVEHIST=100000
 # Append history to the zsh_history file
 setopt APPEND_HISTORY
 
-# Write to history after each command
-setopt INC_APPEND_HISTORY
-
-# Write the running time of commands to the history
-# NOTE: the zsh documentation says this and INC_APPEND_HISTORY are mutually
-# exclusive, but this seems to work fine.
+# Write to history after each command (with timing data)
 setopt INC_APPEND_HISTORY_TIME
 
 # Ignore duplicates in zsh history

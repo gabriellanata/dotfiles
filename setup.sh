@@ -26,8 +26,8 @@ setup_homebrew() {
         log "Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         if [[ $(uname -m) == 'arm64' ]]; then
-            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
-            eval "$(/opt/homebrew/bin/brew shellenv)"
+            cp "$DOTFILES_DIR/zprofile" "$HOME/.zprofile"
+            source "$HOME/.zprofile"
         fi
         success "Homebrew installed"
     else
