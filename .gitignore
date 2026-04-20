@@ -61,6 +61,11 @@ coverage.xml
 # Tmux
 configs/tmux/ressurect/tmux_resurrect_*.txt
 
+# Codex runtime-managed system skills live under the shared skills root when
+# ~/.codex/skills is symlinked into this repo. Keep user-installed skills
+# reviewable in git, but ignore Codex's own machine-managed subtree.
+configs/agents/skills/.system/
+
 # Lyft specific
 configs/xcode/snippets/lyft_*
 Brewfile.backup
