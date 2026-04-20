@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+# gh-quick submit/update (https://github.com/gabriellanata/gh-quick). Override path if needed.
+GH_QUICK_BIN="${GH_QUICK_BIN:-$HOME/src/gh-quick/gh-quick}"
+
 # If there are any arguments, assume they are a command
 if [[ $# -gt 0 ]]; then
     command="$1"
@@ -17,9 +20,9 @@ if [[ $# -gt 0 ]]; then
     elif [[ "$command" == "list" || "$command" == "-l" ]]; then
         pr-list "$@"
     elif [[ "$command" == "submit" || "$command" == "-s" ]]; then
-        pr-quick-submit "$@"
+        "$GH_QUICK_BIN" submit "$@"
     elif [[ "$command" == "update" || "$command" == "-u" || "$command" == "fixup" || "$command" == "-f" ]]; then
-        pr-quick-update "$@"
+        "$GH_QUICK_BIN" update "$@"
     else
         echo "Unknown command '$command'"
         exit 1
@@ -27,3 +30,32 @@ if [[ $# -gt 0 ]]; then
 else
     pr-default
 fi
+
+
+## BACKUP
+
+# # If there are any arguments, assume they are a command
+# if [[ $# -gt 0 ]]; then
+#     command="$1"
+#     shift
+#     if [[ "$command" == "approve" || "$command" == "-a" ]]; then
+#         pr-modify approve "$@"
+#     elif [[ "$command" == "merge" || "$command" == "automerge" || "$command" == "-m" ]]; then
+#         pr-modify merge "$@"
+#     elif [[ "$command" == "rename" ]]; then
+#         pr-modify rename "$@"
+#     elif [[ "$command" == "comment" ]]; then
+#         pr-modify comment "$@"
+#     elif [[ "$command" == "list" || "$command" == "-l" ]]; then
+#         pr-list "$@"
+#     elif [[ "$command" == "submit" || "$command" == "-s" ]]; then
+#         pr-quick-submit "$@"
+#     elif [[ "$command" == "update" || "$command" == "-u" || "$command" == "fixup" || "$command" == "-f" ]]; then
+#         pr-quick-update "$@"
+#     else
+#         echo "Unknown command '$command'"
+#         exit 1
+#     fi
+# else
+#     pr-default
+# fi

@@ -5,17 +5,15 @@
     "files.autoSave": "afterDelay",
     "editor.inlineSuggest.enabled": true,
     "github.copilot.enable": {
-        "*": true
+        "*": true,
     },
     "remote.SSH.externalSSH_ASKPASS": true,
     "window.zoomLevel": 1,
     "[python]": {
-        "editor.formatOnType": true
+        "editor.formatOnType": true,
     },
     "github.copilot.advanced": {},
-    "editor.rulers": [
-        110
-    ],
+    "editor.rulers": [110],
     "git.enableSmartCommit": true,
     "github.copilot.editor.enableAutoCompletions": true,
     "markdown-preview-enhanced.enablePreviewZenMode": true,
@@ -30,9 +28,7 @@
     "lldb.launch.expressions": "native",
     "cursor.composer.agentLoopOnLints": false,
     "window.commandCenter": 1,
-    "shellcheck.customArgs": [
-        "--shell=bash"
-    ],
+    "shellcheck.customArgs": ["--shell=bash"],
     "python.createEnvironment.trigger": "off",
     "git.openRepositoryInParentFolders": "always",
     "makefile.configureOnOpen": false,
@@ -70,13 +66,13 @@
         "**/.lyft": true,
         "**/.git": true,
         "**/.swc": true,
-        "**/.pytest_cache": true
+        "**/.pytest_cache": true,
     },
     "files.exclude": {
         "**/.mypy_cache": true,
         "**/__pycache__": true,
         "**/.swc": true,
-        "**/.pytest_cache": true
+        "**/.pytest_cache": true,
     },
     "files.watcherExclude": {
         "**/node_modules/**": true,
@@ -99,17 +95,14 @@
         "**/.swc/**": true,
         "**/.pytest_cache/**": true,
         "**/.git/objects/**": true,
-        "**/.git/subtree-cache/**": true
+        "**/.git/subtree-cache/**": true,
     },
     "search.followSymlinks": false,
     "search.useIgnoreFiles": true,
     "search.useParentIgnoreFiles": true,
     "search.useGlobalIgnoreFiles": true,
     "search.smartCase": true,
-    "git.branchProtection": [
-        "master",
-        "main"
-    ],
+    "git.branchProtection": ["master", "main"],
     "git.branchProtectionPrompt": "alwaysCommitToNewBranch",
     "editor.stickyScroll.enabled": true,
     "editor.guides.bracketPairs": true,
@@ -131,10 +124,13 @@
     "diffEditor.ignoreTrimWhitespace": true,
     "editor.gotoLocation.multipleDefinitions": "goto",
     "editor.gotoLocation.multipleReferences": "goto",
-    "markdownlint.ignore": [
-        "/Users/glanata/.cursor/plans/**"
-    ],
-    "cSpell.ignorePaths": [
-        "/Users/glanata/.cursor/plans/**"
-    ]
+    "markdownlint.ignore": ["/Users/glanata/.cursor/plans/**"],
+    "cSpell.ignorePaths": ["/Users/glanata/.cursor/plans/**"],
+    "cursor.general.glassShowWarningNotifications": true,
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "github.copilot.chat.claudeAgent.enabled": false,
+    "github.copilot.chat.backgroundAgent.enabled": false,
+    "github.copilot.chat.cloudAgent.enabled": false,
+    "github.copilot.chat.reviewAgent.enabled": false,
+    "github.copilot.chat.reviewSelection.enabled": false,
 }
